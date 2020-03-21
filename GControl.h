@@ -1,7 +1,7 @@
 /*
 	Autore: Cavallo Gabriele
 	Versione: 1.1
-	Progetto: ArduCore
+	Progetto: ArduWin
 	https://github.com/Gabriele266/ArduCore/blob/master/README.md
 	Contiene l' interfaccia della classe GControl che rappresenta un controllo generico nella interfaccia
 */
@@ -67,7 +67,7 @@ class GControl{
 		location __point;
 		// Surface per il disegno
 		LiquidCrystal_I2C *__surf;
-		// Definisce se l'oggetto è mostrato
+		// Definisce se l'oggetto Ã¨ mostrato
 		bool __isShown = false;
 		// Puntatore a una funzione che gestisce gli eventi
 		void (*eventHandler)(GEvent *event);
