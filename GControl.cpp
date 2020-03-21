@@ -19,9 +19,6 @@ Descrizione: implementazione della classe GControl, che rappresenta un GControll
 
 // HEADER
 #include "GControl.h"
-#include "LiquidCrystal_I2C/LiquidCrystal_I2C.h"
-#include <Arduino.h>
-
 
 GControl::GControl(){
 
