@@ -1,12 +1,11 @@
-/*classe generata dal programma CodeUtils di Gabriele Cavallo. 
-La seguente classe contiene un costruttore.
+/*
       Autore: Cavallo Gabriele
       Versione: 1.1
-      Tipologia licenza: Shareware
-      Descrizione licenza: Shareware
+      Tipologia licenza: GPL
+      Descrizione licenza: GPL
       Nome classe: Label
       Descrizione classe: Rappresenta una etichetta in una interfaccia lcd
-      Progetto: ArduCore
+      Progetto: ArduWin
 */
 #include "GControl.h"
 #include <arduino.h>
