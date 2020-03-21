@@ -10,12 +10,13 @@
 #ifndef WIN_H
 #define WIN_H
 
+#define ARDUWIN_USE_I2C
 // Librerie
 #include <arduino.h>
 #include "GControl.h"
 
 // Includo la libreria giusta
-#ifdef ARDUWIN_USE_I2C
+#if defined ARDUWIN_USE_I2C
 // Utilizzo la libreria per gli schermi I2C
 #include <LiquidCrystal_I2C.h>
 #else
@@ -99,7 +100,7 @@ class GWindow{
         GControl* getControl(char bname[]);
 
 	// Controllo quale libreria è stata inclusa
-	#ifdef ARDUWIN_USE_I2C
+	#if defined ARDUWIN_USE_I2C
         /// Imposta la superficie su cui disegnare
         void setSurface(LiquidCrystal_I2C *s);
 	#else
@@ -124,7 +125,7 @@ class GWindow{
         // Handler che gestisce il click del pulsante indietro
         void (*clickedBackHandler) (GEvent *event) = nullptr;
         // Puntatore alla surface su cui disegnare
-	#ifdef ARDUWIN_USE_I2C
+	#if defined ARDUWIN_USE_I2C
         LiquidCrystal_I2C *surf;
 	#else
 	LiquidCrystal *surf;
