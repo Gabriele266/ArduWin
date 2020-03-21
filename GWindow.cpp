@@ -7,7 +7,7 @@
 
 /*
 =============================================
-Il seguente file è parte del progetto sveglia arduino
+Il seguente file Ã¨ parte del progetto sveglia arduino
 =============================================
 */
 
@@ -25,7 +25,7 @@ GWindow::GWindow(char n[], char t[]){
 }
 
 void GWindow::setTitle(char t[]){
-    // Imposto il titolo solo se non è vuoto
+    // Imposto il titolo solo se non Ã¨ vuoto
     strcpy(title, t);
 }
 
@@ -35,7 +35,7 @@ char* GWindow::getTitle(){
 }
 
 void GWindow::setName(char n[]){
-    // Imposto il nome solo se non è nullo
+    // Imposto il nome solo se non Ã¨ nullo
     strcpy(name, n);
 }
 void GWindow::drawControls(){
@@ -148,9 +148,15 @@ void GWindow::draw(){
     drawControls();
 }
 
+#ifdef ARDUWIN_USE_I2C
 void GWindow::setSurface(LiquidCrystal_I2C *s){
     surf = s;
 }
+#else
+void GWindow::setSurface(LiquidCrystal *s){
+    surf = s;
+}
+#endif
 
 int GWindow::addControl(GControl *l){
     controls[controls_num] = l;
