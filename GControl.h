@@ -7,10 +7,11 @@
 */
 #pragma once
 // Inclusione
+#define ARDUWIN_USE_I2C
 #include <Arduino.h>
 
 // Controllo se devo utilizzare uno schermo lcd i2
-#ifdef ARDUWIN_USE_I2C
+#if defined ARDUWIN_USE_I2C
 // Libreria per gli schermi lcd I2C
 #include <LiquidCrystal_I2C.h>
 #else
@@ -51,7 +52,7 @@ class GControl{
 
 		// Ottiene o imposta la surface su cui disegnare
 		// Controllo quele libreria sto utilizzando
-		#ifdef ARDUWIN_USE_I2C
+		#if defined ARDUWIN_USE_I2C
 		// Utilizzo quella per schermi i2c
 		void setSurface(LiquidCrystal_I2C *s);
 		LiquidCrystal_I2C* getSurface();
@@ -84,7 +85,7 @@ class GControl{
 		// Posizione del controllo nella interfaccia
 		location __point;
 		// Surface per il disegno
-		#ifdef ARDUWIN_USE_I2C
+		#if defined ARDUWIN_USE_I2C
 		LiquidCrystal_I2C *__surf;
 		#else
 		// Creo un puntatore all' oggetto della libreria normale
