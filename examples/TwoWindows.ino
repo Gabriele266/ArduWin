@@ -1,13 +1,13 @@
 /*
  * Autore: Cavallo Gabriele
- * Esempio Two_Windows, tramite la libreria ArduCore crea un raccoglitore di 
+ * Esempio Two_Windows, tramite la libreria ArduWin crea un raccoglitore di 
  * finestre GWinList e gli inserisce due nuove finestre: una chiamata first e una second.
  * Infine gestisce la loro visualizzazione: imposta first come finestra principale e la mostra; dopo 3 secondi mostra la finestra second tramite la funzione di ricerca tramite il nome.
  * ATTENZIONE: Per evitare problemi di utilizzo della ram si consiglia l'utilizzo della libreria con schede Arduino Mega o Due.
  */
 
-// Header di ArduCore
-#include <ArduCore.h>
+// Header di ArduWin
+#include <ArduWin.h>
 // Liberia per lo schermo
 #include <LiquidCrystal_I2C.h>
 
