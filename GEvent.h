@@ -4,7 +4,7 @@
 /*
     Autore: Cavallo Gabriele
     Versione: 1.1
-    Descrizione: Rappresenta un GEvento nella libreria arducore
+    Descrizione: Rappresenta un GEvento nella libreria ArduWin
 */
 #include <Arduino.h>
 #include "Location.h"
@@ -23,9 +23,9 @@ class GEvent
         /// Ottiene il nome dell' GEvento
         char* getName();
 
-        /// Imposta la posizione a cui è avvenuto
+        /// Imposta la posizione a cui Ã¨ avvenuto
         void setPosition(location l);
-        /// Ottiene la posizione a cui è avvenuto
+        /// Ottiene la posizione a cui Ã¨ avvenuto
         location getPosition();
 
         /// Imposta il sender dell' Evento
@@ -35,7 +35,7 @@ class GEvent
         /// Avvia la gestione dell' Evento
         virtual void throwEvent();
 
-        /// Determina se l'GEvento è stato gestito da qualcuno
+        /// Determina se l'GEvento Ã¨ stato gestito da qualcuno
         bool isThrown();
 
     protected:
@@ -48,7 +48,7 @@ class GEvent
         location position;
         /// Inviatore dell' GEvento
         char sender[60];
-        /// Determina se è stato gestito
+        /// Determina se Ã¨ stato gestito
         bool thrown = false;
 
 
