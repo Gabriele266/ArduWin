@@ -6,7 +6,7 @@
  */
  
 // Header di ArduCore
-#include <ArduCore.h>
+#include <ArduWin.h>
 // Header per gli schermi lcd i2c
 #include <LiquidCrystal_I2C.h>
 
