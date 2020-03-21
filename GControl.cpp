@@ -86,14 +86,24 @@ location GControl::getLocation(){
     return __point;
 }
 
+// Metodi per impostare la superficie
+#ifdef ARDUWIN_USE_I2C
+// Versione per l'utilizzo con schermi lcd i2c
 void GControl::setSurface(LiquidCrystal_I2C *s){
     __surf = s;
 }
-
 LiquidCrystal_I2C* GControl::getSurface(){
    return __surf;
 }
-
+#else
+// Versione per l'utilizzo con schermi lcd normali
+void GControl::setSurface(LiquidCrystal *s){
+    __surf = s;
+}
+LiquidCrystal* GControl::getSurface(){
+   return __surf;
+}
+#endif
 // Funzione fittizia
 bool GControl::draw(){
 
