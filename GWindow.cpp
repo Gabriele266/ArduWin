@@ -3,13 +3,7 @@
 
 #include "GWindow.h"
 #include <Arduino.h>
-#include <MemoryFree.h>
 
-/*
-=============================================
-Il seguente file è parte del progetto sveglia arduino
-=============================================
-*/
 
 GWindow::GWindow(){
     strcpy(title , "");
@@ -148,7 +142,7 @@ void GWindow::draw(){
     drawControls();
 }
 
-#ifdef ARDUWIN_USE_I2C
+#if defined ARDUWIN_USE_I2C
 void GWindow::setSurface(LiquidCrystal_I2C *s){
     surf = s;
 }
