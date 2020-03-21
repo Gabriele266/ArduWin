@@ -4,7 +4,7 @@
  * 
  * Il programma crea un oggetto liquidrcystal i2c, una finestra e la mostra
  */
-#include <Arducore.h>
+#include <ArduWin.h>
 #include <LiquidCrystal_I2C.h>
 
 // Creo la finestra
