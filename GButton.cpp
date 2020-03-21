@@ -30,18 +30,20 @@ bool GButton::draw(){
         __surf->noBlink();
         // Imposto il cursore
         __surf->setCursor(getLocation().x -1, getLocation().y);
+	// Disegno una barra verticale
+	__surf->print("|");
 	// Controllo se devo mettere una icona
 	if (icon != nullptr && !icon->isEmpty()) {
 		// Disegno l'icona
 		__surf->write(byte(icon->getIndex()));
 	}
         // Disegno il testo
-		__surf->print("|");
         __surf->print(__text);
-		__surf->print("|");
-    }
+	// Disegno un altra barra verticale
+	__surf->print("|");
+    	}
 	else{
-
+		
 	}
 
 }
