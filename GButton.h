@@ -2,7 +2,7 @@
       Autore: Cavallo Gabriele
       Nome classe: GButton
       Descrizione classe: Rappresenta un pulsante in una interfaccia
-      Progetto:ArduCore
+      Progetto:ArduWin
 */
 
 #ifndef FBTN_H
