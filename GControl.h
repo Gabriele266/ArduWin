@@ -8,8 +8,17 @@
 #pragma once
 // Inclusione
 #include <Arduino.h>
-// Libreriua per gli schermi lcd I2C
-#include <LiquidCrystal_I2C/LiquidCrystal_I2C.h>
+
+// Controllo se devo utilizzare uno schermo lcd i2
+#ifdef ARDUWIN_USE_I2C
+// Libreria per gli schermi lcd I2C
+#include <LiquidCrystal_I2C.h>
+#else
+// Utilizzo la libreria per schermi lcd normali
+#include <LiquidCrystal.h>
+#endif
+
+
 // Header per la posizione
 #include "Location.h"
 // Header per gli eventi
@@ -41,8 +50,17 @@ class GControl{
 		location getLocation();
 
 		// Ottiene o imposta la surface su cui disegnare
+		// Controllo quele libreria sto utilizzando
+		#ifdef ARDUWIN_USE_I2C
+		// Utilizzo quella per schermi i2c
 		void setSurface(LiquidCrystal_I2C *s);
 		LiquidCrystal_I2C* getSurface();
+		#else
+		// Utilizzo quella per schermi normali
+		void setSurface(LiquidCrystal *s);
+		LiquidCrystal* getSurface();
+		#endif
+		
 
 		// Disegna il GControllo
 		virtual bool draw();
@@ -66,7 +84,13 @@ class GControl{
 		// Posizione del controllo nella interfaccia
 		location __point;
 		// Surface per il disegno
+		#ifdef ARDUWIN_USE_I2C
 		LiquidCrystal_I2C *__surf;
+		#else
+		// Creo un puntatore all' oggetto della libreria normale
+		LiquidCrystal *__surf;
+		#endif
+	
 		// Definisce se l'oggetto è mostrato
 		bool __isShown = false;
 		// Puntatore a una funzione che gestisce gli eventi
