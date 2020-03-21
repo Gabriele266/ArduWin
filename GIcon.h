@@ -1,12 +1,11 @@
-/*classe generata dal programma CodeUtils di Gabriele Cavallo.
-La seguente classe contiene un costruttore.
+/*
+
       Autore: Cavallo Gabriele
       Versione: 1.1
       Tipologia licenza: GPL
       Descrizione licenza: GPL
       Nome classe: GWinList
       Descrizione classe: Rappresenta una lista di finestre gestite.
-      Progetto: Sveglia Arduino
 */
 #ifndef ICON_H
 #define ICON_H
@@ -39,7 +38,7 @@ public:
     // restituisce l'indice
     int getIndex();
 
-    // Restituisce true se l'icona è vuota
+    // Restituisce true se l'icona Ã¨ vuota
     bool isEmpty();
 
     // Funzione statica che permette la creazione di un icona in modo diretto
