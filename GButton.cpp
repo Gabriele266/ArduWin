@@ -28,14 +28,13 @@ bool GButton::draw(){
 	if(__surf != nullptr && enabled){
         // Tolgo il blink
         __surf->noBlink();
-		// Controllo se devo mettere una icona
-		if (icon != nullptr && !icon->isEmpty()) {
-			// Disegno l'icona
-			__surf->write(byte(icon->getIndex()));
-		}
         // Imposto il cursore
         __surf->setCursor(getLocation().x -1, getLocation().y);
-
+	// Controllo se devo mettere una icona
+	if (icon != nullptr && !icon->isEmpty()) {
+		// Disegno l'icona
+		__surf->write(byte(icon->getIndex()));
+	}
         // Disegno il testo
 		__surf->print("|");
         __surf->print(__text);
