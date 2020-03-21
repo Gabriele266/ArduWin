@@ -1,14 +1,9 @@
-/*classe generata dal programma CodeUtils di Gabriele Cavallo.
-La seguente classe contiene un costruttore.
+/*
       Autore: Cavallo Gabriele
       Versione: 1.1
-      Tipologia licenza:  Freeware
-      Descrizione licenza: Non Open source, è illegale modificare il codice
+      Tipologia licenza:  GPL
       Nome classe: GWindow
-      Descrizione classe: Rappresenta una finestra all' interno delle mie api
-      Progetto: SvegliaArduino
-
-	  Il seguente file è parte del progetto Sveglia Arduino
+      Descrizione classe: Rappresenta una finestra
 */
 
 
