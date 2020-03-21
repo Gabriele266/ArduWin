@@ -13,7 +13,16 @@
 // Librerie
 #include <arduino.h>
 #include "GControl.h"
-#include "LiquidCrystal_I2C/LiquidCrystal_I2C.h"
+
+// Includo la libreria giusta
+#ifdef ARDUWIN_USE_I2C
+// Utilizzo la libreria per gli schermi I2C
+#include <LiquidCrystal_I2C.h>
+#else
+// Utilizzo la libreria standard
+#include <LiquidCrystal.h>
+#endif
+
 #include "GEvent.h"
 #include "Location.h"
 
@@ -89,8 +98,14 @@ class GWindow{
         /// Ottiene il primo controllo con quel nome
         GControl* getControl(char bname[]);
 
+	// Controllo quale libreria è stata inclusa
+	#ifdef ARDUWIN_USE_I2C
         /// Imposta la superficie su cui disegnare
         void setSurface(LiquidCrystal_I2C *s);
+	#else
+	void setSurface(LiquidCrystal *s);
+	#endif
+	
         /// Disegna solo i controlli della finestra
         void drawControls();
 
@@ -109,8 +124,13 @@ class GWindow{
         // Handler che gestisce il click del pulsante indietro
         void (*clickedBackHandler) (GEvent *event) = nullptr;
         // Puntatore alla surface su cui disegnare
+	#ifdef ARDUWIN_USE_I2C
         LiquidCrystal_I2C *surf;
-        // Numero di controlli
+	#else
+	LiquidCrystal *surf;
+	#endif
+	
+	// Numero di controlli
         int controls_num = 0;
         GControl *controls[20];
         // Definisce se mostrare il pulsante indietro
