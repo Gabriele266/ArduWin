@@ -27,5 +27,7 @@ La licenza è valida su tutti i sorgenti del progetto.
 #include "GEvent.h"
 // Header per le icone
 #include "GIcon.h"
+// Header per gli errori
+#include "GError.h"
 // Header con le icone predefinite
 #include "default_icons.h"
