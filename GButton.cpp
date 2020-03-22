@@ -2,6 +2,7 @@
 #define FButton_CPP
 
 #include "GButton.h"
+#include <Arduino.h>
 
 GButton::GButton(){
 	setName(" ");
@@ -29,9 +30,9 @@ bool GButton::draw(){
         // Tolgo il blink
         __surf->noBlink();
         // Imposto il cursore
-        __surf->setCursor(getLocation().x -1, getLocation().y);
+        __surf->setCursor(getLocation().x, getLocation().y);
 	// Disegno una barra verticale
-	__surf->print("|");
+	
 	// Controllo se devo mettere una icona
 	if (icon != nullptr && !icon->isEmpty()) {
 		// Disegno l'icona
@@ -40,7 +41,7 @@ bool GButton::draw(){
         // Disegno il testo
         __surf->print(__text);
 	// Disegno un altra barra verticale
-	__surf->print("|");
+	
     	}
 	else{
 		
@@ -67,31 +68,25 @@ GIcon* GButton::getIcon() {
 void GButton::updateEvents(location l){
 	// GControllo se sono stato premuto
 	if(enabled){
-		if(exists(l) && exists(getLocation()) && isInArea(l, getLocation(), strlen(__text) + 2)){
+		// Controllo che eistano tutti e che la posizione appartenga al pulsante
+		if(exists(l) && exists(getLocation()) && isInArea(l,getLocation(), strlen(__text))){
 			 //Sono stato premuto
 			 // Creo un evento
 			 GEvent *event = new GEvent();
 			 // Imposto il nome
 			 event->setName("buttonClick");
 			 // Imposto il sender
-             event->setSender(this->getName());
-             // Imposto la posizione
-             event->setPosition(this->getLocation());
-             // Imposto l'evento come gestito
-             event->throwEvent();
+             		event->setSender(this->getName());
+             		// Imposto la posizione
+             		event->setPosition(this->getLocation());
+             		// Imposto l'evento come gestito
+             		event->throwEvent();
 			 //Chiamo l'handler
-             eventHandler(event);
-
-			return;
-		}
-		else{
+             		eventHandler(event);
+			
 			return;
 		}
 	}
-	else{
-
-	}
-	Serial.println("Controllo eventi pulsante");
 }
 
 void GButton::enable()
