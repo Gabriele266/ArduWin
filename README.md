@@ -16,5 +16,5 @@ gestori che ricevono un <b>GEvent</b>.
 All' interno del framework e' inoltre possibile gestire gli errori, tramite <b>GError</b>, che permette di ottenere informazioni 
 sull' errore e ottenerne alcune caratteristiche.
 
-Il tutto e' completamente open source.
-<b><u>Ulteriori informazioni su come iniziare ad usarla sono contenute nel file come-iniziare-arduwin.pdf</b></u>
+Il tutto e' completamente open source. <br>
+<b><u>Ulteriori informazioni su come iniziare ad usarla sono contenute nel file per-iniziare-arduwin.pdf</b></u>
