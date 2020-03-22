@@ -84,7 +84,7 @@ static bool exists(location l) {
 static bool isInArea(location cur, location __point, int size_x) {
 	// Controllo che tutte le posizioni esistano
 	if (exists(cur) && exists(__point)) {
-		if (__point.x >= cur.x && __point.x <= (cur.x + size_x) && __point.y == cur.y) {
+		if (cur.x >= __point.x && cur.x <= (__point.x + size_x) && cur.y == __point.y) {
 			return true;
 		}
 		else {
