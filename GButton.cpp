@@ -65,10 +65,10 @@ GIcon* GButton::getIcon() {
 
 
 void GButton::updateEvents(location l){
-	// GControllo se sono stato premutoi
+	// GControllo se sono stato premuto
 	if(enabled){
-		if(exists(l) && exists(getLocation()) && isInArea(l, getLocation(), strlen(__text))){
-			 //Sono stato premutoi
+		if(exists(l) && exists(getLocation()) && isInArea(l, getLocation(), strlen(__text) + 2)){
+			 //Sono stato premuto
 			 // Creo un evento
 			 GEvent *event = new GEvent();
 			 // Imposto il nome
@@ -76,9 +76,9 @@ void GButton::updateEvents(location l){
 			 // Imposto il sender
              event->setSender(this->getName());
              // Imposto la posizione
-             //event->setPosition(this->getLocation());
+             event->setPosition(this->getLocation());
              // Imposto l'evento come gestito
-             //event->throwEvent();
+             event->throwEvent();
 			 //Chiamo l'handler
              eventHandler(event);
 
