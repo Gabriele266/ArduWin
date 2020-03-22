@@ -14,6 +14,7 @@
 // Librerie
 #include <arduino.h>
 #include "GControl.h"
+#include "GButton.h"
 
 // Includo la libreria giusta
 #if defined ARDUWIN_USE_I2C
@@ -122,16 +123,19 @@ class GWindow{
         BackBtnPos pos;
         // Tipologia del pulsante indietro
         BackBtnType type;
+        // Rappresenta il pulsante indietro
+        GButton* back = new GButton();
+        // 
         // Handler che gestisce il click del pulsante indietro
         void (*clickedBackHandler) (GEvent *event) = nullptr;
         // Puntatore alla surface su cui disegnare
-	#if defined ARDUWIN_USE_I2C
+	    #if defined ARDUWIN_USE_I2C
         LiquidCrystal_I2C *surf;
-	#else
-	LiquidCrystal *surf;
-	#endif
+	    #else
+	    LiquidCrystal *surf;
+	    #endif
 	
-	// Numero di controlli
+	    // Numero di controlli
         int controls_num = 0;
         GControl *controls[20];
         // Definisce se mostrare il pulsante indietro
