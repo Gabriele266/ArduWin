@@ -10,6 +10,8 @@ GWindow::GWindow(){
     strcpy(name , "");
     strcpy(tags , "");
     controls_num = 0;
+    // Inizializzo il pulsante di  default
+    
 }
 
 GWindow::GWindow(char n[], char t[]){
@@ -91,47 +93,47 @@ void GWindow::draw(){
         surf->clear();
         // Disegno il pulsante indietro
         if (showBackBtn) {
-            // Stringa che contiene la formattazione in testo del pulsante indietro
-            char back_form[4];
             // Controllo la posizione immessa dall' utente
             switch ((int)pos) {
             case BackBtnPos::TopCenter:
                 // Metto il pulsante al centro
-                surf->setCursor(7, 0);
+                back->setLocation(createLocation(7, 1));
                 break;
             case BackBtnPos::TopLeft:
-                surf->setCursor(0, 0);
+                back->setLocation(createLocation(0, 0));
                 break;
             case BackBtnPos::TopRight:
-                surf->setCursor(17, 0);
+                back->setLocation(createLocation(16, 0));
                 break;
-                case BackBtnPos::BottomLeft:
-                    surf->setCursor(0, 3);
-                    break;
-                case BackBtnPos::BottomRight:
-                    surf->setCursor(19, 3);
-                    break;
-                case BackBtnPos::BottomCenter:
-                    surf->setCursor(7, 3);
-                    break;
+            case BackBtnPos::BottomLeft:
+                back->setLocation(createLocation(0, 3));
+				break;
+			case BackBtnPos::BottomRight:
+                back->setLocation(createLocation(17, 3));
+				break;
+			case BackBtnPos::BottomCenter:
+                back->setLocation(createLocation(7, 3));
+				break;
             default:
-                    
+                
                 break;
             };
             // Controllo la dimensione scelta e formatto la stringa
             switch ((int)type) {
             case BackBtnType::Small:
-                strcpy(back_form, "<");
+                back->setText("<");
                 break;
             case BackBtnType::Medium:
-                strcpy(back_form, "<-");
+                back->setText("<-");
                 break;
             case BackBtnType::Large:
-                strcpy(back_form, "<--");
+                back->setText("<--");
                 break;
             };
+            back->setEventHandler(clickedBackHandler);
+            back->enable();
             // Disegno il pulsante
-			surf->print(back_form);
+            back->draw();
         }
     }
     // Imposto il cursore per scrivere il titolo
@@ -145,10 +147,12 @@ void GWindow::draw(){
 #if defined ARDUWIN_USE_I2C
 void GWindow::setSurface(LiquidCrystal_I2C *s){
     surf = s;
+    back->setSurface(s);
 }
 #else
 void GWindow::setSurface(LiquidCrystal *s){
     surf = s;
+    back->setSurface(s);
 }
 #endif
 
@@ -224,27 +228,11 @@ GControl* GWindow::getControl(char bname[]) {
     }
 }
 
-
 void GWindow::updateControls(location cursor_pos){
     // Prendo ogni controllo e avvio la ricerca
-    if(cursor_pos.x >= 0 && cursor_pos.x <= 3 && cursor_pos.y == 0){
-            // Si trova nella area del pulsante indietro
-        if(clickedBackHandler != nullptr){
-            // Controllo di non incappare in errori
-            // Creo un nuovo evento
-            GEvent *event = new GEvent();
-            // Imposto il nome
-            event->setName("backHandlerClick");
-            // Imposto il sender
-            event->setSender(this->getName());
-            // Imposto la posizione
-            event->setPosition(createLocation());
-            // Avvio l'handler
-            clickedBackHandler(event);
-        }
-    }
+    back->updateEvents(cursor_pos);
     // Controllo gli eventi dei controlli
-    for(int x = 1; x < controls_num; x++){
+    for(int x = 0; x < controls_num; x++){
         controls[x]->updateEvents(cursor_pos);
     }
 }
