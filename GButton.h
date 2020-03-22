@@ -48,7 +48,7 @@ class GButton : public GControl{
 		// Definisce se il pulsante è attivato
 		bool enabled;
 		// Rappresenta l'icona
-		GIcon* icon;
+		GIcon* icon = nullptr;
 };
 
 #endif
