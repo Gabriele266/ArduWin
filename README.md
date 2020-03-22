@@ -3,7 +3,7 @@ Un <b>framework</b> grafico per <u>Arduino</u> designato per schermi lcd I2C
 
 Contiene una organizzazione simile a quelle dei maggiori framework grafici per computer (ad esempio Qt o wxWidgets)
 
-Permette di designare interfaccie dinamiche sfruttando le classi c++
+Permette di designare interfaccie dinamiche sfruttando le classi c++. <br>
 Ogni interfaccia e' composta da Controlli (<b>GControl</b>), come ad esempio Etichette (<b>GLabel</b>) o pulsanti (GButton). Essi vengono aggiunti all' interno delle finestre (<b>GWindow</b>) che contengono anche altri campi/proprietà come il titolo, un pulsante predefinito
 per andare indietro, un nome, e metodi per gestire i controlli contenuti.
 
