@@ -31,3 +31,5 @@ La licenza è valida su tutti i sorgenti del progetto.
 #include "GError.h"
 // Header con le icone predefinite
 #include "default_icons.h"
+// Header per le notifiche
+#include "GNotification.h"
