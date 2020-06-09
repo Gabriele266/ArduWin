@@ -78,7 +78,7 @@ class GWindow{
         void setBackBtnHandle(
                               void(*backHandler)(GEvent *event));
         /// Disegna la finestra partendo dal titolo e poi chiama le funzioni di draw dei componenti figlio
-        void draw();
+        virtual void draw();
 
         /// Aggiunge un controllo alla lista
         int addControl(GControl *l);
@@ -93,7 +93,13 @@ class GWindow{
         void removeControl(char bname[]);
 
         /// Effettua il controllo degli eventi di click relativi a tutti i controlli
-        void updateControls(location cursor_pos);
+        virtual void updateControls(location cursor_pos);
+
+        /// Ridisegna un controllo pulendo solo la parte di schermo necessaria per la sua visualizzazione e lasciando invariato il resto.
+        void redrawControl(int index, int old_dim);
+
+		/// Ridisegna un controllo pulendo solo la parte di schermo necessaria per la sua visualizzazione e lasciando invariato il resto dato il nome
+		void redrawControl(char name[], int old_dim);
 
         /// Ottiene il controllo relativo
         GControl* getControl(int ind);
@@ -107,7 +113,7 @@ class GWindow{
 	#else
 	void setSurface(LiquidCrystal *s);
 	#endif
-	
+
         /// Disegna solo i controlli della finestra
         void drawControls();
 
@@ -125,7 +131,7 @@ class GWindow{
         BackBtnType type;
         // Rappresenta il pulsante indietro
         GButton* back = new GButton();
-        // 
+        //
         // Handler che gestisce il click del pulsante indietro
         void (*clickedBackHandler) (GEvent *event) = nullptr;
         // Puntatore alla surface su cui disegnare
@@ -134,7 +140,7 @@ class GWindow{
 	    #else
 	    LiquidCrystal *surf;
 	    #endif
-	
+
 	    // Numero di controlli
         int controls_num = 0;
         GControl *controls[20];

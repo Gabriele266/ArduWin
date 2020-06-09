@@ -11,7 +11,7 @@ GWindow::GWindow(){
     strcpy(tags , "");
     controls_num = 0;
     // Inizializzo il pulsante di  default
-    
+
 }
 
 GWindow::GWindow(char n[], char t[]){
@@ -86,7 +86,7 @@ BackBtnType GWindow::getBackBtnType() {
 
 void GWindow::draw(){
     // Disegna la finestra
-    
+
     // Controllo che la superficie esista
     if (surf != nullptr) {
         // Pulisco lo schermo
@@ -115,7 +115,7 @@ void GWindow::draw(){
                 back->setLocation(createLocation(7, 3));
 				break;
             default:
-                
+
                 break;
             };
             // Controllo la dimensione scelta e formatto la stringa
@@ -130,6 +130,7 @@ void GWindow::draw(){
                 back->setText("<--");
                 break;
             };
+            back->setIcon(nullptr);
             back->setEventHandler(clickedBackHandler);
             back->enable();
             // Disegno il pulsante
@@ -142,6 +143,47 @@ void GWindow::draw(){
     surf->print(title);
     // Disegno i componenti
     drawControls();
+}
+
+void GWindow::redrawControl(int index , int len) {
+    // Controllo che l'indice esista
+    if (index >= 0 && index < controls_num) {
+        // Esiste
+        // Controllo che il conotrollo relativo non sia nullo
+        if (controls[index] != nullptr) {
+            // Contiene qualcosa
+            // Salvo la posizione di inizio
+            int start_x = controls[index]->getLocation().x;
+            int y = controls[index]->getLocation().y;
+            // Controllo che non vada fuori dallo schermo
+            if (len + start_x <= 19) {
+                // Va bene posso cancellare
+				// Pulisco lo spazio
+				for (int x = start_x; x <= len + start_x; x++) {
+					// Imposto la posizione
+					surf->setCursor(x, y);
+					// Scrivo un carattere vuoto
+					surf->print(" ");
+				}
+				// Disegno il controllo
+				controls[index]->draw();
+            }
+        }
+    }
+}
+
+void GWindow::redrawControl(char name[], int old_dim) {
+    // Scorro tutti gli elementi
+    if (strlen(name) > 0) {
+        // La dimensione va bene
+        // Scorro tutti gli elementi
+        for (int x = 0; x <= controls_num; x++) {
+            if (strcmp(controls[x]->getName(), name) == 0) {
+                redrawControl(x, old_dim);
+                break;
+            }
+        }
+    }
 }
 
 #if defined ARDUWIN_USE_I2C

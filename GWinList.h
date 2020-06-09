@@ -624,7 +624,10 @@ class GWinList{
 			
 			// Mostra la finestra impostata come corrente
 			void drawCurrent();
-            int getCurrent() {return currentWindow;}
+			int getCurrent() {return currentWindow;}
+
+            /// Determina se la finestra indicata dal nome è la finestra corrente
+			bool isCurrent(char name[]);
       private:
           // Numero di finestre
           int win_num = 0;

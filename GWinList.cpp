@@ -120,6 +120,18 @@ void GWinList::draw(int index){
     }
 }
 
+bool GWinList::isCurrent(char name[]) {
+	// Calcolo il nome della finestra corrente
+	// Controllo
+	if (strcmp(__wins[currentWindow]->getName(), name) == 0) {
+		return true;
+	}
+	else {
+		return false;
+	}
+	
+}
+
 void GWinList::drawCurrent(){
     // Controllo che l'indice della finestra corrente esista
 	if(currentWindow >= 0 && currentWindow <= win_num){
@@ -137,7 +149,12 @@ int GWinList::getIndex(char name[]){
 
 void GWinList::draw(char name[]){
     // Risolvo il nome della finestra in un indice e mostro il tutto
-    __wins[resolveIndex(name)]->draw();
+	int index = 0;
+	// Calcolo l'indice
+	index = resolveIndex(name);
+	// Mostro la finestra
+	draw(index);
+
 }
 
 
