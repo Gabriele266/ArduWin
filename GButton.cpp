@@ -23,35 +23,34 @@ GButton::GButton(char __name[], char __content[]){
     enabled = true;
 }
 
-bool GButton::draw(){
+bool GButton::draw() {
 	// Disegno il pulsante
 	// GControllo che sia stata impostate una superficie
-	if(__surf != nullptr && enabled){
-        // Tolgo il blink
-        __surf->noBlink();
-        // Imposto il cursore
-        __surf->setCursor(getLocation().x, getLocation().y);
-	// Disegno una barra verticale
-	
-	// Controllo se devo mettere una icona
-	if (icon != nullptr && !icon->isEmpty()) {
-		// Disegno l'icona
-		__surf->write(byte(icon->getIndex()));
-	}
-        // Disegno il testo
-        __surf->print(__text);
-	// Disegno un altra barra verticale
-	
-    	}
-	else{
-		
-	}
+	if (__surf != nullptr && enabled) {
+		// Tolgo il blink
+		__surf->noBlink();
+		// Imposto il cursore
+		__surf->setCursor(getLocation().x, getLocation().y);
+		// Disegno una barra verticale
 
+		// Controllo se devo mettere una icona
+		if (icon != nullptr) {
+
+			// Disegno l'icona
+			__surf->write(byte(icon->getIndex()));
+
+			
+
+		}
+		// Disegno il testo
+		__surf->print(__text);
+		// Disegno un altra barra verticale
+
+	}
 }
-
 void GButton::begin() {
 	// Controllo che l'icona esista
-	if (icon != nullptr && !icon->isEmpty()) {
+	if (icon != nullptr) {
 		__surf->createChar(icon->getIndex(), icon->getCode());
 	}
 }

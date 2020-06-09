@@ -15,6 +15,12 @@
 // Sorgente con la definizione di un icona orologio
 #include "icons/clock_icon.cpp"
 
+// Sorgente con la defiinzione dell' icona checked
+#include "icons/checked_icon.cpp"
+
+// Sorgente con la definizione dell' icona uncked
+#include "icons/unchecked_icon.cpp"
+
 // Aggiungere qui i riferimenti alle proprie icone per utilizzarle comodamente nella libreria
 
 #endif
