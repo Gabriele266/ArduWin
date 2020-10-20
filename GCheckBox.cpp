@@ -47,11 +47,24 @@ void GCheckBox::setChecked(bool val){
     checked = val;
 }
 
-void GCheckBox::begin(){
-    // Inizializzo la icona checked
-    getSurface()->createChar(checkedIcon->getIndex(), checkedIcon->getCode());
-    // Inizializzo la iocona unchecked
-    getSurface()->createChar(uncheckedIcon->getIndex(), uncheckedIcon->getCode());
+bool GCheckBox::begin(){
+    // conrollo se è stata specificata una superficie di disegno
+    if(getSurface() != nullptr){
+        // controllo se snono state impostate le icone
+        if(checkedIcon != nullptr && uncheckedIcon != nullptr){
+            // Inizializzo la icona checked
+            getSurface()->createChar(checkedIcon->getIndex(), checkedIcon->getCode());
+            // Inizializzo la iocona unchecked
+            getSurface()->createChar(uncheckedIcon->getIndex(), uncheckedIcon->getCode());
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    else{
+        return false;
+    }
 }
 
 bool GCheckBox::draw(){
@@ -70,41 +83,33 @@ bool GCheckBox::draw(){
         }
         // Metto il testo
         getSurface()->print(getText());
+        return true;
+    }
+    else{
+        return false;
     }
 }
 
 
 void GCheckBox::updateEvents(location l){
-    // Controllo che eistano tutti e che la posizione appartenga al pulsante
-    if(exists(l) && exists(getLocation()) && isInArea(l,getLocation(), strlen(getText()))){
-         //Sono stato premuto
-         // Inverto lo stato e ridisegno
-         getSurface()->setCursor(getLocation().x, getLocation().y);
-         checked = !checked;
-         if(checked){
-            getSurface()->write(byte(checkedIcon->getIndex()));
-         }
-         else{
-            // Metto l'icona unchecked
-            getSurface()->write(byte(uncheckedIcon->getIndex()));
-         }
-//         // Creo un evento
-//         GEvent event;
-//         // Imposto il nome
-//         event.setName("checkBoxStateChanged");
-//         // Imposto il sender
-//         event.setSender(this->getName());
-//         // Imposto la posizione
-//         event.setPosition(this->getLocation());
-//         // Imposto l'evento come gestito
-//         event.throwEvent();
-         //Chiamo l'handler
-        // Controllo che non sia nullo
-        /*if (eventHandler != nullptr) {
-            eventHandler(&event);
+    // controllo che esista la superficie
+    if(getSurface() != nullptr){
+        // Controllo che eistano tutti e che la posizione appartenga al pulsante
+        if(exists(l) && exists(getLocation()) && isInArea(l,getLocation(), strlen(getText()))){
+             //Sono stato premuto
+             // Inverto lo stato e ridisegno
+             getSurface()->setCursor(getLocation().x, getLocation().y);
+             checked = !checked;
+             if(checked){
+                getSurface()->write(byte(checkedIcon->getIndex()));
+             }
+             else{
+                // Metto l'icona unchecked
+                getSurface()->write(byte(uncheckedIcon->getIndex()));
+             }
         }
-        */
+    }
+    else{
 
-//        return;
     }
 }

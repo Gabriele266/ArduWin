@@ -3,13 +3,13 @@
 
 /*
     Autore: Cavallo Gabriele
-    Versione: 1.1
-    Descrizione: Rappresenta un GEvento nella libreria ArduWin
+    Descrizione: Rappresenta un Evento nella libreria ArduWin
 */
+
 #include <Arduino.h>
 #include "location.h"
 
-
+/// Rappresenta un evento in ArduWin
 class GEvent
 {
     public:
@@ -30,6 +30,7 @@ class GEvent
 
         /// Imposta il sender dell' Evento
         void setSender(char sen[]);
+        /// Restituisce il sender dell' evento
         char* getSender();
 
         /// Avvia la gestione dell' Evento
@@ -38,19 +39,19 @@ class GEvent
         /// Determina se l'GEvento è stato gestito da qualcuno
         bool isThrown();
 
-    protected:
-
     private:
 
         /// Nome dell' GEvento
         char name[60];
+
         /// Posizione dell' GEvento
         location position;
+
         /// Inviatore dell' GEvento
         char sender[60];
+
         /// Determina se è stato gestito
         bool thrown = false;
-
 
 };
 
