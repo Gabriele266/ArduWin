@@ -9,7 +9,7 @@ La licenza è valida su tutti i sorgenti del progetto.
 ========================================================
 */
 // Espone la versione del framework
-#define ARDUWIN_VERSION "1.1"
+#define ARDUWIN_VERSION "2.0"
 
 // HEADER PER LE FINESTRE
 #include "GWindow.h"
@@ -31,5 +31,7 @@ La licenza è valida su tutti i sorgenti del progetto.
 #include "default_icons.h"
 // Header per il checkbox
 #include "GCheckBox.h"
+// Header per le notifiche
 #include "GNotification.h"
+// Header per gli errori
 #include "GError.h"
