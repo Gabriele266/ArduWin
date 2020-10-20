@@ -48,6 +48,10 @@ void GWinList::setMain(int ind){
     }
 }
 
+void GWinList::addMain(GWindow *win){
+    main_win_index = add(win);
+}
+
 int GWinList::getMainInd(){
     return main_win_index;
 }

@@ -27,6 +27,8 @@ isBackBtnShowable KEYWORD2
 removeControl	KEYWORD2
 updateControls	KEYWORD2
 getControlIndex	KEYWORD2
+getMainInd	KEYWORD2
+addMain		KEYWORD2
 setSurface	KEYWORD2
 getControlsNum	KEYWORD2
 drawControls	KEYWORD2

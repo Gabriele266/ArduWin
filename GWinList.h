@@ -7,7 +7,6 @@
       Rappresenta una lista di finestre gestite.
 */
 
-
 #ifndef WINLIST_H
 #define WINLIST_H
 #pragma once
@@ -34,6 +33,9 @@ class GWinList{
             void setMain(int ind);
 
             void setMain(char name[]);
+
+            /// Aggiunge la finestra alla lista e la imposta come principale
+            void addMain(GWindow *win);
 
             /// Restituisce l'indice della finestra principale
             int getMainInd();
