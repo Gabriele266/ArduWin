@@ -45,8 +45,8 @@ enum BackBtnPos : int{
     BottomRight
 };
 
+/// Rappresenta una finestra in ArduWin
 class GWindow{
-
     public:
         /// Costruttore di default
         GWindow();
@@ -78,13 +78,14 @@ class GWindow{
         void setBackBtnHandle(
                               void(*backHandler)(GEvent *event));
         /// Disegna la finestra partendo dal titolo e poi chiama le funzioni di draw dei componenti figlio
-        virtual void draw();
+        virtual bool draw();
 
         /// Aggiunge un controllo alla lista
         int addControl(GControl *l);
 
         /// Imposta se mostrare o no il pulsante indietro
         void setShowBackBtn(bool val);
+
         /// Ottiene un valore booleano che indica se mostrare il pulsante indietro
         bool isBackBtnShowable();
 
@@ -96,13 +97,14 @@ class GWindow{
         virtual void updateControls(location cursor_pos);
 
         /// Ridisegna un controllo pulendo solo la parte di schermo necessaria per la sua visualizzazione e lasciando invariato il resto.
-        void redrawControl(int index, int old_dim);
+        bool redrawControl(int index, int old_dim);
 
 		/// Ridisegna un controllo pulendo solo la parte di schermo necessaria per la sua visualizzazione e lasciando invariato il resto dato il nome
-		void redrawControl(char name[], int old_dim);
+		bool redrawControl(char name[], int old_dim);
 
         /// Ottiene il controllo relativo
         GControl* getControl(int ind);
+
         /// Ottiene il primo controllo con quel nome
         GControl* getControl(char bname[]);
 
@@ -116,6 +118,9 @@ class GWindow{
 
         /// Disegna solo i controlli della finestra
         void drawControls();
+
+        /// Cancella tutti i controlli
+        void clearAll();
 
     private:
         // Nome della finestra
@@ -131,25 +136,21 @@ class GWindow{
         BackBtnType type;
         // Rappresenta il pulsante indietro
         GButton* back = new GButton();
-        //
         // Handler che gestisce il click del pulsante indietro
         void (*clickedBackHandler) (GEvent *event) = nullptr;
         // Puntatore alla surface su cui disegnare
 	    #if defined ARDUWIN_USE_I2C
-        LiquidCrystal_I2C *surf;
+        LiquidCrystal_I2C *surf = nullptr;
 	    #else
-	    LiquidCrystal *surf;
+	    LiquidCrystal *surf = nullptr;
 	    #endif
 
 	    // Numero di controlli
         int controls_num = 0;
+        // Controlli della finestra
         GControl *controls[20];
         // Definisce se mostrare il pulsante indietro
         bool showBackBtn = false;
 };
-
-
-
-
 
 #endif // WIN_H

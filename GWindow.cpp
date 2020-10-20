@@ -10,21 +10,26 @@ GWindow::GWindow(){
     strcpy(name , "");
     strcpy(tags , "");
     controls_num = 0;
+    clearAll();
     // Inizializzo il pulsante di  default
-
+    surf = nullptr;
 }
 
 GWindow::GWindow(char n[], char t[]){
     strcpy(title , t);
     strcpy(name , n);
+    // imposto i valori di default
     controls_num = 0;
+    // imposto tutti i controlli a nullptr
+    clearAll();
+    // Assegno alla superficie di disegno nullptr
+    surf = nullptr;
 }
 
 void GWindow::setTitle(char t[]){
     // Imposto il titolo solo se non è vuoto
     strcpy(title, t);
 }
-
 
 char* GWindow::getTitle(){
     return title;
@@ -34,12 +39,16 @@ void GWindow::setName(char n[]){
     // Imposto il nome solo se non è nullo
     strcpy(name, n);
 }
+
 void GWindow::drawControls(){
+    // disabilito il blink
     surf->noBlink();
+    // scorro i controlli e li disegno
     for (int x = 0; x < controls_num; x++){
         controls[x]->draw();
     }
 }
+
 char* GWindow::getName(){
     return name;
 }
@@ -60,6 +69,7 @@ void GWindow::setShowBackBtn(bool val){
 bool GWindow::isBackBtnShowable(){
     return showBackBtn;
 }
+
 char* GWindow::getTags(){
     return tags;
 }
@@ -84,9 +94,8 @@ BackBtnType GWindow::getBackBtnType() {
     return type;
 }
 
-void GWindow::draw(){
+bool GWindow::draw(){
     // Disegna la finestra
-
     // Controllo che la superficie esista
     if (surf != nullptr) {
         // Pulisco lo schermo
@@ -136,53 +145,81 @@ void GWindow::draw(){
             // Disegno il pulsante
             back->draw();
         }
+        // Imposto il cursore per scrivere il titolo
+        surf->setCursor(10 - (strlen(title) / 2) ,0);
+        // Scrivo il contenuto
+        surf->print(title);
+        // Disegno i componenti
+        drawControls();
+        return true;
     }
-    // Imposto il cursore per scrivere il titolo
-    surf->setCursor(10 - (strlen(title) / 2) ,0);
-    // Scrivo il contenuto
-    surf->print(title);
-    // Disegno i componenti
-    drawControls();
+    else{
+        return false;
+    }
 }
 
-void GWindow::redrawControl(int index , int len) {
-    // Controllo che l'indice esista
-    if (index >= 0 && index < controls_num) {
-        // Esiste
-        // Controllo che il conotrollo relativo non sia nullo
-        if (controls[index] != nullptr) {
-            // Contiene qualcosa
-            // Salvo la posizione di inizio
-            int start_x = controls[index]->getLocation().x;
-            int y = controls[index]->getLocation().y;
-            // Controllo che non vada fuori dallo schermo
-            if (len + start_x <= 19) {
-                // Va bene posso cancellare
-				// Pulisco lo spazio
-				for (int x = start_x; x <= len + start_x; x++) {
-					// Imposto la posizione
-					surf->setCursor(x, y);
-					// Scrivo un carattere vuoto
-					surf->print(" ");
-				}
-				// Disegno il controllo
-				controls[index]->draw();
+bool GWindow::redrawControl(int index , int len) {
+    // controllo che esista la superficie
+    if(surf != nullptr){
+        // Controllo che l'indice esista
+        if (index >= 0 && index < controls_num) {
+            // Esiste
+            // Controllo che il conotrollo relativo non sia nullo
+            if (controls[index] != nullptr) {
+                // Contiene qualcosa
+                // Salvo la posizione di inizio
+                int start_x = controls[index]->getLocation().x;
+                int y = controls[index]->getLocation().y;
+                // Controllo che non vada fuori dallo schermo
+                if (len + start_x <= 19) {
+                    // Va bene posso cancellare
+                    // Pulisco lo spazio
+                    for (int x = start_x; x <= len + start_x; x++) {
+                        // Imposto la posizione
+                        surf->setCursor(x, y);
+                        // Scrivo un carattere vuoto
+                        surf->print(" ");
+                    }
+                    // Disegno il controllo
+                    controls[index]->draw();
+                }
+                else{
+                    return false;
+                }
+            }
+            else{
+                return false;
             }
         }
+        else{
+            return false;
+        }
+    }
+    else{
+        return false;
     }
 }
 
-void GWindow::redrawControl(char name[], int old_dim) {
+bool GWindow::redrawControl(char name[], int old_dim) {
     // Scorro tutti gli elementi
     if (strlen(name) > 0) {
         // La dimensione va bene
         // Scorro tutti gli elementi
         for (int x = 0; x <= controls_num; x++) {
-            if (strcmp(controls[x]->getName(), name) == 0) {
-                redrawControl(x, old_dim);
-                break;
+            // controllo che esista
+            if(controls[x] != nullptr){
+                if (strcmp(controls[x]->getName(), name) == 0) {
+                    // ridisegno il controllo
+                    return redrawControl(x, old_dim);
+                }
+            }
+            else{
+
             }
         }
+    }
+    else{
+        return false;
     }
 }
 
@@ -275,7 +312,15 @@ void GWindow::updateControls(location cursor_pos){
     back->updateEvents(cursor_pos);
     // Controllo gli eventi dei controlli
     for(int x = 0; x < controls_num; x++){
-        controls[x]->updateEvents(cursor_pos);
+        if(controls[x] != nullptr){
+            controls[x]->updateEvents(cursor_pos);
+        }
+    }
+}
+
+void GWindow::clearAll(){
+    for(int x = 0; x < 20; x++){
+        controls[x] = nullptr;
     }
 }
 
