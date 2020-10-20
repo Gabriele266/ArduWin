@@ -1,13 +1,11 @@
 /*
 Autore: Cavallo Gabriele
-Versione: 1.3
-Descrizione: file che contiene funzioni per la gestione della posizione
+Descrizione: file che contiene funzioni per la gestione della posizione.
+Progetto: ArduWin
 */
 
 #ifndef LOC_CPP
 #define LOC_CPP
-
-
 
 // Struttura che definisce la posizione
 struct location {
@@ -15,14 +13,13 @@ struct location {
 	int y;
 };
 
-// Incrementa una struttura location
+/// Incrementa una struttura location
 static void inflate(signed int step, location lac) {
 	lac.x += step;
 	lac.y += step;
 }
 
-
-// Incrementa la x della posizione
+/// Incrementa la x della posizione
 static void increaseX(signed int step, location *loc) {
 	loc->x += step;
 }
@@ -31,6 +28,7 @@ static void increaseX(signed int step, location loc) {
 	loc.x += step;
 }
 
+/// Incrementa la y della posizione di un valore dato
 static void increaseY(signed int step, location *loc) {
 	loc->y += step;
 }
@@ -39,18 +37,41 @@ static void increaseY(signed int step, location loc) {
 	loc.x += step;
 }
 
-static void normalize(location *loc) {
+/// Controlla se la posizione è contenuta in un rettangolo di 20x4
+static bool normalize(location *loc) {
+    // controllo la x
 	if (loc->x > 19) {
 		loc->x = 19;
 	}
-	if (loc->x < 0) {
+	else if (loc->x < 0) {
 		loc->x = 0;
 	}
+
+	// controllo la y
 	if (loc->y < 0) {
 		loc->y = 0;
 	}
-	if (loc->y > 3) {
+	else if (loc->y > 3) {
 		loc->y = 3;
+	}
+}
+
+/// Normalizza la posizione in base ad un rettangolo specificato dall' utente
+static void normalize(int sizeX, int sizeY, location *loc){
+    // controllo la x
+    if (loc->x > sizeX) {
+		loc->x = sizeX;
+	}
+	else if (loc->x < 0) {
+		loc->x = 0;
+	}
+
+    // controllo la y
+	if (loc->y < 0) {
+		loc->y = 0;
+	}
+	else if (loc->y > sizeY) {
+		loc->y = sizeY;
 	}
 }
 
@@ -70,7 +91,7 @@ static int getY(location *l) {
 	return l->y;
 }
 
-// Determina se il punto l esiste
+/// Determina se il punto l esiste
 static bool exists(location l) {
 	if (l.x >= 0 && l.y >= 0) {
 		return true;
@@ -80,7 +101,7 @@ static bool exists(location l) {
 	}
 }
 
-// Indica se cur si trova nell' area espressa da point
+/// Indica se cur si trova nell' area espressa da point
 static bool isInArea(location cur, location __point, int size_x) {
 	// Controllo che tutte le posizioni esistano
 	if (exists(cur) && exists(__point)) {
@@ -93,7 +114,7 @@ static bool isInArea(location cur, location __point, int size_x) {
 	}
 }
 
-// COnverte in striga una tupla
+/// Converte in striga una tupla
 static char* toString(location loc, bool showLetters = true) {
 	// Variabile da restituire
 	char  result[20];
@@ -129,11 +150,7 @@ static location getLocationByPointer(location *ptr){
 	location loc;
 	loc.x = ptr->x;
 	loc.y = ptr->y;
-
 	return loc;
 }
-
-
-
 #endif
 
