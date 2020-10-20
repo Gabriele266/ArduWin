@@ -15,52 +15,60 @@
 #include <Arduino.h>
 #include "GWindow.h"
 
+/// Rappresenta una lista di finestre in ambiente ArduWin
 class GWinList{
       public:
             GWinList();
-            GWinList(char name[]);
+            GWinList(char name[]) : GWinList();
 
-            // Ottiene o imposta il nome
+            /// Ottiene o imposta il nome
             void setName(char n[]);
             char* getName();
 
-            // Aggiunge una finestra alla raccolta
+            /// Aggiunge una finestra alla raccolta
             int add(GWindow* w);
-            // Aggiunge la finestra nell' indice specifico
+            /// Aggiunge la finestra nell' indice specifico
             void add(GWindow *w, int index);
 
-            // Imposta la finestra principale tramite un indice numerico
+            /// Imposta la finestra principale tramite un indice numerico
             void setMain(int ind);
+
             void setMain(char name[]);
 
+            /// Restituisce l'indice della finestra principale
             int getMainInd();
 
-            // Rimuove una finestra dal raccoglitore
+            /// Rimuove una finestra dal raccoglitore
             void remove(int ind);
 
-            // Ottiene una finestra a partire da un indice
+            /// Ottiene una finestra a partire da un indice
             GWindow* get(int ind);
-            // Ottiene una finestra a partire da un nome
+
+            /// Ottiene una finestra a partire da un nome
             GWindow* get(char bname[]);
 
-			// Ottiene l'indice di una finestra con quel nome
+			/// Ottiene l'indice di una finestra con quel nome
 			int getIndex(char name[]);
 
-            // Mostra una finestra
-            void draw(int ind);
+            /// Mostra una finestra
+            bool draw(int ind);
 
-            // Mostra la finestra principale
-            void drawMain();
+            /// Mostra la finestra principale
+            bool drawMain();
 
-            // Mostra una finestra a partire dal nome
-            void draw(char name[]);
+            /// Mostra una finestra a partire dal nome
+            bool draw(char name[]);
 
-			// Mostra la finestra impostata come corrente
-			void drawCurrent();
+			/// Mostra la finestra impostata come corrente
+			bool drawCurrent();
 			int getCurrent() {return currentWindow;}
 
             /// Determina se la finestra indicata dal nome è la finestra corrente
 			bool isCurrent(char name[]);
+
+            /// Cancella tutte le finestre dalla memoria
+            void clearWins();
+
       private:
           // Numero di finestre
           int win_num = 0;
@@ -74,6 +82,7 @@ class GWinList{
 		  int currentWindow;
           // Funzione per ottenere l'indice di una finestra a partire dal nome
           int resolveIndex(char name[]);
+
 };
 
 #endif // WINLIST_H

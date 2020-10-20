@@ -1,30 +1,19 @@
 #ifndef GWinList_CPP
 #define GWinList_CPP
 /*
-=================================================
-QUESTO FILE E' PARTE DEL PROGETTO SVEGLIA ARDUINO.
-NON E' OPENSOURCE QUINDI E' ILLEGALE MODIFICARE IL CODICE
-AUTORE: CAVALLO GABRIELE
-IL FILE E TUTTO IL PROGETTO SONO PROTETTI DA COPYRIGHT.
-E' INOLTRE ILLEGALE COPIARE LE IDEE E LE METODOLOGIE DI RISOLUZIONE DEI PROBLEMI
-PER ULTERIORI INFORMAZIONI RIVOLGETEVI A GABRIELE CAVALLO:
-3317375441
-=================================================
-
-Descrizione: contiene l'implementazione della classe GWinList
-
-
+    Autore: cavallo gabriele
+    Implementazione della classe gwinlist
 */
 
 #include "GWinList.h"
 
 GWinList::GWinList(){
     win_num = 0;
+    clearWins();
 }
 
-GWinList::GWinList(char name[]){
+GWinList::GWinList(char name[]) : GWinList(){
     strcpy(this->__name, name);
-    win_num = 0;
 }
 
 void GWinList::setName(char n[]){
@@ -32,7 +21,7 @@ void GWinList::setName(char n[]){
     strcpy(__name , n);
 }
 
-char *GWinList::getName(){
+char* GWinList::getName(){
     return __name;
 }
 
@@ -63,6 +52,12 @@ int GWinList::getMainInd(){
     return main_win_index;
 }
 
+void GWinList::clearWins(){
+    for(int x = 0; x < 10; x ++){
+        __wins[x] = nullptr;
+    }
+}
+
 void GWinList::remove(int ind){
 	// Controllo l'indice
 	// Controllo se esiste e se e' legato ad un controllo
@@ -80,7 +75,7 @@ void GWinList::remove(int ind){
 			// Non effettuo alcun flush degli elementi
 			// Svuoto il puntatore e decremento il contatore dei controlli
 			__wins[ind] = nullptr;
-            
+
 			win_num--;
 		}
 		else {
@@ -94,7 +89,7 @@ void GWinList::remove(int ind){
 			// Decremento
 			win_num--;
 		}
-        
+
 	}
 }
 
@@ -107,7 +102,7 @@ GWindow* GWinList::get(int ind){
 	}
 }
 
-void GWinList::draw(int index){
+bool GWinList::draw(int index){
     // Controllo che l'indice dato esista
     if(index >= 0 && index < win_num){
         // Controllo che la finestra non sia un puntatore nullo
@@ -116,7 +111,14 @@ void GWinList::draw(int index){
 			__wins[index]->draw();
 			// Imposto la finestra corrente come finestra corrente
 			currentWindow = index;
+			return true;
 		}
+		else{
+            return false;
+		}
+    }
+    else{
+        return false;
     }
 }
 
@@ -129,39 +131,30 @@ bool GWinList::isCurrent(char name[]) {
 	else {
 		return false;
 	}
-	
+
 }
 
-void GWinList::drawCurrent(){
-    // Controllo che l'indice della finestra corrente esista
-	if(currentWindow >= 0 && currentWindow <= win_num){
-        // Controllo che la finestra relativa non sia un puntatore nullo
-        if (__wins[currentWindow] != nullptr) {
-            // Mostro la finestra
-            __wins[currentWindow]->draw();
-        }
-	}
+bool GWinList::drawCurrent(){
+   return draw(currentWindow);
 }
 
 int GWinList::getIndex(char name[]){
 	return resolveIndex(name);
 }
 
-void GWinList::draw(char name[]){
+bool GWinList::draw(char name[]){
     // Risolvo il nome della finestra in un indice e mostro il tutto
 	int index = 0;
 	// Calcolo l'indice
 	index = resolveIndex(name);
-	// Mostro la finestra
-	draw(index);
 
+	// Mostro la finestra
+	return draw(index);
 }
 
-
-
-void GWinList::drawMain(){
+bool GWinList::drawMain(){
     // Mostro la finestra principale
-    draw(main_win_index);
+    return draw(main_win_index);
 }
 
 void GWinList::setMain(char name[]) {
@@ -180,11 +173,13 @@ int GWinList::resolveIndex(char __name[]) {
 				// Le due stringhe sono uguali
 				// Disegno la finestra
                 return cur;
-				// Esco dal ciclo
-				break;
 			}
 		}
+		else{
+
+		}
 	}
+	return -1;
 }
 
 #endif
