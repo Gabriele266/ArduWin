@@ -26,7 +26,7 @@
 #endif
 
 #include "GEvent.h"
-#include "Location.h"
+#include "location.h"
 
 // Enumerazione per i tipi di pulsante indietro
 enum BackBtnType : int{

@@ -10,7 +10,7 @@
 #include "GControl.h"
 #include <arduino.h>
 #include "GIcon.h"
-#include "Location.h"
+#include "location.h"
 
 #ifndef LABEL_H
 #define LABEL_H
@@ -23,16 +23,16 @@ public:
 	GLabel(char name[], char text[]);
 	// Construttore che imposta il nome il testo e la posizione
 	GLabel(char name[], char text[], location loc);
-	
+
 	// Funzione per mostrarlo
 	// Ridefinizione del metodo virtuale
 	bool draw();
-	// Inizializza l'icona impostata 
+	// Inizializza l'icona impostata
 	void begin();
 	void updateEvents(location l);
 
 	void setIcon(GIcon *icn);
-private: 
+private:
 	// Punta all' icona
 	GIcon *icon;
 };

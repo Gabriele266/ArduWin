@@ -7,7 +7,7 @@
     Descrizione: Rappresenta un GEvento nella libreria ArduWin
 */
 #include <Arduino.h>
-#include "Location.h"
+#include "location.h"
 
 
 class GEvent

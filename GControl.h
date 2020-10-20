@@ -20,7 +20,7 @@
 #endif
 
 // Header per la posizione
-#include "Location.h"
+#include "location.h"
 // Header per gli eventi
 #include "GEvent.h"
 
