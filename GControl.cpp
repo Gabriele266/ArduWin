@@ -21,26 +21,20 @@ Descrizione: implementazione della classe GControl, che rappresenta un GControll
 #include "GControl.h"
 
 GControl::GControl(){
-
+    surf = nullptr;
 }
+
 void GControl::setName(char _n[]){
-    if(_n != ""){
-        // Imposto il nome
-        strcpy(__name , _n);
-    }
-    else{
-        // Imposto un nome dato
-
-    }
+    strcpy(__name, _n);
 }
 
-GControl::GControl(char name[], char text[]){
+GControl::GControl(char name[], char text[]) : GControl(){
 	// Salvo il valore del nome
 	strcpy(__name, name);
 	strcpy(__text, text);
 }
 
-GControl::GControl(char name[], char text[], location loc){
+GControl::GControl(char name[], char text[], location loc) : GControl(){
     // Salvo il nome
     strcpy(__name, name);
     // Salvo il testo

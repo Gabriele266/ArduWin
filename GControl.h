@@ -30,10 +30,10 @@ class GControl{
           // Costruttore di default
 		GControl();
         /// Costruttore di base con nome e testo
-		GControl(char name[], char text[]);
+		GControl(char name[], char text[]) : GControl();
 
         /// Costruttore che accetta un
-        GControl(char name[], char text[], location l);
+        GControl(char name[], char text[], location l) : GControl();
 
 		/// Ottiene o imposta il nome del GControllo
 		void setName(char _n[]);
