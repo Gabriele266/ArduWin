@@ -1,10 +1,10 @@
 /*
 	Autore: Cavallo Gabriele
-	Versione: 1.1
 	Progetto: ArduWin
 	https://github.com/Gabriele266/ArduCore/blob/master/README.md
 	Contiene l' interfaccia della classe GControl che rappresenta un controllo generico nella interfaccia
 */
+
 #pragma once
 // Inclusione
 #define ARDUWIN_USE_I2C
@@ -24,16 +24,20 @@
 // Header per gli eventi
 #include "GEvent.h"
 
+/// Rappresenta un controllo in ambiente ArduWin
 class GControl{
       public:
           // Costruttore di default
 		GControl();
         /// Costruttore di base con nome e testo
 		GControl(char name[], char text[]);
+
         /// Costruttore che accetta un
         GControl(char name[], char text[], location l);
+
 		/// Ottiene o imposta il nome del GControllo
 		void setName(char _n[]);
+
 		/// Restituisce il nome del controllo
 		char* getName();
 
@@ -43,13 +47,16 @@ class GControl{
 
 		/// Ottiene o imposta i tag del GControllo
 		void setTags(char _t[]);
+
 		/// Restituisce i tag associati al controllo
 		char* getTags();
 
 		/// Ottiene o imposta la posizione del GControllo
 		void setLocation(location l);
+
 		/// Imposta la posizione in base ad una coppia di coordinate
 		void setLocation(int x, int y);
+
 		/// Restituisce la posizione del controllo
 		location getLocation();
 
@@ -65,13 +72,15 @@ class GControl{
 		LiquidCrystal* getSurface();
 		#endif
 
-		/// Disegna il GControllo
+		/// Disegna il GControllo. Restituisce true se l'operazione è andata a buon fine
 		virtual bool draw();
+
 		/// Restituisce lo stato del GControllo
 		bool getShownState();
 
 		/// Imposta il gestore degli eventi
 		void setEventHandler(void (*ptr)(GEvent *event));
+
 		/// CHiama l'handler
 		void callHandler(GEvent *event);
 
@@ -80,12 +89,16 @@ class GControl{
 
 		/// Nome del controllo
 		char __name[10];
+
 		/// Testo associato al controllo
 		char __text[10];
+
 		/// Tag del controllo
 		char __tags[10];
+
 		/// Posizione del controllo nella interfaccia
 		location __point;
+
 		/// Surface per il disegno
 		#if defined ARDUWIN_USE_I2C
 		LiquidCrystal_I2C *__surf = nullptr;
@@ -96,6 +109,7 @@ class GControl{
 
 		/// Definisce se l'oggetto è mostrato
 		bool __isShown = false;
+
 		/// Puntatore a una funzione che gestisce gli eventi
 		void (*eventHandler)(GEvent *event) = nullptr;
     private:
