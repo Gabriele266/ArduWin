@@ -97,7 +97,7 @@ class GControl{
 		char __tags[10];
 
 		/// Posizione del controllo nella interfaccia
-		location __point;
+		location __point = createLocation();
 
 		/// Surface per il disegno
 		#if defined ARDUWIN_USE_I2C

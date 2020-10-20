@@ -118,7 +118,11 @@ void GControl::callHandler(GEvent *event){
 	if(eventHandler != nullptr){
 		eventHandler(event);
 	}
+	else{
+
+	}
 }
+
 bool GControl::getShownState(){
     return __isShown;
 }
