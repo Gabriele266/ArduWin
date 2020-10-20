@@ -9,7 +9,7 @@ La licenza è valida su tutti i sorgenti del progetto.
 ========================================================
 */
 // Espone la versione del framework
-#define ARDUWIN_VERSION "2.0"
+#define ARDUWIN_VERSION 2.0
 
 // HEADER PER LE FINESTRE
 #include "GWindow.h"
@@ -35,3 +35,11 @@ La licenza è valida su tutti i sorgenti del progetto.
 #include "GNotification.h"
 // Header per gli errori
 #include "GError.h"
+
+/// Determina se la versione è migliore o peggiore
+static bool greaterThan(float version){
+      if(ARDUWIN_VERSION > version){
+            return true;
+      }
+      return false;
+}
