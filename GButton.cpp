@@ -31,27 +31,33 @@ bool GButton::draw() {
 		__surf->noBlink();
 		// Imposto il cursore
 		__surf->setCursor(getLocation().x, getLocation().y);
-		// Disegno una barra verticale
-
 		// Controllo se devo mettere una icona
 		if (icon != nullptr) {
-
 			// Disegno l'icona
 			__surf->write(byte(icon->getIndex()));
-
-			
-
 		}
 		// Disegno il testo
 		__surf->print(__text);
-		// Disegno un altra barra verticale
-
+		return true;
+	}
+	else{
+        return false;
 	}
 }
-void GButton::begin() {
-	// Controllo che l'icona esista
-	if (icon != nullptr) {
-		__surf->createChar(icon->getIndex(), icon->getCode());
+bool GButton::begin() {
+    // controllo che esista l'interfaccia
+    if(getSurface() != nullptr){
+        // Controllo che l'icona esista
+        if (icon != nullptr) {
+            __surf->createChar(icon->getIndex(), icon->getCode());
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+	else{
+        return false;
 	}
 }
 
@@ -63,29 +69,36 @@ GIcon* GButton::getIcon() {
 	return icon;
 }
 
-
 void GButton::updateEvents(location l){
-	// GControllo se sono stato premuto
-	if(enabled){
-		// Controllo che eistano tutti e che la posizione appartenga al pulsante
-		if(exists(l) && exists(getLocation()) && isInArea(l,getLocation(), strlen(__text))){
-			 //Sono stato premuto
-			 // Creo un evento
-			 GEvent *event = new GEvent();
-			 // Imposto il nome
-			 event->setName("buttonClick");
-			 // Imposto il sender
-             		event->setSender(this->getName());
-             		// Imposto la posizione
-             		event->setPosition(this->getLocation());
-             		// Imposto l'evento come gestito
-             		event->throwEvent();
-			 //Chiamo l'handler
-             		eventHandler(event);
-			
-			return;
-		}
-	}
+    // conrollo se esiste la superficie
+    if(getSurface() != nullptr){
+        // GControllo se sono stato premuto
+        if(enabled){
+            // Controllo che eistano tutti e che la posizione appartenga al pulsante
+            if(exists(l) && exists(getLocation()) && isInArea(l,getLocation(), strlen(__text))){
+                 //Sono stato premuto
+                 // controllo se esiste il gestore eventi
+                 if(eventHandler != nullptr){
+                        // Creo un evento
+                        GEvent *event = new GEvent();
+                        // Imposto il nome
+                        event->setName("buttonClick");
+                        // Imposto il sender
+                        event->setSender(this->getName());
+                        // Imposto la posizione
+                        event->setPosition(this->getLocation());
+                        // Imposto l'evento come gestito
+                        event->throwEvent();
+                        //Chiamo l'handler
+                        eventHandler(event);
+                 }
+            }
+        }
+    }
+    else{
+        return;
+    }
+
 }
 
 void GButton::enable()
@@ -96,4 +109,5 @@ void GButton::enable()
 void GButton::disable() {
 	enabled = true;
 }
+
 #endif
