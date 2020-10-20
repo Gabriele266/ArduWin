@@ -18,7 +18,7 @@
 class GWinList{
       public:
             GWinList();
-            GWinList(char name[]) : GWinList();
+            GWinList(char name[]);
 
             /// Ottiene o imposta il nome
             void setName(char n[]);

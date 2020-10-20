@@ -21,7 +21,7 @@ Descrizione: implementazione della classe GControl, che rappresenta un GControll
 #include "GControl.h"
 
 GControl::GControl(){
-    surf = nullptr;
+    __surf = nullptr;
 }
 
 void GControl::setName(char _n[]){
