@@ -19,7 +19,6 @@
 #include <LiquidCrystal.h>
 #endif
 
-
 // Header per la posizione
 #include "Location.h"
 // Header per gli eventi
@@ -61,7 +60,6 @@ class GControl{
 		void setSurface(LiquidCrystal *s);
 		LiquidCrystal* getSurface();
 		#endif
-		
 
 		// Disegna il GControllo
 		virtual bool draw();
@@ -86,12 +84,12 @@ class GControl{
 		location __point;
 		// Surface per il disegno
 		#if defined ARDUWIN_USE_I2C
-		LiquidCrystal_I2C *__surf;
+		LiquidCrystal_I2C *__surf = nullptr;
 		#else
 		// Creo un puntatore all' oggetto della libreria normale
-		LiquidCrystal *__surf;
+		LiquidCrystal *__surf = nullptr;
 		#endif
-	
+
 		// Definisce se l'oggetto è mostrato
 		bool __isShown = false;
 		// Puntatore a una funzione che gestisce gli eventi
