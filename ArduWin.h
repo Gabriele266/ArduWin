@@ -8,6 +8,9 @@ La licenza è valida su tutti i sorgenti del progetto.
 ========================================================
 ========================================================
 */
+#ifndef ARDUWIN_HEAD
+#define ARDUWIN_HEAD
+
 // Espone la versione del framework
 #define ARDUWIN_VERSION 2.0
 
@@ -43,3 +46,6 @@ static bool greaterThan(float version){
       }
       return false;
 }
+
+#endif // ARDUWIN_HEAD
+
