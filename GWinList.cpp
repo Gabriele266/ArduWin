@@ -193,4 +193,14 @@ void GWinList::setCurrentIndex(unsigned int index) {
     }
 }
 
+GWindow* GWinList::get(char name[]){
+    // risolvo l'indice del nome della finestra
+    int ind = resolveIndex(name);
+    // controllo se è stato trovato
+    if(ind != -1){
+        // restituisco la finestra
+        return __wins[ind];
+    }
+}
+
 #endif
