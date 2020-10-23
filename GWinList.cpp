@@ -186,4 +186,11 @@ int GWinList::resolveIndex(char __name[]) {
 	return -1;
 }
 
+void GWinList::setCurrentIndex(unsigned int index) {
+    // controllo se esiste
+    if(index >= 0 && index < win_num){
+        currentWindow = index;
+    }
+}
+
 #endif

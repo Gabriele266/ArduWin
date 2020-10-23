@@ -34,6 +34,9 @@ class GWinList{
 
             void setMain(char name[]);
 
+            /// Imposta l'indice della finestra corrente
+            void setCurrentIndex(unsigned int index);
+
             /// Aggiunge la finestra alla lista e la imposta come principale
             void addMain(GWindow *win);
 
