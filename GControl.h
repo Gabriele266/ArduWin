@@ -87,31 +87,31 @@ class GControl{
 		/// Funzione per aggiornare gli eventi
 		virtual void updateEvents(location l);
 
-		/// Nome del controllo
-		char __name[10];
+    /// Nome del controllo
+    char __name[10];
 
-		/// Testo associato al controllo
-		char __text[10];
+    /// Testo associato al controllo
+    char __text[10];
 
-		/// Tag del controllo
-		char __tags[10];
+    /// Tag del controllo
+    char __tags[10];
 
-		/// Posizione del controllo nella interfaccia
-		location __point = createLocation();
+    /// Posizione del controllo nella interfaccia
+    location __point = createLocation();
 
-		/// Surface per il disegno
-		#if defined ARDUWIN_USE_I2C
-		LiquidCrystal_I2C *__surf = nullptr;
-		#else
-		// Creo un puntatore all' oggetto della libreria normale
+    /// Surface per il disegno
+#if defined ARDUWIN_USE_I2C
+    LiquidCrystal_I2C *__surf = nullptr;
+#else
+    // Creo un puntatore all' oggetto della libreria normale
 		LiquidCrystal *__surf = nullptr;
-		#endif
+#endif
 
-		/// Definisce se l'oggetto è mostrato
-		bool __isShown = false;
+    /// Definisce se l'oggetto è mostrato
+    bool __isShown = false;
 
-		/// Puntatore a una funzione che gestisce gli eventi
-		void (*eventHandler)(GEvent *event) = nullptr;
+    /// Puntatore a una funzione che gestisce gli eventi
+    void (*eventHandler)(GEvent *event) = nullptr;
     private:
 
 

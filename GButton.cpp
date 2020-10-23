@@ -2,7 +2,6 @@
 #define FButton_CPP
 
 #include "GButton.h"
-#include <Arduino.h>
 
 GButton::GButton(){
 	setName(" ");
@@ -26,6 +25,7 @@ GButton::GButton(char __name[], char __content[]){
 bool GButton::draw() {
 	// Disegno il pulsante
 	// GControllo che sia stata impostate una superficie
+
 	if (__surf != nullptr && enabled) {
 		// Tolgo il blink
 		__surf->noBlink();
