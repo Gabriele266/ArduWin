@@ -37,6 +37,26 @@ public:
 
     /// Operatore di accesso
     t* operator[](nat index);
+
+    /// Ridimensiona l'array
+    bool resize(nat new_dim);
+
+    /// Ridimensiona l'array e rimuove gli elementi che rimarrebbero unhowned
+    bool resize(nat new_dim, bool remove_others);
+
+    /// Restituisce le dimensioni dell' array
+    nat getSize(){
+        return count;
+    }
+
+    /// Restituisce le dimensioni massime dell' array
+    nat getMaxSize() {
+        return dim;
+    }
+
+    /// Pulisce l'array cancellando tutti gli elementi
+    void clear();
+
 private:
     // Array con gli elementi
     t *elems[dim];
@@ -132,7 +152,39 @@ bool GArray<t, dim>::set(nat index, t *val){
     else{
         return false;
     }
-    
+}
+
+template <class t, nat dim>
+bool GArray<t, dim>::resize(nat new_dim){
+    // controllo che la nuova dimensione sia contenuta in quella massima
+    if(new_dim < dim){
+        count = new_dim;
+    }
+    else{
+        #ifdef ENABLE_SERIAL_ERRORS
+        launchError(" classe GArray. Tentativo di ridimensionamento con valore troppo grande.");
+        launchParam("Nuova dimensione", new_dim);
+        launchParam("Dimensione massima", dim);
+        launchParam("Dimensione corrente", count);
+        launchParam("Funzione", "resize(unsigned int new_dim)");
+        #endif
+    }
+}
+
+template <class t, nat dim>
+bool GArray<t, dim>::resize(nat new_dim, bool remove_others){
+    // controllo se posso cambiare le dimensioni
+    if(resize(new_dim)){
+        // cancello gli elementi
+        if(new_dim < count - 1){
+            // rimuovo gli elementi rimasti fuori
+            for(int x = new_dim; x < count; x++){
+                elems[x] = nullptr;
+            }
+        }
+        return true;
+    }
+    return false;
 }
 
 template <class t, nat dim>
@@ -147,6 +199,14 @@ t* GArray<t, dim>::get(nat ind){
         launchParam("Indice", ind);
         #endif
         return nullptr;
+    }
+}
+
+template <class t, nat dim>
+void GArray<t, dim>::clear(){
+    // scorro gli elementi
+    for(int x = 0; x < dim; x ++){
+        elems[x] = nullptr;
     }
 }
 #endif
