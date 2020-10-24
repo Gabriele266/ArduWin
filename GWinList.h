@@ -13,6 +13,7 @@
 // Librerie
 #include <Arduino.h>
 #include "GWindow.h"
+#include "flags.cpp"
 
 /// Rappresenta una lista di finestre in ambiente ArduWin
 class GWinList{
@@ -66,6 +67,8 @@ class GWinList{
 
 			/// Mostra la finestra impostata come corrente
 			bool drawCurrent();
+
+			/// Restituisce la finestra corrente
 			int getCurrent() {return currentWindow;}
 
             /// Determina se la finestra indicata dal nome è la finestra corrente
@@ -73,6 +76,12 @@ class GWinList{
 
             /// Cancella tutte le finestre dalla memoria
             void clearWins();
+
+            /// Determina se un indice esiste
+            bool exists(int ind);
+
+            /// Determina se esiste una finestra con quel nome
+            bool exists(char bname[]);
 
       private:
           // Numero di finestre
