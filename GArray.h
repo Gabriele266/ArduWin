@@ -21,7 +21,7 @@ public:
     GArray();
     
     // Funzione per aggiungere un elemento
-    void add(t *elem);
+    int add(t *elem);
 
     /// Imposta l'elemento index
     bool set(nat index, t *elem);
@@ -73,9 +73,11 @@ GArray<t, dim>::GArray(){
 }
 
 template <class t, nat dim>
-void GArray<t, dim>::add(t *elem){
+int GArray<t, dim>::add(t *elem){
     elems[count] = elem;
     count ++;
+    
+    return count --;
 }
 
 

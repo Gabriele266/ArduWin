@@ -12,7 +12,7 @@ La licenza è valida su tutti i sorgenti del progetto.
 #define ARDUWIN_HEAD
 
 // Espone la versione del framework
-#define ARDUWIN_VERSION 2.0
+#define ARDUWIN_VERSION 2.1
 
 // HEADER PER LE FINESTRE
 #include "GWindow.h"

@@ -9,9 +9,8 @@ Rappresenta un array di finestre come specificazione del template di GArray
 #include "GWindow.h"
 
 /// Rappresenta un array finestre
-class GWindowArray : public GArray<GWindow, 10>{
+class GWindowArray : GArray<GWindow, 10>{
 public:
-    
 };
 
 #endif
