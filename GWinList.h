@@ -64,12 +64,6 @@ class GWinList : public GArray<GWindow, 10>{
             /// Determina se la finestra indicata dal nome � la finestra corrente
 			bool isCurrent(char name[]);
 
-            /// Determina se un indice esiste
-            bool exists(int ind);
-
-            /// Determina se esiste una finestra con quel nome
-            bool exists(char bname[]);
-
       private:
           // Indice della finestra principale
           int main_win_index = 0;
