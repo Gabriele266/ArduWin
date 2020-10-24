@@ -38,6 +38,8 @@ La licenza è valida su tutti i sorgenti del progetto.
 #include "GNotification.h"
 // Header per gli errori
 #include "GError.h"
+// Header per gli array
+#include "GArray.h"
 
 /// Determina se la versione è migliore o peggiore
 static bool greaterThan(float version){
