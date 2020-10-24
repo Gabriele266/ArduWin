@@ -17,14 +17,15 @@
 /// Invia un errore sul seriale
 static void launchError(char text[]){
     Serial.println("");
-    Serial.print("Errore ArduWin: ");
+    Serial.print("/*Errore ArduWin: ");
     Serial.println(text);
+    
 }
 
 /// Invia un warning sul seriale
 static void launchWarning(char text[]){
     Serial.println("");
-    Serial.print("Warning ArduWin: ");
+    Serial.print("/*Warning ArduWin: ");
     Serial.println(text);
 }
 
@@ -40,6 +41,10 @@ static void launchParam(char name[], t& value){
     Serial.print(name);
     Serial.print(":");
     Serial.println(value);
+}
+
+static void closeLaunch(){
+    Serial.println("*/");
 }
 
 #endif

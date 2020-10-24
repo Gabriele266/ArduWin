@@ -57,6 +57,9 @@ public:
     /// Pulisce l'array cancellando tutti gli elementi
     void clear();
 
+    /// Esegue la funzione function su tutti gli elementi esistenti
+    void execute(void (*function)(t *current, nat current_ind));
+
 private:
     // Array con gli elementi
     t *elems[dim];
@@ -86,6 +89,7 @@ bool GArray<t, dim>::exists(nat index){
     launchWarning(" classe GArray ricerca elemento in array ha restiuito false. ");
     launchParam("Indice ricerca", index);
     launchParam("Funzione", "exists(unsigned int index)");
+    closeLaunch();
     #endif
     return false;
 }
@@ -111,6 +115,7 @@ bool GArray<t, dim>::exists(nat index, bool check_nullptr){
     launchParam("Indice ricerca", index);
     launchParam("Funzione", "exists(unsigned int index, bool check_nullptr)");
     launchParam("Ricerca nullptr", check_nullptr);
+    closeLaunch();
     #endif
     return false;
 }
@@ -126,8 +131,29 @@ t* GArray<t, dim>::operator[](nat ind){
         launchWarning(" classe GArray ricerca elemento in array non esistente. E' stato restituito nullptr");
         launchParam("Indice", ind);
         launchParam("Funzione", "operator[](unsigned int ind)");
+        closeLaunch();
         #endif
         return nullptr;
+    }
+}
+
+template <class t, nat dim>
+void GArray<t, dim>::execute(void (*function)(t *current, nat current_ind)){
+    // Scorro gli elementi attivi dell' array
+    for(int cur = 0; cur < count; cur ++){
+        // Controllo che l'elemento corrente non sia nullptr
+        if(elems[cur] != nullptr){
+            // eseguo la funzione
+            function(elems[cur], cur);
+        }
+        else{
+            #ifdef ENABLE_SERIAL_ERRORS
+            launchError(" classe GArray. Esecuzione funzione non riuscita su elemento nullo in array. ");
+            launchParam("Indice", cur);
+            launchParam("Numero elementi", count);
+            closeLaunch();
+            #endif
+        }
     }
 }
 
@@ -146,6 +172,7 @@ bool GArray<t, dim>::set(nat index, t *val){
             #ifdef ENABLE_SERIAL_ERRORS
             launchError(" tentativo di impostazione di un valore esterno all' array");
             launchParam("Indice", index);
+            closeLaunch();
             #endif
         }
     }
@@ -164,9 +191,10 @@ bool GArray<t, dim>::resize(nat new_dim){
         #ifdef ENABLE_SERIAL_ERRORS
         launchError(" classe GArray. Tentativo di ridimensionamento con valore troppo grande.");
         launchParam("Nuova dimensione", new_dim);
-        launchParam("Dimensione massima", dim);
+        // launchParam("Dimensione massima", dim);
         launchParam("Dimensione corrente", count);
         launchParam("Funzione", "resize(unsigned int new_dim)");
+        closeLaunch();
         #endif
     }
 }
@@ -197,6 +225,7 @@ t* GArray<t, dim>::get(nat ind){
         #ifdef ENABLE_SERIAL_ERRORS
         launchError(" classe GArray tentativo di accesso a un elemento non esistente. ");
         launchParam("Indice", ind);
+        closeLaunch();
         #endif
         return nullptr;
     }
