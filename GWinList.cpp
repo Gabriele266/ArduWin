@@ -9,6 +9,7 @@
 
 GWinList::GWinList(){
     clear();
+    cursor_pos = createLocation(0, 0);
 }
 
 GWinList::GWinList(char name[]) : GWinList(){
@@ -208,8 +209,6 @@ void GWinList::locateCursor(LiquidCrystal_I2C *surf){
         normalize(&cursor_pos);
         // La imposto sullo schermo
         surf->setCursor(cursor_pos.x, cursor_pos.y);
-        // attivo il blink
-        surf->blink();
     }
     else{
         #ifdef ENABLE_SERIAL_ERRORS
@@ -226,8 +225,6 @@ void GWinList::locateCursor(LiquidCrystal *surf){
         normalize(&cursor_pos);
         // La imposto sullo schermo
         surf->setCursor(cursor_pos.x, cursor_pos.y);
-        // attivo il blink
-        surf->blink();
     }
     else{
         #ifdef ENABLE_SERIAL_ERRORS
