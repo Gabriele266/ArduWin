@@ -9,17 +9,16 @@
 #include <Arduino.h>
 
 // Indica alla libreria di mostrare errori seriali in caso succedessero
-#define ENABLE_SERIAL_ERRORS
+//#define ENABLE_SERIAL_ERRORS
 
 // Indica alla libreria di abilitare i warning seriali
-#define ENABLE_SERIAL_WARNINGS
+//#define ENABLE_SERIAL_WARNINGS
 
 /// Invia un errore sul seriale
 static void launchError(char text[]){
     Serial.println("");
     Serial.print("/*Errore ArduWin: ");
     Serial.println(text);
-    
 }
 
 /// Invia un warning sul seriale
