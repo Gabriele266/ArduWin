@@ -140,4 +140,102 @@ void GWinList::setCurrentIndex(unsigned int index) {
     }
 }
 
+void GWinList::moveCursorUp(){
+    // Controllo che non esca dallo schermo
+    if((cursor_pos.y - 1) >= 0){
+        cursor_pos.y -= 1;
+    }
+    else{
+        #ifdef ENABLE_SERIAL_ERRORS
+        launchError(" classe GWinList. Tentativo di spostamento del cursore in su in una posizione esterna allo schermo. ");
+        launchParam("Posizione", cursor_pos.y - 1);
+        closeLaunch();
+        #endif
+    }
+}
+
+void GWinList::moveCursorDown(){
+    // Controllo che non esca dallo schermo
+    if((cursor_pos.y + 1) <= 3){
+        cursor_pos.y += 1;
+    }
+    else{
+        #ifdef ENABLE_SERIAL_ERRORS
+        launchError(" classe GWinList. Tentativo di spostamento del cursore in giu in una posizione esterna allo schermo. ");
+        launchParam("Posizione", cursor_pos.y + 1);
+        closeLaunch();
+        #endif
+    }
+}
+
+void GWinList::moveCursorLeft(){
+    // Controllo che non esca dallo schermo
+    if((cursor_pos.x - 1) >= 0){
+        cursor_pos.x -= 1;
+    }
+    else{
+        #ifdef ENABLE_SERIAL_ERRORS
+        launchError(" classe GWinList. Tentativo di spostamento del cursore verso destra in una posizione esterna allo schermo. ");
+        launchParam("Posizione", cursor_pos.x - 1);
+        closeLaunch();
+        #endif
+    }
+}
+
+void GWinList::moveCursorRight(){
+    // Controllo che non esca dallo schermo
+    if((cursor_pos.x + 1) <= 19){
+        cursor_pos.x += 1;
+    }
+    else{
+        #ifdef ENABLE_SERIAL_ERRORS
+        launchError(" classe GWinList. Tentativo di spostamento del cursore verso destra in una posizione esterna allo schermo. ");
+        launchParam("Posizione", cursor_pos.x + 1);
+        closeLaunch();
+        #endif
+    }
+}
+
+location GWinList::getCursorPosition(){
+    return cursor_pos;
+}
+
+#ifdef ARDUWIN_USE_I2C
+void GWinList::locateCursor(LiquidCrystal_I2C *surf){
+    // controllo che surf non sia nullptr
+    if(surf != nullptr){
+        // normalizzo la posizione
+        normalize(&cursor_pos);
+        // La imposto sullo schermo
+        surf->setCursor(cursor_pos.x, cursor_pos.y);
+        // attivo il blink
+        surf->blink();
+    }
+    else{
+        #ifdef ENABLE_SERIAL_ERRORS
+        launchError(" class GWinList. Tentativo di posizionare il cursore senza uno schermo valido. ");
+        launchParam("Lista", __name);
+        #endif
+    }
+}
+#else
+void GWinList::locateCursor(LiquidCrystal *surf){
+    // controllo che surf non sia nullptr
+    if(surf != nullptr){
+        // normalizzo la posizione
+        normalize(&cursor_pos);
+        // La imposto sullo schermo
+        surf->setCursor(cursor_pos.x, cursor_pos.y);
+        // attivo il blink
+        surf->blink();
+    }
+    else{
+        #ifdef ENABLE_SERIAL_ERRORS
+        launchError(" class GWinList. Tentativo di posizionare il cursore senza uno schermo valido. ");
+        launchParam("Lista", __name);
+        #endif
+    }
+}
+#endif
+
 #endif

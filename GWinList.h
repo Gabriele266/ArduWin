@@ -16,6 +16,14 @@
 #include "flags.cpp"
 #include "GArray.h"
 
+#define ARDUWIN_USE_I2C
+
+#ifdef ARDUWIN_USE_I2C
+#include <LiquidCrystal_I2C.h>
+#else
+#include <LiquidCrystal.h>
+#endif
+
 /// Rappresenta una lista di finestre in ambiente ArduWin
 class GWinList : public GArray<GWindow, 10>{
       public:
@@ -64,6 +72,33 @@ class GWinList : public GArray<GWindow, 10>{
             /// Determina se la finestra indicata dal nome � la finestra corrente
 			bool isCurrent(char name[]);
 
+            /// Sposta il cursore a sinistra
+            void moveCursorLeft();
+
+            /// Muove il cursore a destra
+            void moveCursorRight();
+
+            /// Muove il cursore in su
+            void moveCursorUp();
+
+            /// Muove il cursore in giu
+            void moveCursorDown();
+
+            /// Riporta il cursore alla posizione home (0,0)
+            void resetCursor();
+
+            /// Posiziona il cursore in una posizione ben definita
+            void moveCursor(location pos);
+
+            /// Restituisce la posizione del cursore nello schermo
+            location getCursorPosition();
+
+            /// Funzioni per posizionare il cursore nello schermo
+            #ifdef ARDUWIN_USE_I2C
+            void locateCursor(LiquidCrystal_I2C *surf);
+            #else
+            void locateCursor(LiquidCrystal *surf);
+            #endif
       private:
           // Indice della finestra principale
           int main_win_index = 0;
@@ -73,6 +108,8 @@ class GWinList : public GArray<GWindow, 10>{
           int resolveIndex(char name[]);
           // Nome della lista
           char __name[20];
+          // Posizione del cursore
+          location cursor_pos = createLocation();
 };
 
 #endif // WINLIST_H
