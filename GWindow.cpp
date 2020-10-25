@@ -5,12 +5,11 @@
 #include <Arduino.h>
 
 
-GWindow::GWindow(){
+GWindow::GWindow() : GArray(){
     strcpy(title , "");
     strcpy(name , "");
     strcpy(tags , "");
-    controls_num = 0;
-    clearAll();
+    clear();
     // Inizializzo il pulsante di  default
     surf = nullptr;
 }
@@ -18,10 +17,8 @@ GWindow::GWindow(){
 GWindow::GWindow(char n[], char t[]){
     strcpy(title , t);
     strcpy(name , n);
-    // imposto i valori di default
-    controls_num = 0;
-    // imposto tutti i controlli a nullptr
-    clearAll();
+    clear();
+    resize(0);
     // Assegno alla superficie di disegno nullptr
     surf = nullptr;
 }
@@ -44,8 +41,8 @@ void GWindow::drawControls(){
     // disabilito il blink
     surf->noBlink();
     // scorro i controlli e li disegno
-    for (int x = 0; x < controls_num; x++){
-        controls[x]->draw();
+    for (int x = 0; x < getSize(); x++){
+        get(x)->draw();
     }
 }
 
@@ -162,40 +159,55 @@ bool GWindow::redrawControl(int index , int len) {
     // controllo che esista la superficie
     if(surf != nullptr){
         // Controllo che l'indice esista
-        if (index >= 0 && index < controls_num) {
+        if (exists(index, true)) {
             // Esiste
-            // Controllo che il conotrollo relativo non sia nullo
-            if (controls[index] != nullptr) {
-                // Contiene qualcosa
-                // Salvo la posizione di inizio
-                int start_x = controls[index]->getLocation().x;
-                int y = controls[index]->getLocation().y;
-                // Controllo che non vada fuori dallo schermo
-                if (len + start_x <= 19) {
-                    // Va bene posso cancellare
-                    // Pulisco lo spazio
-                    for (int x = start_x; x <= len + start_x; x++) {
-                        // Imposto la posizione
-                        surf->setCursor(x, y);
-                        // Scrivo un carattere vuoto
-                        surf->print(" ");
-                    }
-                    // Disegno il controllo
-                    controls[index]->draw();
+            // Contiene qualcosa
+            // Salvo la posizione di inizio
+            int start_x = get(index)->getLocation().x;
+            int y = get(index)->getLocation().y;
+            // Controllo che non vada fuori dallo schermo
+            if (len + start_x <= 19) {
+                // Va bene posso cancellare
+                // Pulisco lo spazio
+                for (int x = start_x; x <= len + start_x; x++) {
+                    // Imposto la posizione
+                    surf->setCursor(x, y);
+                    // Scrivo un carattere vuoto
+                    surf->print(" ");
                 }
-                else{
-                    return false;
-                }
+                // Disegno il controllo
+                get(index)->draw();
             }
             else{
+                #ifdef ENABLE_SERIAL_WARNINGS
+                launchWarning(" classe GWindow. Tentativo di ridisegnare un controllo con una dimensione che esce dallo schermo. ");
+                launchParam("Finestra", name);
+                launchParam("Dimensione", len);
+                launchParam("Nome ctrl", get(index)->getName());
+                closeLaunch();
+                #endif
                 return false;
             }
         }
         else{
+            #ifdef ENABLE_SERIAL_ERRORS
+            launchError(" classe GWindow. Tentativo di ridisegnare un controllo non esistente. ");
+            launchParam("Indice", index);
+            launchParam("Finestra", name);
+            launchParam("Funzione", "redrawControl(int index, int old_size)");
+            closeLaunch();
+            #endif
             return false;
         }
     }
     else{
+        #ifdef ENABLE_SERIAL_ERRORS
+        launchError(" classe GWindow. Tentativo di ridisegnare un controllo senza una superficie impostata. ");
+        launchParam("Finestra", name);
+        launchParam("Indice ctrl", index);
+        launchParam("Funzione", "redrawControl(int index, int old_size)");
+        closeLaunch();
+        #endif
         return false;
     }
 }
@@ -205,20 +217,23 @@ bool GWindow::redrawControl(char name[], int old_dim) {
     if (strlen(name) > 0) {
         // La dimensione va bene
         // Scorro tutti gli elementi
-        for (int x = 0; x <= controls_num; x++) {
+        for (int x = 0; x <= getSize(); x++) {
             // controllo che esista
-            if(controls[x] != nullptr){
-                if (strcmp(controls[x]->getName(), name) == 0) {
+            if(exists(x, true)){
+                if (strcmp(get(x)->getName(), name) == 0) {
                     // ridisegno il controllo
                     return redrawControl(x, old_dim);
                 }
             }
-            else{
-
-            }
         }
     }
     else{
+        #ifdef ENABLE_SERIAL_ERRORS
+        launchError(" classe GWindow. Tentativo di ridisegnare un controllo senza specificare un nome. ");
+        launchParam("Finestra", name);
+        launchParam("Dimensione", old_dim);
+        closeLaunch();
+        #endif
         return false;
     }
 }
@@ -235,92 +250,14 @@ void GWindow::setSurface(LiquidCrystal *s){
 }
 #endif
 
-int GWindow::addControl(GControl *l){
-    controls[controls_num] = l;
-    controls_num++;
-    return controls_num;
-}
-
-void GWindow::removeControl(int ind){
-    // Controllo l'indice
-    // Controllo se esiste e se e' legato ad un controllo
-    if(ind >= 0 && ind < controls_num){
-        // Controllo se e' l'ultimo dell' array
-        if (ind == controls_num - 1) {
-            // E' l'ultimo
-            // Non effettuo alcun flush degli elementi
-            // Svuoto il puntatore e decremento il contatore dei controlli
-            controls[ind] = nullptr;
-            controls_num--;
-        }
-        else {
-            // L'elemento non e' l'ultimo
-            // Eseguo il flush degli elementi
-            // Parto da quello successivo a ind
-            // Sposto tutti gli altri di 1 posizione indietro e infine decremento il contatore dei controlli
-            for (int index = ind + 1; index < controls_num; index++) {
-                controls[index - 1] = controls[index];
-            }
-            // Decremento
-            controls_num--;
-        }
-    }
-}
-
-void GWindow::removeControl(char bname[]) {
-    // Cerco il controllo che ha quel nome
-    // NOTA: si ferma al primo risultato
-    for (int index = 0; index < controls_num; index++) {
-        // Controllo che il controllo corrente esista
-        if (controls[index] != nullptr) {
-            if (strcmp(controls[index]->getName(), bname) == 0) {
-                // Trovato il controllo con quel nome
-                // Chiamo la funzione per rimuoverlo
-                removeControl(index);
-                break;
-            }
-        }
-    }
-}
-
-GControl* GWindow::getControl(int index) {
-    // Controllo l'indice
-    if (index >= 0 && index < controls_num) {
-        return controls[index];
-    }
-}
-
-GControl* GWindow::getControl(char bname[]) {
-    // Controllo che il nome non sia nullo
-    if (strlen(bname) > 0) {
-        // Procedo
-		for (int index = 0; index < controls_num; index++) {
-			// Controllo che il controllo corrente esista
-			if (controls[index] != nullptr) {
-				if (strcmp(controls[index]->getName(), bname) == 0) {
-					// Trovato il controllo con quel nome
-					// Chiamo la funzione per rimuoverlo
-					return controls[index];
-				}
-			}
-		}
-    }
-}
-
 void GWindow::updateControls(location cursor_pos){
     // Prendo ogni controllo e avvio la ricerca
     back->updateEvents(cursor_pos);
     // Controllo gli eventi dei controlli
-    for(int x = 0; x < controls_num; x++){
-        if(controls[x] != nullptr){
-            controls[x]->updateEvents(cursor_pos);
+    for(int x = 0; x < getSize(); x++){
+        if(exists(x, true)){
+            get(x)->updateEvents(cursor_pos);
         }
-    }
-}
-
-void GWindow::clearAll(){
-    for(int x = 0; x < 20; x++){
-        controls[x] = nullptr;
     }
 }
 

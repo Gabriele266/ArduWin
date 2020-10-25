@@ -25,8 +25,14 @@
 #include <LiquidCrystal.h>
 #endif
 
+// Header per gli eventi
 #include "GEvent.h"
+// Header per le posizioni
 #include "location.h"
+// Header per gli array
+#include "GArray.h"
+// Header per gestione errori
+#include "flags.cpp"
 
 // Enumerazione per i tipi di pulsante indietro
 enum BackBtnType : int{
@@ -46,7 +52,7 @@ enum BackBtnPos : int{
 };
 
 /// Rappresenta una finestra in ArduWin
-class GWindow{
+class GWindow : public GArray<GControl, 15>{
     public:
         /// Costruttore di default
         GWindow();
@@ -80,18 +86,11 @@ class GWindow{
         /// Disegna la finestra partendo dal titolo e poi chiama le funzioni di draw dei componenti figlio
         virtual bool draw();
 
-        /// Aggiunge un controllo alla lista
-        int addControl(GControl *l);
-
         /// Imposta se mostrare o no il pulsante indietro
         void setShowBackBtn(bool val);
 
         /// Ottiene un valore booleano che indica se mostrare il pulsante indietro
         bool isBackBtnShowable();
-
-        /// Rimuove un controllo
-        void removeControl(int ind);
-        void removeControl(char bname[]);
 
         /// Effettua il controllo degli eventi di click relativi a tutti i controlli
         virtual void updateControls(location cursor_pos);
@@ -101,12 +100,6 @@ class GWindow{
 
 		/// Ridisegna un controllo pulendo solo la parte di schermo necessaria per la sua visualizzazione e lasciando invariato il resto dato il nome
 		bool redrawControl(char name[], int old_dim);
-
-        /// Ottiene il controllo relativo
-        GControl* getControl(int ind);
-
-        /// Ottiene il primo controllo con quel nome
-        GControl* getControl(char bname[]);
 
 	// Controllo quale libreria è stata inclusa
 	#if defined ARDUWIN_USE_I2C
@@ -118,12 +111,9 @@ class GWindow{
 
         /// Disegna solo i controlli della finestra
         void drawControls();
-
-        /// Cancella tutti i controlli
-        void clearAll();
     private:
         // Nome della finestra
-		char name[20];
+		char name[15];
 		// Titolo della finestra
 		char title[20];
 		// Tags relativi alla finestra
@@ -143,11 +133,6 @@ class GWindow{
 	    #else
 	    LiquidCrystal *surf = nullptr;
 	    #endif
-
-	    // Numero di controlli
-        int controls_num = 0;
-        // Controlli della finestra
-        GControl *controls[20];
         // Definisce se mostrare il pulsante indietro
         bool showBackBtn = false;
 };
