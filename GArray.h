@@ -21,7 +21,11 @@ public:
     GArray();
     
     // Funzione per aggiungere un elemento
+<<<<<<< Updated upstream
     int add(t *elem);
+=======
+    void add(t *elem);
+>>>>>>> Stashed changes
 
     /// Imposta l'elemento index
     bool set(nat index, t *elem);
@@ -73,6 +77,7 @@ GArray<t, dim>::GArray(){
 }
 
 template <class t, nat dim>
+<<<<<<< Updated upstream
 int GArray<t, dim>::add(t *elem){
     elems[count] = elem;
     count ++;
@@ -80,6 +85,14 @@ int GArray<t, dim>::add(t *elem){
     return count - 1;
 }
 
+=======
+void GArray<t, dim>::add(t *elem){
+    elems[count] = elem;
+    count ++;
+}
+
+
+>>>>>>> Stashed changes
 template <class t, nat dim>
 bool GArray<t, dim>::exists(nat index){
     // controllo se esiste

@@ -105,8 +105,28 @@ void GWinList::setMain(char name[]) {
 	int index = resolveIndex(name);
 }
 
+<<<<<<< Updated upstream
 int GWinList::resolveIndex(char _name[]) {
 	for (int cur = 0; cur < getSize(); cur++) {
+=======
+bool GWinList::exists(int ind){
+    // controllo
+    if(ind >= 0 && ind < win_num && __wins[ind] != nullptr){
+        // esiste una finestra effettiva
+        return true;
+    }
+
+    // do un errore
+#ifdef ENABLE_SERIAL_WARNINGS
+    launchWarning(" classe GWinList. Ricerca indice ha restituito false.");
+    launchParam("Indice di ricerca", ind);
+#endif
+    return false;
+}
+
+int GWinList::resolveIndex(char __name[]) {
+	for (int cur = 0; cur < win_num; cur++) {
+>>>>>>> Stashed changes
 		// Controllo che la finestra esista
 		if (exists((nat) cur)) {
 			// Confronto
