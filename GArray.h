@@ -80,7 +80,6 @@ int GArray<t, dim>::add(t *elem){
     return count - 1;
 }
 
-
 template <class t, nat dim>
 bool GArray<t, dim>::exists(nat index){
     // controllo se esiste

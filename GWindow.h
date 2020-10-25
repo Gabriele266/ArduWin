@@ -121,7 +121,6 @@ class GWindow{
 
         /// Cancella tutti i controlli
         void clearAll();
-
     private:
         // Nome della finestra
 		char name[20];
