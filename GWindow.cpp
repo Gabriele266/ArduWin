@@ -42,7 +42,10 @@ void GWindow::drawControls(){
     surf->noBlink();
     // scorro i controlli e li disegno
     for (int x = 0; x < getSize(); x++){
-        get(x)->draw();
+        // controllo se esiste
+        if(exists(x, true)){
+            get(x)->draw();
+        }
     }
 }
 
@@ -151,6 +154,11 @@ bool GWindow::draw(){
         return true;
     }
     else{
+        #ifdef ENABLE_SERIAL_ERRORS
+        launchError("classe GWindow. Tentativo di disegnare una finestra senza una superficie impostata. ");
+        launchParam("Finestra",name);
+        closeLaunch();
+        #endif
         return false;
     }
 }
@@ -258,7 +266,17 @@ void GWindow::updateControls(location cursor_pos){
         if(exists(x, true)){
             get(x)->updateEvents(cursor_pos);
         }
+        else{
+            #ifdef ENABLE_SERIAL_ERRORS
+            launchError(" classe GWindow. Tentativo di aggiornare un controllo non esistente.");
+            launchParam("Finestra", name);
+            launchParam("Indice", x);
+            launchParam("Funzione", "updateControls(location cursor_pos)");
+            closeLaunch();
+            #endif
+        }
     }
+    return;
 }
 
 #endif
