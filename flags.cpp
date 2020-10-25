@@ -9,9 +9,11 @@
 #include <Arduino.h>
 
 // Indica alla libreria di mostrare errori seriali in caso succedessero
+// Commentare per disabilitare il lancio degli errori sul seriale e ridurre l'utilizzo della sram
 //#define ENABLE_SERIAL_ERRORS
 
 // Indica alla libreria di abilitare i warning seriali
+// Commentare per disabilitare i warning seriali e ridurre l'utilizzo della sram
 //#define ENABLE_SERIAL_WARNINGS
 
 /// Invia un errore sul seriale
