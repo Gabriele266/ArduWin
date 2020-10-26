@@ -5,12 +5,10 @@ GArray              KEYWORD1
 GWindow 		    KEYWORD1
 GControl		    KEYWORD1
 GCheckBox           KEYWORD1
-=======
 GWindow 		    KEYWORD1
 GControl		    KEYWORD1
 GCheckBox           KEYWORD1
-GArray              KEYWORD1
->>>>>>> Stashed changes
+GArray		KEYWORD1
 GWinList		    KEYWORD1
 GLabel		KEYWORD1
 GEvent		KEYWORD1

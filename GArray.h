@@ -58,6 +58,9 @@ public:
         return dim;
     }
 
+    /// Determina se tutti gli elementi dell' array contengono un puntatore valido
+    bool notEmpty();
+
     /// Pulisce l'array cancellando tutti gli elementi
     void clear();
 
@@ -77,7 +80,6 @@ GArray<t, dim>::GArray(){
 }
 
 template <class t, nat dim>
-<<<<<<< Updated upstream
 int GArray<t, dim>::add(t *elem){
     elems[count] = elem;
     count ++;
@@ -85,14 +87,12 @@ int GArray<t, dim>::add(t *elem){
     return count - 1;
 }
 
-=======
 void GArray<t, dim>::add(t *elem){
     elems[count] = elem;
     count ++;
 }
 
 
->>>>>>> Stashed changes
 template <class t, nat dim>
 bool GArray<t, dim>::exists(nat index){
     // controllo se esiste
@@ -251,5 +251,19 @@ void GArray<t, dim>::clear(){
     for(int x = 0; x < dim; x ++){
         elems[x] = nullptr;
     }
+}
+
+template <class t, nat dim>
+bool GArray<t, dim>::notEmpty() {
+    // Scorro gli elementi
+    for(int cont = 0; cont < count; cont++){
+        if(elems[count] != nullptr){
+            continue;
+        }
+        else{
+            return false;
+        }
+    }
+    return true;
 }
 #endif
