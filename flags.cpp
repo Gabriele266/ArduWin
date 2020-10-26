@@ -62,7 +62,7 @@ static void launchWarning(char text[]){
     Serial.print(F("/*Warning ArduWin: "));
     Serial.println(text);
 }
-
+#ifndef ENABLE_SERIAL_ERRORS
 /// Invia un parametro sul seriale
 static void launchParam(char name[], char value[]){
     Serial.print(name);
@@ -82,6 +82,7 @@ static void launchParam(char name[], t value) {
 static void closeLaunch(){
     Serial.println(F("*/"));
 }
+#endif
 #endif
 
 

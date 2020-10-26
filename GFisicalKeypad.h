@@ -5,8 +5,10 @@
  */
 
 #ifndef GKEYPAD_HEAD
-#include "../ArduWin/ArduWin.h"
+#define GKEYPAD_HEAD
+
 #include "GFisicalButton.h"
+#include <ArduWin.h>
 
 /// Rappresenta un keypad
 class GFisicalKeypad{
@@ -15,6 +17,9 @@ public:
 
     /// Costruttore con il nome
     GFisicalKeypad(char name[]);
+
+    /// Imposta il nome del keypad
+    void setName(char n[]);
 
     /// Imposta il pin del pulsante right
     void setRightBtnPin(nat pin);
@@ -46,6 +51,8 @@ public:
 #ifdef ENABLE_SERIAL_INFO
     /// Mostra le informazioni del keypad sul seriale
     void writeReference();
+    /// Mostra le informazioni di tutti i pulsanti e il loro stato corrente
+    void writeState();
 #endif
 
 private:

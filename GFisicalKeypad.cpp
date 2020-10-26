@@ -1,12 +1,16 @@
 #ifndef EXPANSION_KEYPAD_CPP
+#define EXPANSION_KEYPAD_CPP
+
 #include "GFisicalKeypad.h"
 
 GFisicalKeypad::GFisicalKeypad(){
     win_handler = nullptr;
-    for(int x = 0; x < 5; x++){
-        // Creo il pulsante
-        default_buttons.add(new GFisicalButton());
-    }
+    // Creo i pulsanti e ne imposto i nomi
+    default_buttons.add(new GFisicalButton("Right"));
+    default_buttons.add(new GFisicalButton("Left"));
+    default_buttons.add(new GFisicalButton("Up"));
+    default_buttons.add(new GFisicalButton("Down"));
+    default_buttons.add(new GFisicalButton("Select"));
 }
 
 GFisicalKeypad::GFisicalKeypad(char n[]) : GFisicalKeypad(){
@@ -44,9 +48,21 @@ void GFisicalKeypad::attachWinList(GWinList *parent) {
     win_handler = parent;
 }
 
+void GFisicalKeypad::setName(char *n){
+    strcpy(name, n);
+}
+
 #ifdef ENABLE_SERIAL_INFO
 void GFisicalKeypad::writeReference() {
+    for(int x = 0; x < 5; x++){
+        default_buttons[x]->writeReference();
+    }
+}
 
+void GFisicalKeypad::writeState(){
+    for(int x = 0; x < 5; x ++){
+        default_buttons[x]->writeState();
+    }
 }
 #endif
 
@@ -69,7 +85,7 @@ void GFisicalKeypad::update(){
                 win_handler->moveCursorDown();
             }
             else if(default_buttons[4]->isPressed()){
-                win_handler[win_handler->getCurrent()]->updateControls(win_handler->getCursorPosition());
+                win_handler->get(win_handler->getCurrent())->updateControls(win_handler->getCursorPosition());
             }
         }
         else{

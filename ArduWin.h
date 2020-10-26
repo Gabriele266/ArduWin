@@ -42,13 +42,10 @@ La licenza è valida su tutti i sorgenti del progetto.
 #include "GError.h"
 // Header per gli array
 #include "GArray.h"
-
-#ifdef ENABLE_HARDWARE_CONTROL
 // Header per la gestione dei pulsanti
 #include "GFisicalButton.h"
 // Header per la gestione dei keypad
 #include "GFisicalKeypad.h"
-#endif
 
 /// Determina se la versione è migliore o peggiore
 static bool greaterThan(float version){

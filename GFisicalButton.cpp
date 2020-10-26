@@ -1,6 +1,9 @@
 /*
 
 */
+#ifndef FISICALBTN_CPP
+#define FISICALBTN_CPP
+
 #include "GFisicalButton.h"
 
 GFisicalButton::GFisicalButton(){
@@ -10,6 +13,18 @@ GFisicalButton::GFisicalButton(){
 
 GFisicalButton::GFisicalButton(nat p){
 	pin = p;
+}
+
+GFisicalButton::GFisicalButton(char n[]){
+    strcpy(name, n);
+}
+
+void GFisicalButton::setName(char *n) {
+    strcpy(n, name);
+}
+
+char* GFisicalButton::getName(){
+    return name;
 }
 
 void GFisicalButton::attachPin(nat p){
@@ -39,6 +54,15 @@ bool GFisicalButton::isPressed(){
 	}
 }
 
+bool GFisicalButton::isPressed(nat custom_soil){
+    if(readOnPin() > custom_soil){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
 bool GFisicalButton::init(){
 	// controllo che il pin esista
 	if(pin != 0){
@@ -56,10 +80,24 @@ bool GFisicalButton::init(){
 	}
 }
 
-#ifdef ENABLE_SERIAL_WARNINGS
+#ifdef ENABLE_SERIAL_INFO
 void GFisicalButton::writeReference() {
+    Serial.print("Nome pulsante: ");
+    Serial.println(name);
     Serial.print(F("Pulsante sul pin: "));
     Serial.println(pin);
+}
+
+void GFisicalButton::writeState(){
+    Serial.print(F("Stato pulsante "));
+    Serial.print(name);
+    Serial.print(F(" : "));
+    if(isPressed()){
+        Serial.println(F("Premuto. "));
+    }
+    else{
+        Serial.println(F("Non premuto. "));
+    }
 }
 #endif
 
@@ -78,3 +116,5 @@ nat GFisicalButton::readOnPin(){
 		#endif
 	}
 }
+
+#endif

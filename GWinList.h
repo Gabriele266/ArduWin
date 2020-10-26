@@ -100,9 +100,6 @@ class GWinList : public GArray<GWindow, 10>{
             void locateCursor(LiquidCrystal *surf);
             #endif
 
-            /// Determina se un indice esiste
-            bool exists(int ind);
-
             /// Determina se esiste una finestra con quel nome
             bool exists(char bname[]);
 
