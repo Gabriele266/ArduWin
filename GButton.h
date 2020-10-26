@@ -8,10 +8,16 @@
 #ifndef FBTN_H
 #define FBTN_H
 
+// Header per i controlli
 #include "GControl.h"
+// Header per le posizioni
 #include "location.h"
+// Header per le icone
 #include "GIcon.h"
+// Header di Arduino
 #include <Arduino.h>
+// Header per le modalità di esecuzione
+#include "flags.cpp"
 
 /// Rappresenta un pulsante in ArduWin
 class GButton : public GControl{
@@ -46,6 +52,10 @@ class GButton : public GControl{
 		/// Disegna il pulsante
 		bool draw();
 
+#ifdef ENABLE_SERIAL_INFO
+		/// Mostra informazioni sul controllo
+		void writeReference();
+#endif
     private:
 		// Numero di pressioni del pulsante
 		unsigned int clicks;

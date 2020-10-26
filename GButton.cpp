@@ -25,7 +25,6 @@ GButton::GButton(char __name[], char __content[]){
 bool GButton::draw() {
 	// Disegno il pulsante
 	// GControllo che sia stata impostate una superficie
-
 	if (__surf != nullptr && enabled) {
 		// Tolgo il blink
 		__surf->noBlink();
@@ -41,9 +40,28 @@ bool GButton::draw() {
 		return true;
 	}
 	else{
+#ifdef ENABLE_SERIAL_ERRORS
+	    launchError(" classe GButton. Tentativo di disegnare un controllo senza una superficie definita. ");
+#ifdef ENABLE_SERIAL_INFO
+	    writeReference();
+#endif
+	    closeLaunch();
+#endif
         return false;
 	}
 }
+
+#ifdef ENABLE_SERIAL_INFO
+void GButton::writeReference() {
+    Serial.print(F("Nome controllo: "));
+    Serial.println(getName());
+    Serial.print(F("Posizione controllo: "));
+    Serial.println(toString(getLocation()));
+    Serial.print(F("Testo controllo: "));
+    Serial.println(getText());
+}
+#endif
+
 bool GButton::begin() {
     // controllo che esista l'interfaccia
     if(getSurface() != nullptr){
@@ -53,10 +71,24 @@ bool GButton::begin() {
             return true;
         }
         else{
+            #ifdef ENABLE_SERIAL_ERRORS
+            launchError(" classe GButton. Tentativo di inizializzare un pulsante con icona senza una icona specificata. ");
+            #ifdef ENABLE_SERIAL_INFO
+            writeReference();
+            #endif
+            closeLaunch();
+            #endif
             return false;
         }
     }
 	else{
+        #ifdef ENABLE_SERIAL_ERRORS
+	    launchError(" classe GButton. Tentativo di inizializzare un pulsante con icona senza una superficie definita. ");
+        #ifdef ENABLE_SERIAL_INFO
+	    writeReference();
+        #endif
+	    closeLaunch();
+        #endif
         return false;
 	}
 }
@@ -92,13 +124,28 @@ void GButton::updateEvents(location l){
                         //Chiamo l'handler
                         eventHandler(event);
                  }
+                 else{
+                    #ifdef ENABLE_SERIAL_ERRORS
+                     launchError(" classe GButton. Tentativo di aggiornare eventi controllo senza un gestore impostato. ");
+                    #ifdef ENABLE_SERIAL_INFO
+                     writeReference();
+                    #endif
+                     closeLaunch();
+                    #endif
+                 }
             }
         }
     }
     else{
+#ifdef ENABLE_SERIAL_ERRORS
+        launchError(" classe GButton. Tentativo di aggiornare eventi pulsante senza una superficie definita. ");
+#ifdef ENABLE_SERIAL_INFO
+        writeReference();
+#endif
+        closeLaunch();
+#endif
         return;
     }
-
 }
 
 void GButton::enable()
