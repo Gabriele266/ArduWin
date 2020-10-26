@@ -20,6 +20,10 @@
 // Commentare per non compilare le funzioni di invio informazioni
 #define ENABLE_SERIAL_INFO
 
+// Indica alla libreria che si desidera utilizzare le classi per la gestione dei dispositivi hardware
+// Fa includere da arduwin anche gli header per il keypad, per i pulsanti
+#define ENABLE_HARDWARE_CONTROL
+
 // # funzioni necessarie per inviare errori sul seriale
 #ifdef ENABLE_SERIAL_ERRORS
 /// Invia un errore sul seriale
