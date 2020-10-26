@@ -1,5 +1,6 @@
 //
 // Created by Gabriele on 24/10/2020.
+// Progetto: ArduWin
 // Contiene le informazioni di esecuzione della libreria arduwin
 
 #ifndef FLAGS_CPP
@@ -15,6 +16,12 @@
 // Commentare per disabilitare i warning seriali e ridurre l'utilizzo della sram
 #define ENABLE_SERIAL_WARNINGS
 
+// Indica alla libreria di abilitare le funzioni di informazioni sul seriale
+// Commentare per non compilare le funzioni di invio informazioni
+#define ENABLE_SERIAL_INFO
+
+// # funzioni necessarie per inviare errori sul seriale
+#ifdef ENABLE_SERIAL_ERRORS
 /// Invia un errore sul seriale
 static void launchError(char text[]){
     Serial.println(F(""));
@@ -22,6 +29,28 @@ static void launchError(char text[]){
     Serial.println(text);
 }
 
+/// Invia un parametro sul seriale
+static void launchParam(char name[], char value[]){
+    Serial.print(name);
+    Serial.print(F(":"));
+    Serial.print(":");
+    Serial.println(value);
+}
+
+template <typename t>
+static void launchParam(char name[], t value) {
+    Serial.print(name);
+    Serial.print(F(":"));
+    Serial.println(value);
+}
+
+static void closeLaunch(){
+    Serial.println(F("*/"));
+}
+#endif
+
+// # funzioni necessarie per l'invio di warning seriale
+#ifdef ENABLE_SERIAL_WARNINGS
 /// Invia un warning sul seriale
 static void launchWarning(char text[]){
     Serial.println("");
@@ -47,5 +76,7 @@ static void launchParam(char name[], t value) {
 static void closeLaunch(){
     Serial.println(F("*/"));
 }
+#endif
+
 
 #endif
