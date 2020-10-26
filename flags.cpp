@@ -44,6 +44,7 @@ static void launchParam(char name[], t value) {
     Serial.println(value);
 }
 
+/// Chiude il lancio di un errore
 static void closeLaunch(){
     Serial.println(F("*/"));
 }
@@ -73,6 +74,7 @@ static void launchParam(char name[], t value) {
     Serial.println(value);
 }
 
+/// Chiude il lancio di un warning
 static void closeLaunch(){
     Serial.println(F("*/"));
 }
