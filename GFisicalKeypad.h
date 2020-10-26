@@ -28,6 +28,9 @@ public:
     /// Imposta il pin del pulsante down
     void setDownBtnPin(nat pin);
 
+    /// Imposta il pin di selezione
+    void setSelectBtnPin(nat pin);
+
     /// Inizializza il keypad
     bool beginAll();
 

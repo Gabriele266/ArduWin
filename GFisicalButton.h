@@ -52,7 +52,7 @@ public:
 	/// Restituisce il valore della lettura sul pin del pulsante
 	nat readOnPin();
 
-#ifdef ENABLE_SERIAL_WARNINGS
+#ifdef ENABLE_SERIAL_INFO
 	/// Mostra informazioni sul pulsante utilizzando il seriale
 	void writeReference();
 #endif

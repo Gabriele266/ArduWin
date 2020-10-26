@@ -15,11 +15,11 @@ GFisicalKeypad::GFisicalKeypad(char n[]) : GFisicalKeypad(){
 
 void GFisicalKeypad::setDownBtnPin(nat pin) {
     // imposto il pin
-    default_buttons[3]->attachPin(pin);
+    default_buttons[2]->attachPin(pin);
 }
 
 void GFisicalKeypad::setUpBtnPin(nat pin) {
-    default_buttons[4]->attachPin(pin);
+    default_buttons[3]->attachPin(pin);
 }
 
 void GFisicalKeypad::setLeftBtnPin(nat pin) {
@@ -28,6 +28,10 @@ void GFisicalKeypad::setLeftBtnPin(nat pin) {
 
 void GFisicalKeypad::setRightBtnPin(nat pin) {
     default_buttons[0]->attachPin(pin);
+}
+
+void GFisicalKeypad::setSelectBtnPin(nat pin) {
+    default_buttons[4]->attachPin(pin);
 }
 
 bool GFisicalKeypad::beginAll(){
