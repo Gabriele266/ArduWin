@@ -14,7 +14,6 @@
 #include <Arduino.h>
 #include "GWindow.h"
 #include "flags.cpp"
-<<<<<<< Updated upstream
 #include "GArray.h"
 
 #define ARDUWIN_USE_I2C
@@ -24,8 +23,6 @@
 #else
 #include <LiquidCrystal.h>
 #endif
-=======
->>>>>>> Stashed changes
 
 /// Rappresenta una lista di finestre in ambiente ArduWin
 class GWinList : public GArray<GWindow, 10>{
@@ -87,7 +84,6 @@ class GWinList : public GArray<GWindow, 10>{
             /// Muove il cursore in giu
             void moveCursorDown();
 
-<<<<<<< Updated upstream
             /// Riporta il cursore alla posizione home (0,0)
             void resetCursor();
 
@@ -103,14 +99,13 @@ class GWinList : public GArray<GWindow, 10>{
             #else
             void locateCursor(LiquidCrystal *surf);
             #endif
-=======
+
             /// Determina se un indice esiste
             bool exists(int ind);
 
             /// Determina se esiste una finestra con quel nome
             bool exists(char bname[]);
 
->>>>>>> Stashed changes
       private:
           // Indice della finestra principale
           int main_win_index = 0;
