@@ -107,7 +107,7 @@ class GWinList : public GArray<GWindow, 10>{
           // Indice della finestra principale
           int main_win_index = 0;
 		  // Indice della finestra corrente
-		  int currentWindow;
+		  int currentWindow = 0;
           // Funzione per ottenere l'indice di una finestra a partire dal nome
           int resolveIndex(char name[]);
           // Nome della lista

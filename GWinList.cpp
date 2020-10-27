@@ -213,6 +213,11 @@ void GWinList::moveCursorRight(){
     }
 }
 
+void GWinList::resetCursor(){
+    cursor_pos.x = 0;
+    cursor_pos.y = 0;
+}
+
 location GWinList::getCursorPosition(){
     return cursor_pos;
 }
