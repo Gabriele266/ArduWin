@@ -88,7 +88,7 @@ class GControl{
 		virtual void updateEvents(location l);
 
     /// Nome del controllo
-    char __name[10];
+    char __name[15];
 
     /// Testo associato al controllo
     char __text[10];
@@ -103,7 +103,7 @@ class GControl{
     bool __isShown = false;
 
     /// Puntatore a una funzione che gestisce gli eventi
-    void (*eventHandler)(GEvent *event) = nullptr;
+    void (*eventHandler)(GEvent *event);
 
     /// Surface per il disegno
 #if defined ARDUWIN_USE_I2C
