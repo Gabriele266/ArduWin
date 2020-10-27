@@ -48,6 +48,22 @@ public:
     /// Aggiunge un pulsante al keypad
     void addButton(GFisicalButton *btn);
 
+    /// Restituisce un puntatore al pulsante select
+    GFisicalButton* getSelectedBtn();
+
+    /// Restituisce un puntatore al pulsante right
+    GFisicalButton* getRightBtn();
+
+    /// Restituisce un puntatore al pulsante left
+    GFisicalButton* getLeftBtn();
+
+    /// Restituisce un puntatore al pulsante up
+    GFisicalButton* getUpBtn();
+
+    /// Restituisce un puntatore al pulsante down
+    GFisicalButton* getDownBtn();
+
+
 #ifdef ENABLE_SERIAL_INFO
     /// Mostra le informazioni del keypad sul seriale
     void writeReference();

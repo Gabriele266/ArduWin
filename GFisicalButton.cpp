@@ -45,6 +45,22 @@ nat GFisicalButton::getPin(){
 	return pin;
 }
 
+nat GFisicalButton::readOnPin(){
+    // controllo il pin
+    if(pin != 0){
+        nat read = analogRead(pin);
+        return read;
+    }
+    else{
+        return 0;
+#ifdef ENABLE_SERIAL_ERRORS
+        launchError(" classe GFisicalButton. Tentativo di lettura su un pin non esistente.");
+        launchParam("Pin", pin);
+        closeLaunch();
+#endif
+    }
+}
+
 bool GFisicalButton::isPressed(){
 	if(readOnPin() > 900){
 		return true;
@@ -101,20 +117,6 @@ void GFisicalButton::writeState(){
 }
 #endif
 
-nat GFisicalButton::readOnPin(){
-	// controllo il pin
-	if(pin != 0){
-		nat read = analogRead(pin);
-		return read;
-	}
-	else{
-		return 0;
-		#ifdef ENABLE_SERIAL_ERRORS
-		launchError(" classe GFisicalButton. Tentativo di lettura su un pin non esistente.");
-		launchParam("Pin", pin);
-		closeLaunch();
-		#endif
-	}
-}
+
 
 #endif

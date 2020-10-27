@@ -100,8 +100,8 @@ class GWinList : public GArray<GWindow, 10>{
             void locateCursor(LiquidCrystal *surf);
             #endif
 
-            /// Determina se esiste una finestra con quel nome
-            bool exists(char bname[]);
+            /// Restituisce la prima finestra con quel nome
+            GWindow* getByName(char name[]);
 
       private:
           // Indice della finestra principale
@@ -113,7 +113,7 @@ class GWinList : public GArray<GWindow, 10>{
           // Nome della lista
           char __name[20];
           // Posizione del cursore
-          location cursor_pos = createLocation();
+          location cursor_pos;
 };
 
 #endif // WINLIST_H

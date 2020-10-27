@@ -52,6 +52,26 @@ void GFisicalKeypad::setName(char *n){
     strcpy(name, n);
 }
 
+GFisicalButton* GFisicalKeypad::getRightBtn(){
+    return default_buttons[0];
+}
+
+GFisicalButton* GFisicalKeypad::getLeftBtn(){
+    return default_buttons[1];
+}
+
+GFisicalButton* GFisicalKeypad::getUpBtn() {
+    return default_buttons[2];
+}
+
+GFisicalButton* GFisicalKeypad::getDownBtn() {
+    return default_buttons[3];
+}
+
+GFisicalButton* GFisicalKeypad::getSelectedBtn() {
+    return default_buttons[4];
+}
+
 #ifdef ENABLE_SERIAL_INFO
 void GFisicalKeypad::writeReference() {
     for(int x = 0; x < 5; x++){
@@ -69,39 +89,32 @@ void GFisicalKeypad::writeState(){
 void GFisicalKeypad::update(){
     // controllo che la winlist non sia nulla
     if(win_handler != nullptr){
-        // Controllo che tutti i pulsanti siano validi
-        if(default_buttons.notEmpty()){
-            // Controllo i pulsanti di default
-            if(default_buttons[0]->isPressed()){
-                win_handler->moveCursorRight();
-            }
-            else if(default_buttons[1]->isPressed()){
-                win_handler->moveCursorLeft();
-            }
-            else if(default_buttons[2]->isPressed()){
-                win_handler->moveCursorUp();
-            }
-            else if(default_buttons[3]->isPressed()){
-                win_handler->moveCursorDown();
-            }
-            else if(default_buttons[4]->isPressed()){
-                win_handler->get(win_handler->getCurrent())->updateControls(win_handler->getCursorPosition());
-            }
+////        // Controllo i pulsanti di default
+        if(default_buttons[0]->isPressed()){
+            win_handler->moveCursorRight();
         }
-        else{
-#ifdef ENABLE_SERIAL_ERRORS
-            launchError(" classe GFisicalKeypad. Tentativo di aggiornare il keypad senza aver definito tutti i pulsanti necessari. ");
-            launchParam("Nome", name);
-            closeLaunch();
-#endif
+        else if(default_buttons[1]->isPressed()){
+            win_handler->moveCursorLeft();
         }
+        else if(default_buttons[2]->isPressed()){
+            win_handler->moveCursorUp();
+        }
+        else if(default_buttons[3]->isPressed()){
+            win_handler->moveCursorDown();
+        }
+        else if(default_buttons[4]->isPressed()){
+//////            win_handler->get(win_handler->getCurrent())->updateControls(win_handler->getCursorPosition());
+        }
+//        else{
+//
+//        }
     }
-    else{
-#ifdef ENABLE_SERIAL_ERRORS
-        launchError(" classe GFisicalKeypad. Tentativo di aggiornare il keypad senza una GWinList associata. ");
-        launchParam("Nome", name);
-        closeLaunch();
-#endif
-    }
+//    else{
+//#ifdef ENABLE_SERIAL_ERRORS
+//        launchError(" classe GFisicalKeypad. Tentativo di aggiornare il keypad senza una GWinList associata. ");
+//        launchParam("Nome", name);
+//        closeLaunch();
+//#endif
+
 }
 #endif

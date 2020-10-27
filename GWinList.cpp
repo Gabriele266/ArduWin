@@ -9,7 +9,8 @@
 
 GWinList::GWinList(){
     clear();
-    cursor_pos = createLocation(0, 0);
+    cursor_pos.x = 0;
+    cursor_pos.y = 0;
 }
 
 GWinList::GWinList(char name[]) : GWinList(){
@@ -50,7 +51,7 @@ int GWinList::getMainInd(){
 
 bool GWinList::draw(int index){
     // controllo se esiste
-    if(exists(index)){
+    if(this->exists(index, true)){
         // Disegno la finestra
         get(index)->draw();
         // Salvo l'indice corrente
@@ -134,6 +135,21 @@ int GWinList::resolveIndex(char _name[]) {
 	return -1;
 }
 
+GWindow* GWinList::getByName(char *name) {
+    // Scorro le finestre
+    for(int x = 0; x < getSize(); x++){
+        if(strcmp(get(x)->getName(), name) == 0){
+            return get(x);
+        }
+    }
+#ifdef ENABLE_SERIAL_WARNINGS
+    launchWarning(" classe GWinList. Ricerca finestra per nome non ha restituito nessun risultato. ");
+    launchParam("Nome ricerca", name);
+    closeLaunch();
+#endif
+    return nullptr;
+}
+
 void GWinList::setCurrentIndex(unsigned int index) {
     // controllo se esiste
     if(exists(index)){
@@ -147,11 +163,11 @@ void GWinList::moveCursorUp(){
         cursor_pos.y -= 1;
     }
     else{
-        #ifdef ENABLE_SERIAL_ERRORS
-        launchError(" classe GWinList. Tentativo di spostamento del cursore in su in una posizione esterna allo schermo. ");
-        launchParam("Posizione", cursor_pos.y - 1);
-        closeLaunch();
-        #endif
+//        #ifdef ENABLE_SERIAL_ERRORS
+//        launchError(" classe GWinList. Tentativo di spostamento del cursore in su in una posizione esterna allo schermo. ");
+//        launchParam("Posizione", cursor_pos.y - 1);
+//        closeLaunch();
+//        #endif
     }
 }
 
@@ -161,11 +177,11 @@ void GWinList::moveCursorDown(){
         cursor_pos.y += 1;
     }
     else{
-        #ifdef ENABLE_SERIAL_ERRORS
-        launchError(" classe GWinList. Tentativo di spostamento del cursore in giu in una posizione esterna allo schermo. ");
-        launchParam("Posizione", cursor_pos.y + 1);
-        closeLaunch();
-        #endif
+//        #ifdef ENABLE_SERIAL_ERRORS
+//        launchError(" classe GWinList. Tentativo di spostamento del cursore in giu in una posizione esterna allo schermo. ");
+//        launchParam("Posizione", cursor_pos.y + 1);
+//        closeLaunch();
+//        #endif
     }
 }
 
@@ -175,11 +191,11 @@ void GWinList::moveCursorLeft(){
         cursor_pos.x -= 1;
     }
     else{
-        #ifdef ENABLE_SERIAL_ERRORS
-        launchError(" classe GWinList. Tentativo di spostamento del cursore verso destra in una posizione esterna allo schermo. ");
-        launchParam("Posizione", cursor_pos.x - 1);
-        closeLaunch();
-        #endif
+//        #ifdef ENABLE_SERIAL_ERRORS
+//        launchError(" classe GWinList. Tentativo di spostamento del cursore verso destra in una posizione esterna allo schermo. ");
+//        launchParam("Posizione", cursor_pos.x - 1);
+//        closeLaunch();
+//        #endif
     }
 }
 
@@ -190,9 +206,9 @@ void GWinList::moveCursorRight(){
     }
     else{
         #ifdef ENABLE_SERIAL_ERRORS
-        launchError(" classe GWinList. Tentativo di spostamento del cursore verso destra in una posizione esterna allo schermo. ");
-        launchParam("Posizione", cursor_pos.x + 1);
-        closeLaunch();
+//        launchError(" classe GWinList. Tentativo di spostamento del cursore verso destra in una posizione esterna allo schermo. ");
+//        launchParam("Posizione", cursor_pos.x + 1);
+//        closeLaunch();
         #endif
     }
 }
@@ -209,6 +225,8 @@ void GWinList::locateCursor(LiquidCrystal_I2C *surf){
         normalize(&cursor_pos);
         // La imposto sullo schermo
         surf->setCursor(cursor_pos.x, cursor_pos.y);
+        // Attivo il blink
+        surf->blink();
     }
     else{
         #ifdef ENABLE_SERIAL_ERRORS

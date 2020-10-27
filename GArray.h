@@ -78,7 +78,7 @@ GArray<t, dim>::GArray(){
 template <class t, nat dim>
 int GArray<t, dim>::add(t *elem){
     elems[count] = elem;
-    count ++;
+    count += 1;
 
     return count - 1;
 }

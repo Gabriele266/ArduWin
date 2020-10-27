@@ -99,6 +99,12 @@ class GControl{
     /// Posizione del controllo nella interfaccia
     location __point = createLocation();
 
+    /// Definisce se l'oggetto è mostrato
+    bool __isShown = false;
+
+    /// Puntatore a una funzione che gestisce gli eventi
+    void (*eventHandler)(GEvent *event) = nullptr;
+
     /// Surface per il disegno
 #if defined ARDUWIN_USE_I2C
     LiquidCrystal_I2C *__surf = nullptr;
@@ -107,11 +113,7 @@ class GControl{
 		LiquidCrystal *__surf = nullptr;
 #endif
 
-    /// Definisce se l'oggetto è mostrato
-    bool __isShown = false;
 
-    /// Puntatore a una funzione che gestisce gli eventi
-    void (*eventHandler)(GEvent *event) = nullptr;
     private:
 
 
