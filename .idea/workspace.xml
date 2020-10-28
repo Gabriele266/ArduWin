@@ -57,13 +57,6 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
   </component>
-  <component name="RunManager">
-    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -76,7 +69,10 @@
       <workItem from="1603700376678" duration="2586000" />
       <workItem from="1603719111599" duration="3130000" />
       <workItem from="1603734607461" duration="4049000" />
-      <workItem from="1603782305114" duration="5808000" />
+      <workItem from="1603782305114" duration="7033000" />
+      <workItem from="1603829172609" duration="143000" />
+      <workItem from="1603868471996" duration="3873000" />
+      <workItem from="1603915925880" duration="2111000" />
     </task>
     <servers />
   </component>

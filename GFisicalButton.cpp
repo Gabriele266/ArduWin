@@ -79,6 +79,10 @@ bool GFisicalButton::isPressed(nat custom_soil){
     }
 }
 
+void GFisicalButton::setPressHandler(void (*n)(GEvent *event)){
+    handler = n;
+}
+
 bool GFisicalButton::init(){
 	// controllo che il pin esista
 	if(pin != 0){

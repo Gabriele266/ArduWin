@@ -8,7 +8,10 @@
 
 // Header di Arduino
 #include <Arduino.h>
+// Sorgente con le modalità di esecuzione
 #include "flags.cpp"
+// Header per la creazione di eventi
+#include "GEvent.h"
 
 /// Rappresenta un numero naturale
 typedef unsigned int nat;
@@ -57,6 +60,9 @@ public:
 
 	/// Determina se il pulsante è attivo
 	bool isEnabled(){ return active;}
+
+	/// Imposta il gestore degli eventi
+	void setPressHandler(void (*handler)(GEvent *event));
 
 	/// Restituisce il valore della lettura sul pin del pulsante
 	nat readOnPin();

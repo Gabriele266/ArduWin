@@ -42,6 +42,8 @@ La licenza è valida su tutti i sorgenti del progetto.
 #include "GError.h"
 // Header per gli array
 #include "GArray.h"
+// Header per i separatori
+#include "GSeparator.h"
 // Header per la gestione dei pulsanti
 #include "GFisicalButton.h"
 // Header per la gestione dei keypad

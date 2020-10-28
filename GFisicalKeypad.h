@@ -45,8 +45,16 @@ public:
     /// Aggiorna il keypad, controlla le azioni da fare e le esegue
     void update();
 
+    /// Aggiorna il keypad applicando un algoritmo di debouncing
+    /// ciclesUntilLast specifica il numero di aggiornamenti che ci devono essere tra un evento accettato e l'altro
+    /// block_key indica all' algoritmo di bloccare i tasti tra un aggiornamento accettato e l'altro
+    void updateDebounced(nat ciclesUntilLast, bool block_key = true);
+
     /// Aggiunge un pulsante al keypad
     void addButton(GFisicalButton *btn);
+
+    /// Aggiunge un pulsante dato il nome, il pin e il gestore della pressione
+    void addButton(char name[], nat pin, void (*handler)(GEvent *event));
 
     /// Restituisce un puntatore al pulsante select
     GFisicalButton* getSelectedBtn();
@@ -88,6 +96,10 @@ private:
 
     // Puntatore al gestore di finestre
     GWinList *win_handler = nullptr;
+    // Numero di aggiornamenti passati senza accettare eventi
+    nat updates_until_last_event = 0;
+    // Indica se nell' ultimo aggiornamento è stato attivato un pulsante
+    bool last_update_activated_button = false;
 };
 
 #endif
