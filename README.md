@@ -1,4 +1,4 @@
-# ArduCore
+# ArduWin
 Un <b>framework</b> grafico per <u>Arduino</u> designato per schermi lcd I2C
 
 Contiene una organizzazione simile a quelle dei maggiori framework grafici per computer (ad esempio Qt o wxWidgets)
