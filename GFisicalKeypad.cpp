@@ -88,160 +88,73 @@ void GFisicalKeypad::writeState(){
 }
 #endif
 
-void GFisicalKeypad::update(){
+bool GFisicalKeypad::update(){
     // controllo che la winlist non sia nulla
     if(win_handler != nullptr){
 ////        // Controllo i pulsanti di default
         if(default_buttons[0]->isPressed()){
             win_handler->moveCursorRight();
-            last_update_activated_button = true;
+            return true;
         }
         else if(default_buttons[1]->isPressed()){
             win_handler->moveCursorLeft();
-            last_update_activated_button = true;
+            return true;
         }
         else if(default_buttons[2]->isPressed()){
             win_handler->moveCursorUp();
-            last_update_activated_button = true;
+            return true;
         }
         else if(default_buttons[3]->isPressed()){
             win_handler->moveCursorDown();
-            last_update_activated_button = true;
+            return true;
         }
         else if(default_buttons[4]->isPressed()){
             win_handler->get(win_handler->getCurrent())->updateControls(win_handler->getCursorPosition());
-            last_update_activated_button = true;
+            return true;
         }
         else{
-            last_update_activated_button = false;
+            return false;
         }
     }
-//    else{
-//#ifdef ENABLE_SERIAL_ERRORS
-//        launchError(" classe GFisicalKeypad. Tentativo di aggiornare il keypad senza una GWinList associata. ");
-//        launchParam("Nome", name);
-//        closeLaunch();
-//#endif
+}
 
+void GFisicalKeypad::decalcFunction(nat number) {
+    switch(number){
+        case 0:
+            win_handler->moveCursorRight();
+            break;
+        case 1:
+            win_handler->moveCursorLeft();
+            break;
+        case 2:
+            win_handler->moveCursorUp();
+            break;
+        case 3:
+            win_handler->moveCursorDown();
+            break;
+        case 4:
+            // chiamo il select
+            win_handler->get(win_handler->getCurrent())->updateControls(win_handler->getCursorPosition());
+            break;
+    }
 }
 
 void GFisicalKeypad::updateDebounced(nat ciclesUntilLast, bool block_key) {
     // controllo i prerequisiti
-    if(win_handler != nullptr){
-        // controllo se è passato il numero giusto di aggiornamenti
+    if(win_handler != nullptr) {
         if(updates_until_last_event == ciclesUntilLast){
-            // controllo se ci sono pulsanti premuti
-            if(default_buttons[0]->isPressed()){
-                // pulsante right premuto
-                // controllo se devo usare un blocco
-                if(block_key){
-                    // controllo se l'istruzione precedente aveva attivato un pulsante
-                    if(!last_update_activated_button){
-                        // posso eseguire l'istruzione
-                        // muovo il cursore a destra
-                        win_handler->moveCursorRight();
-                        // attivo il flag
-                        last_update_activated_button = true;
-                    }
-                }
-                else{
-                    // eseguo l'istruzione
-                    win_handler->moveCursorRight();
-                }
-                // azzero il contatore degli aggiornamenti
-                updates_until_last_event = 0;
+            // controllo se supero il blocco
+            if(!last_update_activated_button){
+                // controllo se la azione è riferita ad un pulsante
+                last_update_activated_button = update();
             }
-            else if(default_buttons[1]->isPressed()){
-                // pulsante right premuto
-                // controllo se devo usare un blocco
-                if(block_key){
-                    // controllo se l'istruzione precedente aveva attivato un pulsante
-                    if(!last_update_activated_button){
-                        // posso eseguire l'istruzione
-                        // muovo il cursore a destra
-                        win_handler->moveCursorLeft();
-                        // attivo il flag
-                        last_update_activated_button = true;
-                    }
-                }
-                else{
-                    // eseguo l'istruzione
-                    win_handler->moveCursorLeft();
-                }
-                // azzero il contatore degli aggiornamenti
-                updates_until_last_event = 0;
-            }
-            else if(default_buttons[2]->isPressed()){
-                // pulsante right premuto
-                // controllo se devo usare un blocco
-                if(block_key){
-                    // controllo se l'istruzione precedente aveva attivato un pulsante
-                    if(!last_update_activated_button){
-                        // posso eseguire l'istruzione
-                        // muovo il cursore a destra
-                        win_handler->moveCursorUp();
-                        // attivo il flag
-                        last_update_activated_button = true;
-                    }
-                }
-                else{
-                    // eseguo l'istruzione
-                    win_handler->moveCursorUp();
-                }
-                // azzero il contatore degli aggiornamenti
-                updates_until_last_event = 0;
-            }
-            else if(default_buttons[3]->isPressed()){
-                // pulsante right premuto
-                // controllo se devo usare un blocco
-                if(block_key){
-                    // controllo se l'istruzione precedente aveva attivato un pulsante
-                    if(!last_update_activated_button){
-                        // posso eseguire l'istruzione
-                        // muovo il cursore a destra
-                        win_handler->moveCursorDown();
-                        // attivo il flag
-                        last_update_activated_button = true;
-                    }
-                }
-                else{
-                    // eseguo l'istruzione
-                    win_handler->moveCursorDown();
-                }
-                // azzero il contatore degli aggiornamenti
-                updates_until_last_event = 0;
-            }
-            else if(default_buttons[4]->isPressed()){
-                // pulsante right premuto
-                // controllo se devo usare un blocco
-                if(block_key){
-                    // controllo se l'istruzione precedente aveva attivato un pulsante
-                    if(!last_update_activated_button){
-                        // posso eseguire l'istruzione
-                        // lancio il select
-                        win_handler->get(win_handler->getCurrent())->updateControls(win_handler->getCursorPosition());
-                        // attivo il flag
-                        last_update_activated_button = true;
-                    }
-                }
-                else{
-                    // eseguo l'istruzione
-                    win_handler->get(win_handler->getCurrent())->updateControls(win_handler->getCursorPosition());
-                }
-                // azzero il contatore degli aggiornamenti
-                updates_until_last_event = 0;
-            }
-            // nessun tasto premuto
             else{
-                // azzero il flag
                 last_update_activated_button = false;
             }
-
             // azzero il contatore
             updates_until_last_event = 0;
         }
         else{
-            // incremento il contatore
             updates_until_last_event ++;
         }
     }

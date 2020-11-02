@@ -56,6 +56,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
+    <property name="settings.editor.selected.configurable" value="fileTemplates" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -72,7 +73,13 @@
       <workItem from="1603782305114" duration="7033000" />
       <workItem from="1603829172609" duration="143000" />
       <workItem from="1603868471996" duration="3873000" />
-      <workItem from="1603915925880" duration="2111000" />
+      <workItem from="1603915925880" duration="2438000" />
+      <workItem from="1603957364273" duration="2674000" />
+      <workItem from="1603977774362" duration="824000" />
+      <workItem from="1604079381686" duration="3325000" />
+      <workItem from="1604135261163" duration="1078000" />
+      <workItem from="1604147544166" duration="2384000" />
+      <workItem from="1604162038386" duration="3069000" />
     </task>
     <servers />
   </component>
@@ -81,5 +88,19 @@
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="428" y="336" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1604147946717">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="428" y="336" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1604147946717" />
+    <state x="561" y="396" width="1357" height="709" key="SettingsEditor" timestamp="1604148516240">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="561" y="396" width="1357" height="709" key="SettingsEditor/0.0.2560.1400@0.0.2560.1400" timestamp="1604148516240" />
+    <state x="1061" y="505" key="save.file.as.template.dialog" timestamp="1604148089904">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1061" y="505" key="save.file.as.template.dialog/0.0.2560.1400@0.0.2560.1400" timestamp="1604148089904" />
   </component>
 </project>

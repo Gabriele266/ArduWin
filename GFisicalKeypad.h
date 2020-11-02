@@ -43,7 +43,8 @@ public:
     void attachWinList(GWinList *parent);
 
     /// Aggiorna il keypad, controlla le azioni da fare e le esegue
-    void update();
+    /// Restituisce true se Ã¨ avvenuto un evento
+    bool update();
 
     /// Aggiorna il keypad applicando un algoritmo di debouncing
     /// ciclesUntilLast specifica il numero di aggiornamenti che ci devono essere tra un evento accettato e l'altro
@@ -71,7 +72,6 @@ public:
     /// Restituisce un puntatore al pulsante down
     GFisicalButton* getDownBtn();
 
-
 #ifdef ENABLE_SERIAL_INFO
     /// Mostra le informazioni del keypad sul seriale
     void writeReference();
@@ -98,8 +98,11 @@ private:
     GWinList *win_handler = nullptr;
     // Numero di aggiornamenti passati senza accettare eventi
     nat updates_until_last_event = 0;
-    // Indica se nell' ultimo aggiornamento è stato attivato un pulsante
+    // Indica se nell' ultimo aggiornamento ï¿½ stato attivato un pulsante
     bool last_update_activated_button = false;
+
+    /// Chiama la funzione di aggiornamento corretta per il pulsante giusto
+    void decalcFunction(nat number);
 };
 
 #endif
