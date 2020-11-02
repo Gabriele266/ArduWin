@@ -7,8 +7,12 @@
 #ifndef GKEYPAD_HEAD
 #define GKEYPAD_HEAD
 
+// Header per il controllo dei pulsanti
 #include "GFisicalButton.h"
-#include <ArduWin.h>
+// Header per il controllo flags
+#include "flags.cpp"
+// Header per il controllo finestre
+#include "GWinList.h"
 
 /// Rappresenta un keypad
 class GFisicalKeypad{

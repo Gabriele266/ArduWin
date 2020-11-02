@@ -8,16 +8,15 @@
 
 #include <Arduino.h>
 
+// Sono nel target debug
+// Do le impostazioni per arduwin
 // Indica alla libreria di mostrare errori seriali in caso succedessero
-// Commentare per disabilitare il lancio degli errori sul seriale e ridurre l'utilizzo della sram
 #define ENABLE_SERIAL_ERRORS
 
 // Indica alla libreria di abilitare i warning seriali
-// Commentare per disabilitare i warning seriali e ridurre l'utilizzo della sram
 #define ENABLE_SERIAL_WARNINGS
 
 // Indica alla libreria di abilitare le funzioni di informazioni sul seriale
-// Commentare per non compilare le funzioni di invio informazioni
 #define ENABLE_SERIAL_INFO
 
 // Indica alla libreria che si desidera utilizzare le classi per la gestione dei dispositivi hardware
@@ -62,27 +61,27 @@ static void launchWarning(char text[]){
     Serial.print(F("/*Warning ArduWin: "));
     Serial.println(text);
 }
-#ifndef ENABLE_SERIAL_ERRORS
-/// Invia un parametro sul seriale
-static void launchParam(char name[], char value[]){
-    Serial.print(name);
-    Serial.print(F(":"));
-    Serial.print(":");
-    Serial.println(value);
-}
+    #ifndef ENABLE_SERIAL_ERRORS
+    /// Invia un parametro sul seriale
+    static void launchParam(char name[], char value[]){
+        Serial.print(name);
+        Serial.print(F(":"));
+        Serial.print(":");
+        Serial.println(value);
+    }
 
-template <typename t>
-static void launchParam(char name[], t value) {
-    Serial.print(name);
-    Serial.print(F(":"));
-    Serial.println(value);
-}
+    template <typename t>
+    static void launchParam(char name[], t value) {
+        Serial.print(name);
+        Serial.print(F(":"));
+        Serial.println(value);
+    }
 
-/// Chiude il lancio di un warning
-static void closeLaunch(){
-    Serial.println(F("*/"));
-}
-#endif
+    /// Chiude il lancio di un warning
+    static void closeLaunch(){
+        Serial.println(F("*/"));
+    }
+    #endif
 #endif
 
 

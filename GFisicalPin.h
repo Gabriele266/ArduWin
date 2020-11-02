@@ -75,6 +75,13 @@ public:
 
     /// Determina se sulla scheda esiste un pin con quel numero
     static bool exists(nat pin);
+
+    /// Legge un valore sul pin e lo restituisce
+    nat readValue();
+
+    /// Determina se sul pin è presente una corrente tensione alta o bassa
+    bool isHigh();
+
 private:
     // Numero del pin
     nat pin;
