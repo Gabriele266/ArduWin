@@ -6,12 +6,12 @@
 
 #include "GFisicalPin.h"
 
-GFisicalPin::GFisicalPin(char *n, nat number, PinType t, PinUseMode mode, PinWaveMode wave){
+GFisicalPin::GFisicalPin(char *n, nat number, PinType t, PinUseMode m, PinWaveMode wave){
     strcpy(name, n);
     pin = number;
     type = t;
-    use_mode = mode;
-    wave_mode = wave;
+    use_mode = m;
+    mode = wave;
 }
 
 GFisicalPin::GFisicalPin(char *n, nat number) : GFisicalPin(n, number, PinType::Digital, PinUseMode::OutputMode, PinWaveMode::NormalWave){
@@ -57,7 +57,7 @@ void GFisicalPin::writeWave(PinWaveMode wave_mode, nat param){
                 digitalWrite(pin, param);
                 break;
             case PinWaveMode::PwmWave:
-                alalogWrite(pin, param);
+                analogWrite(pin, param);
                 break;
             case PinWaveMode::SinusoidalWave:
                 analogWrite(pin, param);
@@ -121,7 +121,49 @@ bool GFisicalPin::begin(){
     launchParam("Nome", name);
     closeLaunch();
 #endif
+                break;
         }
+    }
+}
+
+nat GFisicalPin::readValue(){
+    // Controllo se il pin esiste
+    if(exists(pin)){
+        // Leggo il valore
+        // Controllo il tipo di pin
+        switch(type){
+            case Pwm:
+                return analogRead(pin);
+            case Digital:
+                return digitalRead(pin);
+            case Analog:
+                return analogRead(pin);
+            case Builtin:
+                return 5;
+#ifdef ENABLE_SERIAL_ERRORS
+                launchError(" classe GFisicalPin. Tentativo di lettura da un pin builtin");
+                closeLaunch();
+#endif
+        }
+    }
+}
+
+bool GFisicalPin::isHigh() {
+    // Controllo che il pin esista e non sia builtin
+    if(exists(pin) && pin != 13){
+        if(digitalRead(pin) == 0){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+    else{
+#ifdef ENABLE_SERIAL_ERRORS
+        launchError(" classe GFisicalPin. Tentativo di lettura digitale da un pin non esistente. ");
+        launchParam("Pin", pin);
+        closeLaunch();
+#endif
     }
 }
 
