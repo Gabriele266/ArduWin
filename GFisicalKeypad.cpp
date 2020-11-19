@@ -109,7 +109,20 @@ bool GFisicalKeypad::update(){
             return true;
         }
         else if(default_buttons[4]->isPressed()){
-            win_handler->get(win_handler->getCurrent())->updateControls(win_handler->getCursorPosition());
+            // Ottengo la finestra corrente
+            GWindow* current = win_handler->get(win_handler->getCurrent());
+            // Controllo che non si tratti di un puntatore nullo
+            if(current != nullptr){
+                // Avvio l'aggiornamento
+                current->updateControls(win_handler->getCursorPosition());
+            }
+            else{
+                // Mostro un errore
+                #ifdef ENABLE_SERIAL_ERRORS
+                launchError(" classe GFisicalKeypad. La ricerca della finestra corrente ha restituito un puntatore nullo. ");
+                closeLaunch();
+                #endif
+            }
             return true;
         }
         else{
