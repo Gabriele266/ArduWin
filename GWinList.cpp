@@ -91,9 +91,13 @@ bool GWinList::draw(char name[]){
 	int index = 0;
 	// Calcolo l'indice
 	index = resolveIndex(name);
-
-	// Mostro la finestra
-	return draw(index);
+    if(index != -1){
+        // Mostro la finestra
+        return draw(index);
+    }
+	else{
+	    return false;
+	}
 }
 
 bool GWinList::drawMain(){
