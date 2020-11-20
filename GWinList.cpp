@@ -262,4 +262,45 @@ void GWinList::locateCursor(LiquidCrystal *surf){
 }
 #endif
 
+#ifdef ENABLE_SERIAL_INFO
+void GWinList::writeReference() {
+    // Scrivo le informazioni sul raccoglitore
+    Serial.print(F("Informazioni su GWinList "));
+    Serial.println(__name);
+    // Scrivo il numero di finestre
+    Serial.print(F("Numero di finestre: "));
+    Serial.println(getSize());
+    // Scrivo il numero massimo di finestre
+    Serial.print(F("Numero massimo di finestre: "));
+    Serial.println(getMaxSize());
+    // Scrivo l'indice della finestra corrente
+    Serial.print(F("Indice finestra corrente: "));
+    Serial.println(currentWindow);
+
+
+    // Avvio la scrittura delle informazioni sulle finestre
+    for(int x = 0; x < getSize(); x++){
+        // Prendo la finestra
+        GWindow *win = get(x);
+        // Scrivo le informazioni
+        Serial.println(F("\n-----------"));
+        Serial.print(F("Finestra numero: "));
+        Serial.println(x);
+        // Controllo se si tratta della finestra corrente
+        if(x == currentWindow){
+            // Lo scrivo
+            Serial.println(F("Finestra corrente. "));
+        }
+
+        Serial.print(F("Posizione in memoria: "));
+        Serial.println((int) get(x));
+        // Controllo se si tratta di un nullptr
+        if(win != nullptr){
+            // Accedo ai membri interni
+            win->writeReference();
+        }
+    }
+}
+#endif
+
 #endif

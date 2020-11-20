@@ -125,26 +125,25 @@ void GButton::updateEvents(location l){
                         eventHandler(event);
                  }
                  else{
-                    #ifdef ENABLE_SERIAL_ERRORS
-                     launchError(" classe GButton. Tentativo di aggiornare eventi controllo senza un gestore impostato. ");
-                    #ifdef ENABLE_SERIAL_INFO
-                     writeReference();
-                    #endif
-                     closeLaunch();
-                    #endif
+//                    #ifdef ENABLE_SERIAL_ERRORS
+//                     launchError(" classe GButton. Tentativo di aggiornare eventi controllo senza un gestore impostato. ");
+//                    #ifdef ENABLE_SERIAL_INFO
+//                     writeReference();
+//                    #endif
+//                     closeLaunch();
+//                    #endif
                  }
             }
         }
     }
     else{
-#ifdef ENABLE_SERIAL_ERRORS
-        launchError(" classe GButton. Tentativo di aggiornare eventi pulsante senza una superficie definita. ");
-#ifdef ENABLE_SERIAL_INFO
-        writeReference();
-#endif
-        closeLaunch();
-#endif
-        return;
+//#ifdef ENABLE_SERIAL_ERRORS
+//        launchError(" classe GButton. Tentativo di aggiornare eventi pulsante senza una superficie definita. ");
+//#ifdef ENABLE_SERIAL_INFO
+//        writeReference();
+//#endif
+//        closeLaunch();
+//#endif
     }
 }
 

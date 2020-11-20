@@ -73,6 +73,8 @@ private:
 template <class t, nat dim>
 GArray<t, dim>::GArray(){
     count = 0;
+    // Pulisco gli elementi
+    clear();
 }
 
 template <class t, nat dim>
@@ -89,13 +91,15 @@ bool GArray<t, dim>::exists(nat index){
     if(index >= 0 && index < count && elems[index] != nullptr){
         return true;
     }
-    #ifdef ENABLE_SERIAL_WARNINGS
-    launchWarning(" classe GArray ricerca elemento in array ha restiuito false. ");
-    launchParam("Indice ricerca", index);
-    launchParam("Funzione", "exists(unsigned int index)");
-    closeLaunch();
-    #endif
-    return false;
+    else{
+        #ifdef ENABLE_SERIAL_WARNINGS
+        launchWarning(" classe GArray ricerca elemento in array ha restiuito false. ");
+        launchParam("Indice ricerca", index);
+        launchParam("Funzione", "exists(unsigned int index)");
+        closeLaunch();
+        #endif
+        return false;
+    }
 }
 
 template <class t, nat dim>
@@ -112,16 +116,21 @@ bool GArray<t, dim>::exists(nat index, bool check_nullptr){
                 return false;
             }
         }
-        return true;   
+        else{
+            return true;
+        }
     }
-    #ifdef ENABLE_SERIAL_WARNINGS
-    launchWarning(" classe GArray ricerca elemento in array ha restiuito false. ");
-    launchParam("Indice ricerca", index);
-    launchParam("Funzione", "exists(unsigned int index, bool check_nullptr)");
-    launchParam("Ricerca nullptr", check_nullptr);
-    closeLaunch();
-    #endif
-    return false;
+    else{
+        #ifdef ENABLE_SERIAL_WARNINGS
+        launchWarning(" classe GArray ricerca elemento in array ha restiuito false. ");
+        launchParam("Indice ricerca", index);
+        launchParam("Funzione", "exists(unsigned int index, bool check_nullptr)");
+        launchParam("Ricerca nullptr", check_nullptr);
+        closeLaunch();
+        #endif
+        return false;
+    }
+
 }
 
 template <class t, nat dim>

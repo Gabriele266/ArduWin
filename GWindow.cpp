@@ -259,24 +259,38 @@ void GWindow::setSurface(LiquidCrystal *s){
 #endif
 
 void GWindow::updateControls(location cursor_pos){
-    // Prendo ogni controllo e avvio la ricerca
-    back->updateEvents(cursor_pos);
+    // Controllo se il pulsante back è stato inizializzato
+    if(showBackBtn){
+        // Prendo ogni controllo e avvio la ricerca
+        back->updateEvents(cursor_pos);
+    }
     // Controllo gli eventi dei controlli
     for(int x = 0; x < getSize(); x++){
-        if(exists(x, true)){
+        if(get(x) != nullptr){
             get(x)->updateEvents(cursor_pos);
         }
         else{
-            #ifdef ENABLE_SERIAL_ERRORS
-            launchError(" classe GWindow. Tentativo di aggiornare un controllo non esistente.");
-            launchParam("Finestra", name);
-            launchParam("Indice", x);
-            launchParam("Funzione", "updateControls(location cursor_pos)");
-            closeLaunch();
-            #endif
+//            #ifdef ENABLE_SERIAL_ERRORS
+//            launchError(" classe GWindow. Tentativo di aggiornare un controllo non esistente.");
+//            launchParam("Finestra", name);
+//            launchParam("Indice", x);
+//            launchParam("Funzione", "updateControls(location cursor_pos)");
+//            closeLaunch();
+//            #endif
         }
     }
     return;
 }
+
+#ifdef ENABLE_SERIAL_INFO
+void GWindow::writeReference() {
+    Serial.print(F("Nome finestra: "));
+    Serial.println(name);
+    Serial.print(F("Numero di controlli: "));
+    Serial.println(getSize());
+    Serial.print(F("Numero di controlli massimo: "));
+    Serial.println(getMaxSize());
+}
+#endif
 
 #endif

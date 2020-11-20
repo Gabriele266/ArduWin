@@ -103,6 +103,11 @@ class GWinList : public GArray<GWindow, 10>{
             /// Restituisce la prima finestra con quel nome
             GWindow* getByName(char name[]);
 
+#ifdef ENABLE_SERIAL_INFO
+            /// Mostra le informazioni sul raccoglitore di finestre
+            void writeReference();
+#endif
+
       private:
           // Indice della finestra principale
           int main_win_index = 0;

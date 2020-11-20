@@ -101,13 +101,18 @@ class GWindow : public GArray<GControl, 15>{
 		/// Ridisegna un controllo pulendo solo la parte di schermo necessaria per la sua visualizzazione e lasciando invariato il resto dato il nome
 		bool redrawControl(char name[], int old_dim);
 
-	// Controllo quale libreria è stata inclusa
-	#if defined ARDUWIN_USE_I2C
-        /// Imposta la superficie su cui disegnare
-        void setSurface(LiquidCrystal_I2C *s);
-	#else
-	void setSurface(LiquidCrystal *s);
-	#endif
+	    // Controllo quale libreria è stata inclusa
+	    #if defined ARDUWIN_USE_I2C
+            /// Imposta la superficie su cui disegnare
+            void setSurface(LiquidCrystal_I2C *s);
+	    #else
+	        void setSurface(LiquidCrystal *s);
+	    #endif
+
+        #ifdef ENABLE_SERIAL_INFO
+	        /// Mostra le informazioni relative alla interfaccia
+	        void writeReference();
+        #endif
 
         /// Disegna solo i controlli della finestra
         void drawControls();

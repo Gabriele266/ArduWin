@@ -91,7 +91,7 @@ void GFisicalKeypad::writeState(){
 bool GFisicalKeypad::update(){
     // controllo che la winlist non sia nulla
     if(win_handler != nullptr){
-////        // Controllo i pulsanti di default
+        // Controllo i pulsanti di default
         if(default_buttons[0]->isPressed()){
             win_handler->moveCursorRight();
             return true;
@@ -110,7 +110,9 @@ bool GFisicalKeypad::update(){
         }
         else if(default_buttons[4]->isPressed()){
             // Ottengo la finestra corrente
-            GWindow* current = win_handler->get(win_handler->getCurrent());
+            GWindow *current = win_handler->get(win_handler->getCurrent());
+            Serial.print(F("Avvio aggiornamento finestra con indirizzo: "));
+            Serial.println((int) current);
             // Controllo che non si tratti di un puntatore nullo
             if(current != nullptr){
                 // Avvio l'aggiornamento
@@ -118,10 +120,10 @@ bool GFisicalKeypad::update(){
             }
             else{
                 // Mostro un errore
-                #ifdef ENABLE_SERIAL_ERRORS
-                launchError(" classe GFisicalKeypad. La ricerca della finestra corrente ha restituito un puntatore nullo. ");
-                closeLaunch();
-                #endif
+//                #ifdef ENABLE_SERIAL_ERRORS
+//                launchError(" classe GFisicalKeypad. La ricerca della finestra corrente ha restituito un puntatore nullo. ");
+//                closeLaunch();
+//                #endif
             }
             return true;
         }

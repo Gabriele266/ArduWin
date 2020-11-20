@@ -13,6 +13,8 @@
 #include "flags.cpp"
 // Header per il controllo finestre
 #include "GWinList.h"
+// Header per le finestre
+#include "GWindow.h"
 
 /// Rappresenta un keypad
 class GFisicalKeypad{
