@@ -1,18 +1,7 @@
 /*
-=================================================
-QUESTO FILE E' PARTE DEL PROGETTO SVEGLIA ARDUINO.
-NON E' OPENSOURCE QUINDI E' ILLEGALE MODIFICARE IL CODICE
-AUTORE: CAVALLO GABRIELE
-IL FILE E TUTTO IL PROGETTO SONO PROTETTI DA COPYRIGHT.
-E' INOLTRE ILLEGALE COPIARE LE IDEE E LE METODOLOGIE DI RISOLUZIONE DEI PROBLEMI
-PER ULTERIORI INFORMAZIONI RIVOLGETEVI A GABRIELE CAVALLO:
-3317375441
-=================================================
-
-Descrizione: implementazione della classe GControl, che rappresenta un GControllo all' interno della interfaccia.
+implementazione della classe GControl, che rappresenta un Controllo all' interno della interfaccia.
 
 */
-
 
 #ifndef GControl_CPP
 #define GControl_CPP
@@ -20,8 +9,29 @@ Descrizione: implementazione della classe GControl, che rappresenta un GControll
 // HEADER
 #include "GControl.h"
 
+
+// Metodi per impostare la superficie
+#if defined ARDUWIN_USE_I2C
+// Versione per l'utilizzo con schermi lcd i2c
+void GControl::setSurface(LiquidCrystal_I2C *s){
+    __surf = s;
+}
+LiquidCrystal_I2C* GControl::getSurface(){
+    return __surf;
+}
+#else
+// Versione per l'utilizzo con schermi lcd normali
+void GControl::setSurface(LiquidCrystal *s){
+    __surf = s;
+}
+LiquidCrystal* GControl::getSurface(){
+   return __surf;
+}
+#endif
+
 GControl::GControl(){
     __surf = nullptr;
+    strcpy(__text, "");
 }
 
 void GControl::setName(char _n[]){
@@ -48,7 +58,27 @@ char* GControl::getName(){
 }
 
 void GControl::setText(char _t[]){
-    strcpy(__text , _t);
+    // Ridisegno il controllo
+    if(strcmp(__text, "") != 0){
+        // Mantengo la vecchia dimensione
+        unsigned int old_dimension = strlen(__text);
+
+        // pulisco i caratteri
+        for(int x = __point.x; x <= (old_dimension + __point.x); x++){
+            // imposto il cursore e cancello il carattere
+            __surf->setCursor(x, __point.y);
+            // cancello
+            __surf->print(" ");
+        }
+        // Imposto il testo
+        strcpy(__text , _t);
+        // Disegno il controllo
+        draw();
+    }
+    else{
+        // Imposto il testo
+        strcpy(__text , _t);
+    }
 }
 
 char* GControl::getText(){
@@ -79,25 +109,6 @@ void GControl::setLocation(int x, int y){
 location GControl::getLocation(){
     return __point;
 }
-
-// Metodi per impostare la superficie
-#if defined ARDUWIN_USE_I2C
-// Versione per l'utilizzo con schermi lcd i2c
-void GControl::setSurface(LiquidCrystal_I2C *s){
-    __surf = s;
-}
-LiquidCrystal_I2C* GControl::getSurface(){
-   return __surf;
-}
-#else
-// Versione per l'utilizzo con schermi lcd normali
-void GControl::setSurface(LiquidCrystal *s){
-    __surf = s;
-}
-LiquidCrystal* GControl::getSurface(){
-   return __surf;
-}
-#endif
 
 // Funzione fittizia
 bool GControl::draw(){

@@ -56,12 +56,17 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
-    <property name="settings.editor.selected.configurable" value="fileTemplates" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.ide.settings.web.browsers" />
   </component>
   <component name="RunManager">
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
   </component>
@@ -89,6 +94,7 @@
       <workItem from="1604162038386" duration="3069000" />
       <workItem from="1604304370726" duration="2210000" />
       <workItem from="1605879889951" duration="3265000" />
+      <workItem from="1605897212691" duration="1917000" />
     </task>
     <servers />
   </component>
@@ -99,14 +105,22 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="838" y="588" key="#Firefox_Settings" timestamp="1605900064353">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="838" y="588" key="#Firefox_Settings/0.0.2560.1400@0.0.2560.1400" timestamp="1605900064353" />
     <state x="428" y="336" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1604147946717">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="428" y="336" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1604147946717" />
-    <state x="561" y="396" width="1357" height="709" key="SettingsEditor" timestamp="1604148516240">
+    <state x="922" y="441" key="FileChooserDialogImpl" timestamp="1605900012176">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="561" y="396" width="1357" height="709" key="SettingsEditor/0.0.2560.1400@0.0.2560.1400" timestamp="1604148516240" />
+    <state x="922" y="441" key="FileChooserDialogImpl/0.0.2560.1400@0.0.2560.1400" timestamp="1605900012176" />
+    <state x="463" y="332" width="1357" height="709" key="SettingsEditor" timestamp="1605900065253">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="463" y="332" width="1357" height="709" key="SettingsEditor/0.0.2560.1400@0.0.2560.1400" timestamp="1605900065253" />
     <state x="1061" y="505" key="save.file.as.template.dialog" timestamp="1604148089904">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
