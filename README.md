@@ -17,3 +17,5 @@ All' interno del framework e' inoltre possibile gestire gli errori, tramite <b>G
 sull' errore e ottenerne alcune caratteristiche.
 
 Il tutto e' completamente open source.
+
+Nel file notes.html sono contenute le note di versione.
