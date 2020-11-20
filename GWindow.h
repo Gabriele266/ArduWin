@@ -56,33 +56,47 @@ class GWindow : public GArray<GControl, 15>{
     public:
         /// Costruttore di default
         GWindow();
+
         /// Costruttore che imposta titolo e nome della finestra
         GWindow(char name[], char title[]);
 
-        /// Imposta o ottiene il titolo
+        /// Imposta il titolo
         void setTitle(char t[]);
+
+        /// Restituisce il titolo
         char* getTitle();
+
         /// Ottiene o imposta il nome
         void setName(char n[]);
+
+        /// Restituisce il nome della finestra
         char* getName();
 
-        /// Ottiene o imposta i tag
+        /// Imposta i tag
         void setTags(char t[]);
+
+        /// Aggiunge un tag alla finestra
         void addTag(char t[]);
+
+        /// Restituisce i tag della finestra
         char* getTags();
 
-        /// Ottiene o imposta la posizione del pulsante indietro
+        /// Imposta la posizione del pulsante indietro
         void setBackBtnPos(BackBtnPos p);
+
+        /// Restituisce la posizione del pulsante indietro
         BackBtnPos getBackBtnPos();
 
         /// Imposta la dimensione del pulsante indietro
         void setBackBtnType(BackBtnType t);
+
         /// Restituisce la tipologia del pulsante indietro
         BackBtnType getBackBtnType();
 
         /// Imposta l'handler per il click
         void setBackBtnHandle(
                               void(*backHandler)(GEvent *event));
+
         /// Disegna la finestra partendo dal titolo e poi chiama le funzioni di draw dei componenti figlio
         virtual bool draw();
 
@@ -101,7 +115,7 @@ class GWindow : public GArray<GControl, 15>{
 		/// Ridisegna un controllo pulendo solo la parte di schermo necessaria per la sua visualizzazione e lasciando invariato il resto dato il nome
 		bool redrawControl(char name[], int old_dim);
 
-	    // Controllo quale libreria è stata inclusa
+	    // a seconda della tipologia di libreria da utilizzare
 	    #if defined ARDUWIN_USE_I2C
             /// Imposta la superficie su cui disegnare
             void setSurface(LiquidCrystal_I2C *s);
@@ -116,6 +130,7 @@ class GWindow : public GArray<GControl, 15>{
 
         /// Disegna solo i controlli della finestra
         void drawControls();
+
     private:
         // Nome della finestra
 		char name[15];
@@ -132,6 +147,7 @@ class GWindow : public GArray<GControl, 15>{
         GButton* back = new GButton();
         // Handler che gestisce il click del pulsante indietro
         void (*clickedBackHandler) (GEvent *event) = nullptr;
+
         // Puntatore alla surface su cui disegnare
 	    #if defined ARDUWIN_USE_I2C
         LiquidCrystal_I2C *surf = nullptr;
@@ -141,5 +157,4 @@ class GWindow : public GArray<GControl, 15>{
         // Definisce se mostrare il pulsante indietro
         bool showBackBtn = false;
 };
-
 #endif // WIN_H
