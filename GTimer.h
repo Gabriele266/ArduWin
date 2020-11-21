@@ -5,6 +5,8 @@
 #ifndef ARDUWIN_GTIMER_H
 #define ARDUWIN_GTIMER_H
 
+#include <Arduino.h>
+
 /// Rappresenta un timer per l'esecuzione di una funzione
 class GTimer {
 public:

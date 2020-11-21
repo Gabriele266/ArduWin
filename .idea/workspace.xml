@@ -59,9 +59,9 @@
     <property name="settings.editor.selected.configurable" value="reference.settings.ide.settings.web.browsers" />
   </component>
   <component name="RunManager">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
@@ -94,7 +94,8 @@
       <workItem from="1604162038386" duration="3069000" />
       <workItem from="1604304370726" duration="2210000" />
       <workItem from="1605879889951" duration="3265000" />
-      <workItem from="1605897212691" duration="3868000" />
+      <workItem from="1605897212691" duration="3935000" />
+      <workItem from="1605957450764" duration="710000" />
     </task>
     <servers />
   </component>

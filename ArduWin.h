@@ -48,6 +48,8 @@ La licenza è valida su tutti i sorgenti del progetto.
 #include "GFisicalButton.h"
 // Header per la gestione dei keypad
 #include "GFisicalKeypad.h"
+// Header per la gestione di un timer
+#include "GTimer.h"
 
 /// Determina se la versione è migliore o peggiore
 static bool greaterThan(float version){
