@@ -81,7 +81,6 @@ template <class t, nat dim>
 int GArray<t, dim>::add(t *elem){
     elems[count] = elem;
     count += 1;
-
     return count - 1;
 }
 
@@ -231,7 +230,7 @@ bool GArray<t, dim>::resize(nat new_dim, bool remove_others){
 template <class t, nat dim>
 t* GArray<t, dim>::get(nat ind){
     // controllo se esiste l'elemento
-    if(exists(ind, false)){
+    if(exists(ind, true)){
         return elems[ind];
     }
     else{

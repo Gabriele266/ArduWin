@@ -11,17 +11,17 @@
 // Sono nel target debug
 // Do le impostazioni per arduwin
 // Indica alla libreria di mostrare errori seriali in caso succedessero
-#define ENABLE_SERIAL_ERRORS
+//#define ENABLE_SERIAL_ERRORS
 
 // Indica alla libreria di abilitare i warning seriali
-#define ENABLE_SERIAL_WARNINGS
+//#define ENABLE_SERIAL_WARNINGS
 
 // Indica alla libreria di abilitare le funzioni di informazioni sul seriale
-#define ENABLE_SERIAL_INFO
+//#define ENABLE_SERIAL_INFO
 
 // Indica alla libreria che si desidera utilizzare le classi per la gestione dei dispositivi hardware
 // Fa includere da arduwin anche gli header per il keypad, per i pulsanti
-#define ENABLE_HARDWARE_CONTROL
+//#define ENABLE_HARDWARE_CONTROL
 
 // # funzioni necessarie per inviare errori sul seriale
 #ifdef ENABLE_SERIAL_ERRORS

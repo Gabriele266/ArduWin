@@ -86,6 +86,10 @@ void GWindow::setBackBtnHandle(void (*btnHandler)(GEvent *event)){
     clickedBackHandler = btnHandler;
 }
 
+void GWindow::setOnDrawFunction(void (*func)(GEvent *)) {
+    windowDrawn = func;
+}
+
 void GWindow::setBackBtnType(BackBtnType t) {
     type = t;
 }
@@ -124,7 +128,6 @@ bool GWindow::draw(){
                 back->setLocation(createLocation(7, 3));
 				break;
             default:
-
                 break;
             };
             // Controllo la dimensione scelta e formatto la stringa
@@ -151,6 +154,16 @@ bool GWindow::draw(){
         surf->print(title);
         // Disegno i componenti
         drawControls();
+
+        // Controllo se è stato impostata una funzione da chiamare quando si disegna una finestra
+        if(windowDrawn != nullptr){
+            // Creo l'evento e la chiamo
+            GEvent event;
+            event.setName("drawn");
+            event.setSender("window");
+            // Chiamo il gestore
+            windowDrawn(&event);
+        }
         return true;
     }
     else{
@@ -260,10 +273,10 @@ void GWindow::setSurface(LiquidCrystal *s){
 
 void GWindow::updateControls(location cursor_pos){
     // Controllo se il pulsante back è stato inizializzato
-    if(showBackBtn){
-        // Prendo ogni controllo e avvio la ricerca
-        back->updateEvents(cursor_pos);
-    }
+    // Prendo ogni controllo e avvio la ricerca
+    back->updateEvents(cursor_pos);
+    Serial.print("Aggiorno finestra con controlli: ");
+    Serial.println(getSize());
     // Controllo gli eventi dei controlli
     for(int x = 0; x < getSize(); x++){
         if(get(x) != nullptr){

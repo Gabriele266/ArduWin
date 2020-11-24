@@ -111,8 +111,10 @@ bool GFisicalKeypad::update(){
         else if(default_buttons[4]->isPressed()){
             // Ottengo la finestra corrente
             GWindow *current = win_handler->get(win_handler->getCurrent());
-            Serial.print(F("Avvio aggiornamento finestra con indirizzo: "));
+            Serial.print("Avvio aggiornamento finestra con indirizzo: ");
             Serial.println((int) current);
+            Serial.print("Nome finestra corrente: ");
+            Serial.println(current->getName());
             // Controllo che non si tratti di un puntatore nullo
             if(current != nullptr){
                 // Avvio l'aggiornamento

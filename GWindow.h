@@ -115,6 +115,9 @@ class GWindow : public GArray<GControl, 15>{
 		/// Ridisegna un controllo pulendo solo la parte di schermo necessaria per la sua visualizzazione e lasciando invariato il resto dato il nome
 		bool redrawControl(char name[], int old_dim);
 
+		/// Imposta la funzione da chiamare quando la finestra viene disegnata
+		void setOnDrawFunction(void (*func)(GEvent *event));
+
 	    // a seconda della tipologia di libreria da utilizzare
 	    #if defined ARDUWIN_USE_I2C
             /// Imposta la superficie su cui disegnare
@@ -147,6 +150,8 @@ class GWindow : public GArray<GControl, 15>{
         GButton* back = new GButton();
         // Handler che gestisce il click del pulsante indietro
         void (*clickedBackHandler) (GEvent *event) = nullptr;
+        // Handler chiamato dopo il disegno della finestra
+        void (*windowDrawn)(GEvent *event) = nullptr;
 
         // Puntatore alla surface su cui disegnare
 	    #if defined ARDUWIN_USE_I2C

@@ -32,6 +32,8 @@ class GWinList : public GArray<GWindow, 10>{
 
             /// Ottiene o imposta il nome
             void setName(char n[]);
+
+            /// Restituisce il nome della lista
             char* getName();
 
             /// Imposta la finestra principale tramite un indice numerico
@@ -107,7 +109,6 @@ class GWinList : public GArray<GWindow, 10>{
             /// Mostra le informazioni sul raccoglitore di finestre
             void writeReference();
 #endif
-
       private:
           // Indice della finestra principale
           int main_win_index = 0;
