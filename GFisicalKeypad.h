@@ -64,7 +64,7 @@ public:
     void addButton(char name[], nat pin, void (*handler)(GEvent *event));
 
     /// Restituisce un puntatore al pulsante select
-    GFisicalButton* getSelectedBtn();
+    GFisicalButton* getSelectBtn();
 
     /// Restituisce un puntatore al pulsante right
     GFisicalButton* getRightBtn();

@@ -26,66 +26,66 @@
 
 /// Rappresenta un controllo in ambiente ArduWin
 class GControl{
-      public:
-          // Costruttore di default
-		GControl();
-        /// Costruttore di base con nome e testo
-		GControl(char name[], char text[]);
+public:
+    // Costruttore di default
+    GControl();
+    /// Costruttore di base con nome e testo
+    GControl(char name[], char text[]);
 
-        /// Costruttore che accetta un
-        GControl(char name[], char text[], location l);
+    /// Costruttore che accetta un
+    GControl(char name[], char text[], location l);
 
-		/// Ottiene o imposta il nome del GControllo
-		void setName(char _n[]);
+    /// Ottiene o imposta il nome del GControllo
+    void setName(char _n[]);
 
-		/// Restituisce il nome del controllo
-		char* getName();
+    /// Restituisce il nome del controllo
+    char* getName();
 
-		/// Ottiene o imposta il testo
-		void setText(char _t[]);
-		char* getText();
+    /// Ottiene o imposta il testo
+    void setText(char _t[]);
+    char* getText();
 
-		/// Ottiene o imposta i tag del GControllo
-		void setTags(char _t[]);
+    /// Ottiene o imposta i tag del GControllo
+    void setTags(char _t[]);
 
-		/// Restituisce i tag associati al controllo
-		char* getTags();
+    /// Restituisce i tag associati al controllo
+    char* getTags();
 
-		/// Ottiene o imposta la posizione del GControllo
-		void setLocation(location l);
+    /// Ottiene o imposta la posizione del GControllo
+    void setLocation(location l);
 
-		/// Imposta la posizione in base ad una coppia di coordinate
-		void setLocation(int x, int y);
+    /// Imposta la posizione in base ad una coppia di coordinate
+    void setLocation(int x, int y);
 
-		/// Restituisce la posizione del controllo
-		location getLocation();
+    /// Restituisce la posizione del controllo
+    location getLocation();
 
-		// Ottiene o imposta la surface su cui disegnare
-		// Controllo quele libreria sto utilizzando
-		#if defined ARDUWIN_USE_I2C
-		// Utilizzo quella per schermi i2c
-		void setSurface(LiquidCrystal_I2C *s);
-		LiquidCrystal_I2C* getSurface();
-		#else
-		// Utilizzo quella per schermi normali
-		void setSurface(LiquidCrystal *s);
-		LiquidCrystal* getSurface();
-		#endif
+    // Ottiene o imposta la surface su cui disegnare
+    // Controllo quele libreria sto utilizzando
+    #if defined ARDUWIN_USE_I2C
+    // Utilizzo quella per schermi i2c
+    void setSurface(LiquidCrystal_I2C *s);
+    LiquidCrystal_I2C* getSurface();
+    #else
+    // Utilizzo quella per schermi normali
+    void setSurface(LiquidCrystal *s);
+    LiquidCrystal* getSurface();
+    #endif
 
-		/// Disegna il GControllo. Restituisce true se l'operazione è andata a buon fine
-		virtual bool draw();
+    /// Disegna il GControllo. Restituisce true se l'operazione è andata a buon fine
+    virtual bool draw();
 
-		/// Restituisce lo stato del GControllo
-		bool getShownState();
+    /// Restituisce true se il controllo è visibile
+    bool isVisible();
 
-		/// Imposta il gestore degli eventi
-		void setEventHandler(void (*ptr)(GEvent *event));
+    /// Imposta il gestore degli eventi
+    void setEventHandler(void (*ptr)(GEvent *event));
 
-		/// CHiama l'handler
-		void callHandler(GEvent *event);
+    /// CHiama l'handler
+    void callHandler(GEvent *event);
 
-		/// Funzione per aggiornare gli eventi
-		virtual void updateEvents(location l);
+    /// Funzione per aggiornare gli eventi
+    virtual void updateEvents(location l);
 
     /// Nome del controllo
     char __name[15];

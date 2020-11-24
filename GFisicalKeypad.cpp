@@ -70,7 +70,7 @@ GFisicalButton* GFisicalKeypad::getDownBtn() {
     return default_buttons[3];
 }
 
-GFisicalButton* GFisicalKeypad::getSelectedBtn() {
+GFisicalButton* GFisicalKeypad::getSelectBtn() {
     return default_buttons[4];
 }
 

@@ -108,42 +108,24 @@ void GButton::updateEvents(location l){
         if(enabled){
             // Controllo che eistano tutti e che la posizione appartenga al pulsante
             if(exists(l) && exists(getLocation()) && isInArea(l,getLocation(), strlen(__text))){
-                 //Sono stato premuto
-                 // controllo se esiste il gestore eventi
-                 if(eventHandler != nullptr){
-                        // Creo un evento
-                        GEvent *event = new GEvent();
-                        // Imposto il nome
-                        event->setName("buttonClick");
-                        // Imposto il sender
-                        event->setSender(this->getName());
-                        // Imposto la posizione
-                        event->setPosition(this->getLocation());
-                        // Imposto l'evento come gestito
-                        event->throwEvent();
-                        //Chiamo l'handler
-                        eventHandler(event);
-                 }
-                 else{
-//                    #ifdef ENABLE_SERIAL_ERRORS
-//                     launchError(" classe GButton. Tentativo di aggiornare eventi controllo senza un gestore impostato. ");
-//                    #ifdef ENABLE_SERIAL_INFO
-//                     writeReference();
-//                    #endif
-//                     closeLaunch();
-//                    #endif
-                 }
+                //Sono stato premuto
+                // controllo se esiste il gestore eventi
+                if(eventHandler != nullptr){
+                    // Creo un evento
+                    GEvent *event = new GEvent();
+                    // Imposto il nome
+                    event->setName("buttonClick");
+                    // Imposto il sender
+                    event->setSender(this->getName());
+                    // Imposto la posizione
+                    event->setPosition(this->getLocation());
+                    // Imposto l'evento come gestito
+                    event->throwEvent();
+                    //Chiamo l'handler
+                    eventHandler(event);
+                }
             }
         }
-    }
-    else{
-//#ifdef ENABLE_SERIAL_ERRORS
-//        launchError(" classe GButton. Tentativo di aggiornare eventi pulsante senza una superficie definita. ");
-//#ifdef ENABLE_SERIAL_INFO
-//        writeReference();
-//#endif
-//        closeLaunch();
-//#endif
     }
 }
 

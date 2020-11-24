@@ -9,7 +9,6 @@ implementazione della classe GControl, che rappresenta un Controllo all' interno
 // HEADER
 #include "GControl.h"
 
-
 // Metodi per impostare la superficie
 #if defined ARDUWIN_USE_I2C
 // Versione per l'utilizzo con schermi lcd i2c
@@ -110,7 +109,6 @@ location GControl::getLocation(){
     return __point;
 }
 
-// Funzione fittizia
 bool GControl::draw(){
 
 }
@@ -134,7 +132,7 @@ void GControl::callHandler(GEvent *event){
 	}
 }
 
-bool GControl::getShownState(){
+bool GControl::isVisible(){
     return __isShown;
 }
 #endif
