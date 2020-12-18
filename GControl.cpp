@@ -32,18 +32,34 @@ GControl::GControl(){
     __surf = nullptr;
 }
 
-void GControl::setText(char _t[]){
-    // Ridisegno il controllo
-    if(strlen(__text) > 0){
-        // Mantengo la vecchia dimensione
-        unsigned int old_dimension = strlen(__text);
+bool GControl::draw(){
 
-        // pulisco i caratteri
-        for(int x = __point.x; x <= (old_dimension + __point.x); x++){
-            // imposto il cursore e cancello il carattere
-            __surf->setCursor(x, __point.y);
-            // cancello
-            __surf->print(" ");
+}
+
+void GControl::setText(char _t[]){
+    // Calcolo le dimensioni dei controlli
+    unsigned int old_dimension = strlen(__text);
+    unsigned int new_dimension = strlen(_t);
+
+    // Ridisegno il controllo
+    // Controllo che il controllo prima avesse del testo
+    if(old_dimension > 0){
+        // Controllo se la vecchia dimensione era più grande di quella corrente
+        if(old_dimension > new_dimension){
+            // Punto di partenza
+            byte start = __point.x;
+            // y di partenza
+            byte y = __point.y;
+
+            // Calcolo la posizione finale della pulizia
+            byte end = start + old_dimension;
+
+            // Scorro i caratteri tra start e end
+            for(int index = start; index < end; index++){
+                // Metto uno spazio
+                __surf->setCursor(index, y);
+                __surf->print(" ");
+            }
         }
         // Imposto il testo
         strcpy(__text , _t);
@@ -75,10 +91,6 @@ void GControl::setLocation(int x, int y){
 
 location GControl::getLocation(){
     return __point;
-}
-
-bool GControl::draw(){
-
 }
 
 void GControl::setEventHandler(void (*ptr)(GEvent *event)){
