@@ -4,20 +4,17 @@
 #include "GButton.h"
 
 GButton::GButton(){
-	setName(" ");
 	setText(" ");
 	enabled = true;
 }
 
-GButton::GButton(char name[], char cont[], location loc){
-	setName(name);
+GButton::GButton(char cont[], location loc){
 	setText(cont);
 	setLocation(loc);
 	enabled = true;
 }
 
-GButton::GButton(char __name[], char __content[]){
-    setName(__name);
+GButton::GButton(char __content[]){
     setText(__content);
     enabled = true;
 }
@@ -116,7 +113,7 @@ void GButton::updateEvents(location l){
                     // Imposto il nome
                     event->setName("buttonClick");
                     // Imposto il sender
-                    event->setSender(this->getName());
+                    event->setSender("Button");
                     // Imposto la posizione
                     event->setPosition(this->getLocation());
                     // Imposto l'evento come gestito

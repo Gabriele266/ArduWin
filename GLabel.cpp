@@ -5,15 +5,14 @@
 
 GLabel::GLabel(){
 	icon = nullptr;
+	show();
 }
 
-GLabel::GLabel(char name[], char text[]) : GLabel(){
-	setName(name);
+GLabel::GLabel(char text[]) : GLabel(){
 	setText(text);
 }
 
-GLabel::GLabel(char name[], char text[], location l) : GLabel(){
-	setName(name);
+GLabel::GLabel(char text[], location l) : GLabel(){
 	setText(text);
 	setLocation(l);
 }
@@ -39,7 +38,7 @@ void GLabel::setIcon(GIcon* icn) {
 
 bool GLabel::draw(){
     // controllo che esista la superficie
-    if(getSurface() != nullptr){
+    if(getSurface() != nullptr && __isShown){
         // Tolgo il blink
         __surf->noBlink();
         // Imposto il cursore
@@ -58,5 +57,13 @@ bool GLabel::draw(){
 
 void GLabel::updateEvents(location l){
 	// Non ci sono eventi
+}
+
+void GLabel::hide(){
+    __isShown = false;
+}
+
+void GLabel::show(){
+    __isShown = true;
 }
 #endif

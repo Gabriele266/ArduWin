@@ -30,35 +30,23 @@ LiquidCrystal* GControl::getSurface(){
 
 GControl::GControl(){
     __surf = nullptr;
-    strcpy(__text, "");
 }
 
-void GControl::setName(char _n[]){
-    strcpy(__name, _n);
-}
-
-GControl::GControl(char name[], char text[]) : GControl(){
-	// Salvo il valore del nome
-	strcpy(__name, name);
+GControl::GControl(char text[]) : GControl(){
 	strcpy(__text, text);
+	__surf = nullptr;
 }
 
-GControl::GControl(char name[], char text[], location loc) : GControl(){
-    // Salvo il nome
-    strcpy(__name, name);
+GControl::GControl(char text[], location loc) : GControl(){
     // Salvo il testo
     strcpy(__text, text);
     // Salvo la posizione
     __point = loc;
 }
 
-char* GControl::getName(){
-    return __name;
-}
-
 void GControl::setText(char _t[]){
     // Ridisegno il controllo
-    if(strcmp(__text, "") != 0){
+    if(strlen(__text) > 0){
         // Mantengo la vecchia dimensione
         unsigned int old_dimension = strlen(__text);
 
@@ -82,14 +70,6 @@ void GControl::setText(char _t[]){
 
 char* GControl::getText(){
     return __text;
-}
-
-void GControl::setTags(char _t[]){
-    strcpy(__tags , _t);
-}
-
-char* GControl::getTags(){
-    return __tags;
 }
 
 void GControl::setLocation(location l){

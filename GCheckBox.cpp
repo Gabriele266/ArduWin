@@ -1,9 +1,8 @@
 #include "GCheckBox.h"
 
-GCheckBox::GCheckBox(char name[], char cont[], location l){
+GCheckBox::GCheckBox(char cont[], location l){
     // Costruttore base
     // Impostoi il nome e il contenuto
-    setName(name);
     setText(cont);
     setLocation(l);
 
@@ -21,12 +20,12 @@ GCheckBox::GCheckBox(char name[], char cont[], location l){
     checked = false;
 }
 
-GCheckBox::GCheckBox() : GCheckBox("", "", createLocation())
+GCheckBox::GCheckBox() : GCheckBox("", createLocation())
 {
     //ctor
 }
 
-GCheckBox::GCheckBox(char name[], char cont[]) : GCheckBox(name, cont, createLocation()){
+GCheckBox::GCheckBox(char cont[]) : GCheckBox(cont, createLocation()){
     // Niente
 }
 

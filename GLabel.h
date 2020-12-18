@@ -19,10 +19,10 @@ public:
     GLabel();
 
 	/// Costruttore che imposta il nome e il testo
-	GLabel(char name[], char text[]);
+	GLabel(char text[]);
 
 	/// Construttore che imposta il nome il testo e la posizione
-	GLabel(char name[], char text[], location loc);
+	GLabel(char text[], location loc);
 
 	/// Funzione per mostrarlo
 	/// Ridefinizione del metodo virtuale
@@ -36,6 +36,16 @@ public:
 
     /// Imposta l'icona della etichetta
 	void setIcon(GIcon *icn);
+
+	/// Mostra l'etichetta
+	void show();
+
+	/// Nasconde l'etichetta
+	void hide();
+
+	/// Restituisce lo stato della visualizzazione della etichetta
+	bool isVisibile();
+
 private:
 	// Punta all' icona
 	GIcon *icon = nullptr;

@@ -26,10 +26,10 @@ class GButton : public GControl{
         GButton();
 
 		/// Costruttore per impostare il nome il testo e la posizione
-		GButton(char name[], char content[], location pos);
+		GButton(char content[], location pos);
 
 		/// Costruttore che imposta nome e contenuto
-		GButton(char __name[], char __content[]);
+		GButton(char __content[]);
 
 		/// Controlla gli eventi
 		void updateEvents(location l);

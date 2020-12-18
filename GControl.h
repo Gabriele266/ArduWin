@@ -30,26 +30,14 @@ public:
     // Costruttore di default
     GControl();
     /// Costruttore di base con nome e testo
-    GControl(char name[], char text[]);
+    GControl(char text[]);
 
     /// Costruttore che accetta un
-    GControl(char name[], char text[], location l);
-
-    /// Ottiene o imposta il nome del GControllo
-    void setName(char _n[]);
-
-    /// Restituisce il nome del controllo
-    char* getName();
+    GControl(char text[], location l);
 
     /// Ottiene o imposta il testo
     void setText(char _t[]);
     char* getText();
-
-    /// Ottiene o imposta i tag del GControllo
-    void setTags(char _t[]);
-
-    /// Restituisce i tag associati al controllo
-    char* getTags();
 
     /// Ottiene o imposta la posizione del GControllo
     void setLocation(location l);
@@ -87,14 +75,8 @@ public:
     /// Funzione per aggiornare gli eventi
     virtual void updateEvents(location l);
 
-    /// Nome del controllo
-    char __name[15];
-
     /// Testo associato al controllo
     char __text[10];
-
-    /// Tag del controllo
-    char __tags[10];
 
     /// Posizione del controllo nella interfaccia
     location __point = createLocation();

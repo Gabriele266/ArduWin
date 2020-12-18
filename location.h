@@ -7,10 +7,12 @@ Progetto: ArduWin
 #ifndef LOC_CPP
 #define LOC_CPP
 
+#include <Arduino.h>
+
 // Struttura che definisce la posizione
 struct location {
-	int x;
-	int y;
+	byte x;
+	byte y;
 };
 
 /// Incrementa una struttura location

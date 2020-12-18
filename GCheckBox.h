@@ -19,10 +19,10 @@ class GCheckBox : public GControl
         GCheckBox();
 
         /// Costruttore con nome e contenuto e posizione
-        GCheckBox(char name[], char cont[], location pos);
+        GCheckBox(char cont[], location pos);
 
         /// Costruttore con nome e contenuto
-        GCheckBox(char name[], char cont[]);
+        GCheckBox(char cont[]);
 
         /// Funzione per checckare il controllo
         void check();
