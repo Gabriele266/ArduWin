@@ -11,31 +11,31 @@ Progetto: ArduWin
 
 // Struttura che definisce la posizione
 struct location {
-	int x;
-	int y;
+	byte x;
+	byte y;
 };
 
 /// Incrementa una struttura location
-static void inflate(signed int step, location lac) {
+static void inflate(byte step, location lac) {
 	lac.x += step;
 	lac.y += step;
 }
 
 /// Incrementa la x della posizione
-static void increaseX(signed int step, location *loc) {
+static void increaseX(byte step, location *loc) {
 	loc->x += step;
 }
 
-static void increaseX(signed int step, location loc) {
+static void increaseX(byte step, location loc) {
 	loc.x += step;
 }
 
 /// Incrementa la y della posizione di un valore dato
-static void increaseY(signed int step, location *loc) {
+static void increaseY(byte step, location *loc) {
 	loc->y += step;
 }
 
-static void increaseY(signed int step, location loc) {
+static void increaseY(byte step, location loc) {
 	loc.x += step;
 }
 
@@ -77,19 +77,19 @@ static void normalize(int sizeX, int sizeY, location *loc){
 	}
 }
 
-static int getX(location l) {
+static byte getX(location l) {
 	return l.x;
 }
 
-static int getX(location *l) {
+static byte getX(location *l) {
 	return l->x;
 }
 
-static int getY(location l) {
+static byte getY(location l) {
 	return l.y;
 }
 
-static int getY(location *l) {
+static byte getY(location *l) {
 	return l->y;
 }
 
