@@ -5,7 +5,7 @@
 #include <Arduino.h>
 
 
-GWindow::GWindow() : GArray(){
+GWindow::GWindow(){
     strcpy(title , "");
     strcpy(name , "");
     strcpy(tags , "");
@@ -53,25 +53,12 @@ char* GWindow::getName(){
     return name;
 }
 
-void GWindow::setTags(char t[]){
-    strcpy(tags, t);
-}
-
-void GWindow::addTag(char t[]){
-    // Aggiungo il tag controllando di non incappare in errori
-    strcat(tags, t);
-}
-
 void GWindow::setShowBackBtn(bool val){
     showBackBtn = val;
 }
 
 bool GWindow::isBackBtnShowable(){
     return showBackBtn;
-}
-
-char* GWindow::getTags(){
-    return tags;
 }
 
 void GWindow::setBackBtnPos(BackBtnPos p){
@@ -200,61 +187,14 @@ bool GWindow::redrawControl(int index , int len) {
                 get(index)->draw();
             }
             else{
-                #ifdef ENABLE_SERIAL_WARNINGS
-                launchWarning(" classe GWindow. Tentativo di ridisegnare un controllo con una dimensione che esce dallo schermo. ");
-                launchParam("Finestra", name);
-                launchParam("Dimensione", len);
-                launchParam("Nome ctrl", get(index)->getName());
-                closeLaunch();
-                #endif
                 return false;
             }
         }
         else{
-            #ifdef ENABLE_SERIAL_ERRORS
-            launchError(" classe GWindow. Tentativo di ridisegnare un controllo non esistente. ");
-            launchParam("Indice", index);
-            launchParam("Finestra", name);
-            launchParam("Funzione", "redrawControl(int index, int old_size)");
-            closeLaunch();
-            #endif
             return false;
         }
     }
     else{
-        #ifdef ENABLE_SERIAL_ERRORS
-        launchError(" classe GWindow. Tentativo di ridisegnare un controllo senza una superficie impostata. ");
-        launchParam("Finestra", name);
-        launchParam("Indice ctrl", index);
-        launchParam("Funzione", "redrawControl(int index, int old_size)");
-        closeLaunch();
-        #endif
-        return false;
-    }
-}
-
-bool GWindow::redrawControl(char name[], int old_dim) {
-    // Scorro tutti gli elementi
-    if (strlen(name) > 0) {
-        // La dimensione va bene
-        // Scorro tutti gli elementi
-        for (int x = 0; x <= getSize(); x++) {
-            // controllo che esista
-            if(exists(x, true)){
-                if (strcmp(get(x)->getName(), name) == 0) {
-                    // ridisegno il controllo
-                    return redrawControl(x, old_dim);
-                }
-            }
-        }
-    }
-    else{
-        #ifdef ENABLE_SERIAL_ERRORS
-        launchError(" classe GWindow. Tentativo di ridisegnare un controllo senza specificare un nome. ");
-        launchParam("Finestra", name);
-        launchParam("Dimensione", old_dim);
-        closeLaunch();
-        #endif
         return false;
     }
 }

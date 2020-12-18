@@ -72,15 +72,6 @@ class GWindow : public GArray<GControl, 15>{
         /// Restituisce il nome della finestra
         char* getName();
 
-        /// Imposta i tag
-        void setTags(char t[]);
-
-        /// Aggiunge un tag alla finestra
-        void addTag(char t[]);
-
-        /// Restituisce i tag della finestra
-        char* getTags();
-
         /// Imposta la posizione del pulsante indietro
         void setBackBtnPos(BackBtnPos p);
 
@@ -139,8 +130,6 @@ class GWindow : public GArray<GControl, 15>{
 		char name[15];
 		// Titolo della finestra
 		char title[20];
-		// Tags relativi alla finestra
-		char tags[30];
 
         // Posizione del pulsante indietro
         BackBtnPos pos;
@@ -148,6 +137,7 @@ class GWindow : public GArray<GControl, 15>{
         BackBtnType type;
         // Rappresenta il pulsante indietro
         GButton* back = new GButton();
+
         // Handler che gestisce il click del pulsante indietro
         void (*clickedBackHandler) (GEvent *event) = nullptr;
         // Handler chiamato dopo il disegno della finestra
