@@ -32,18 +32,6 @@ GControl::GControl(){
     __surf = nullptr;
 }
 
-GControl::GControl(char text[]) : GControl(){
-	strcpy(__text, text);
-	__surf = nullptr;
-}
-
-GControl::GControl(char text[], location loc) : GControl(){
-    // Salvo il testo
-    strcpy(__text, text);
-    // Salvo la posizione
-    __point = loc;
-}
-
 void GControl::setText(char _t[]){
     // Ridisegno il controllo
     if(strlen(__text) > 0){

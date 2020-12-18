@@ -22,7 +22,6 @@
 /// Rappresenta un pulsante in ArduWin
 class GButton : public GControl{
     public:
-        /// Costruttore vuoto
         GButton();
 
 		/// Costruttore per impostare il nome il testo e la posizione
@@ -58,7 +57,7 @@ class GButton : public GControl{
 #endif
     private:
 		// Numero di pressioni del pulsante
-		unsigned int clicks;
+		byte clicks;
 		// Definisce se il pulsante è attivato
 		bool enabled;
 		// Rappresenta l'icona

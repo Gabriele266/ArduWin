@@ -4,20 +4,16 @@
 #include "GButton.h"
 
 GButton::GButton(){
-	setText(" ");
-	enabled = true;
+    enabled = true;
 }
 
 GButton::GButton(char cont[], location loc){
-	setText(cont);
-	setLocation(loc);
+	strcpy(__text, cont);
+	__point = loc;
 	enabled = true;
 }
 
-GButton::GButton(char __content[]){
-    setText(__content);
-    enabled = true;
-}
+GButton::GButton(char __content[]) : GButton(__content, createLocation()){}
 
 bool GButton::draw() {
 	// Disegno il pulsante

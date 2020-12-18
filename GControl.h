@@ -29,11 +29,6 @@ class GControl{
 public:
     // Costruttore di default
     GControl();
-    /// Costruttore di base con nome e testo
-    GControl(char text[]);
-
-    /// Costruttore che accetta un
-    GControl(char text[], location l);
 
     /// Ottiene o imposta il testo
     void setText(char _t[]);

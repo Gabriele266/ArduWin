@@ -11,8 +11,8 @@ Progetto: ArduWin
 
 // Struttura che definisce la posizione
 struct location {
-	byte x;
-	byte y;
+	int x;
+	int y;
 };
 
 /// Incrementa una struttura location

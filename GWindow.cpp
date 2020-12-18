@@ -8,7 +8,6 @@
 GWindow::GWindow(){
     strcpy(title , "");
     strcpy(name , "");
-    strcpy(tags , "");
     clear();
     // Inizializzo il pulsante di  default
     surf = nullptr;
@@ -154,11 +153,6 @@ bool GWindow::draw(){
         return true;
     }
     else{
-        #ifdef ENABLE_SERIAL_ERRORS
-        launchError("classe GWindow. Tentativo di disegnare una finestra senza una superficie impostata. ");
-        launchParam("Finestra",name);
-        closeLaunch();
-        #endif
         return false;
     }
 }
