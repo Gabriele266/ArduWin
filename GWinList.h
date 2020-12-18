@@ -28,13 +28,6 @@
 class GWinList : public GArray<GWindow, 10>{
       public:
             GWinList();
-            GWinList(char name[]);
-
-            /// Ottiene o imposta il nome
-            void setName(char n[]);
-
-            /// Restituisce il nome della lista
-            char* getName();
 
             /// Imposta la finestra principale tramite un indice numerico
             void setMain(int ind);
@@ -111,13 +104,11 @@ class GWinList : public GArray<GWindow, 10>{
 #endif
       private:
           // Indice della finestra principale
-          int main_win_index = 0;
+          int main_win_index = -1;
 		  // Indice della finestra corrente
 		  int currentWindow = 0;
           // Funzione per ottenere l'indice di una finestra a partire dal nome
           int resolveIndex(char name[]);
-          // Nome della lista
-          char __name[20];
           // Posizione del cursore
           location cursor_pos;
 };

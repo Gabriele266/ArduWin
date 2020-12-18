@@ -13,19 +13,6 @@ GWinList::GWinList(){
     cursor_pos.y = 0;
 }
 
-GWinList::GWinList(char name[]) : GWinList(){
-    strcpy(__name, name);
-}
-
-void GWinList::setName(char n[]){
-    // Imposta il nome
-    strcpy(__name , n);
-}
-
-char* GWinList::getName(){
-    return __name;
-}
-
 void GWinList::setMain(int ind){
     // Controllo che il valore sia corretto
     if(ind >= 0){
