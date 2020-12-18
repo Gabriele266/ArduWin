@@ -12,7 +12,7 @@ La licenza è valida su tutti i sorgenti del progetto.
 #define ARDUWIN_HEAD
 
 // Espone la versione del framework
-#define ARDUWIN_VERSION 2.2
+#define ARDUWIN_VERSION 2.4
 
 // Header con i flag per la libreria
 #include "flags.cpp"
