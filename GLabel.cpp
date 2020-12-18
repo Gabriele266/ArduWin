@@ -5,16 +5,16 @@
 
 GLabel::GLabel(){
 	icon = nullptr;
-	show();
+    __isShown = true;
 }
 
 GLabel::GLabel(char text[]) : GLabel(){
-	setText(text);
+	strcpy(__text, text);
 }
 
 GLabel::GLabel(char text[], location l) : GLabel(){
-	setText(text);
-	setLocation(l);
+	strcpy(__text, text);
+	__point = l;
 }
 
 bool GLabel::begin() {
