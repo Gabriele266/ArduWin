@@ -141,18 +141,12 @@ static location createLocation(){
     return loc;
 }
 
-static location createLocation(int x, int y) {
+static location createLocation(byte x, byte y) {
 	location loc;
 	loc.x = x;
 	loc.y = y;
 	return loc;
 }
 
-static location getLocationByPointer(location *ptr){
-	location loc;
-	loc.x = ptr->x;
-	loc.y = ptr->y;
-	return loc;
-}
 #endif
 
