@@ -42,7 +42,7 @@ bool GLabel::draw(){
         // Tolgo il blink
         __surf->noBlink();
         // Imposto il cursore
-        __surf->setCursor(getLocation().x, getLocation().y);
+        __surf->setCursor((int) getLocation().x, (int) getLocation().y);
         // Controllo se devo mettere una icona
         if (icon != nullptr && !icon->isEmpty()) {
             // Disegno l'icona
