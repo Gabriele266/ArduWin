@@ -8,6 +8,10 @@
 #pragma once
 // Inclusione
 #define ARDUWIN_USE_I2C
+
+// Dimensione massima del testo di un controllo
+#define CONTROL_MAX_TXT_DIM 15
+
 #include <Arduino.h>
 
 // Controllo se devo utilizzare uno schermo lcd i2
@@ -71,7 +75,7 @@ public:
     virtual void updateEvents(location l);
 
     /// Testo associato al controllo
-    char __text[10];
+    char __text[CONTROL_MAX_TXT_DIM];
 
     /// Posizione del controllo nella interfaccia
     location __point = createLocation();
